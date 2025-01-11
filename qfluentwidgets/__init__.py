@@ -19,3 +19,10 @@ Examples are available at https://github.com/zhiyiYo/PyQt-Fluent-Widgets/tree/Py
 
 __version__ = "1.0.0"
 __author__ = "zhiyiYo, modified by QIAO"
+
+
+from ._rc import resource
+from .common import *
+from .window import *
+from .components import *
+from .multimedia import *
