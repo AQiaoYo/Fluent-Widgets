@@ -1,0 +1,44 @@
+[project]
+name = "Fluent-Widgets"
+version = "0.1.0"
+description = "基于 PyQt-Fluent-Widgets 的组件库"
+authors = [
+    {name = "Qiao", email = "SugarQiao@outlook.com"},
+]
+dependencies = [
+    "PySide6>=6.4.2",
+    "PySideSix-Frameless-Window>=0.4.0",
+    "darkdetect",
+    "colorthief",
+    "scipy",
+    "pillow",
+]
+requires-python = "<3.13, >=3.10"
+readme = "README.md"
+license = {text = "GPLv3"}
+
+[build-system]
+requires = ["setuptools>=61", "wheel"]
+build-backend = "setuptools.build_meta"
+
+
+[tool.pdm]
+distribution = true
+
+
+[tool.black]
+line-length = 120  # 设置代码行的最大长度为 80 字符
+target-version = ['py312']  # 目标 Python 版本为 3.12
+
+
+[tool.isort]
+profile = "black"  # 兼容 black
+line_length = 120  # 将行长度设置为与 black 一致
+length_sort = true  # 按导入语句的长度进行排序
+
+
+# 导入自动注释
+import_heading_stdlib = "标准库导入"
+import_heading_thirdparty = "第三方库导入"
+import_heading_firstparty = "项目内模块导入"
+
