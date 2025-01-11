@@ -1,12 +1,15 @@
 # coding:utf-8
+# 标准库导入
 from typing import Union
-from PySide6.QtCore import QPoint, Qt, QRect, QRectF
-from PySide6.QtGui import QPixmap, QPainter, QPainterPath, QIcon, QImage
+
+# 第三方库导入
+from PySide6.QtGui import QIcon, QImage, QPixmap, QPainter, QPainterPath
+from PySide6.QtCore import Qt, QRect, QPoint, QRectF
 from PySide6.QtWidgets import QWidget
 
 from ...common.icon import FluentIconBase
-from ..widgets.flyout import FlyoutAnimationType, FlyoutViewBase, FlyoutView, Flyout, FlyoutAnimationManager
 from .acrylic_widget import AcrylicWidget
+from ..widgets.flyout import Flyout, FlyoutView, FlyoutViewBase, FlyoutAnimationType, FlyoutAnimationManager
 
 
 class AcrylicFlyoutViewBase(AcrylicWidget, FlyoutViewBase):

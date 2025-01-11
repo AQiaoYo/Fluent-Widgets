@@ -1,9 +1,11 @@
 # coding:utf-8
+# 标准库导入
 from typing import Iterable
 
-from PySide6.QtCore import Qt, Signal, QSize, QEvent, QRectF
+# 第三方库导入
 from PySide6.QtGui import QPainter
-from PySide6.QtWidgets import QListWidget, QListWidgetItem, QToolButton
+from PySide6.QtCore import Qt, QSize, QEvent, QRectF, Signal
+from PySide6.QtWidgets import QListWidget, QToolButton, QListWidgetItem
 
 from .scroll_area import SmoothScrollBar
 from ...common.icon import FluentIcon, isDarkTheme

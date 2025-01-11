@@ -1,22 +1,30 @@
 # coding:utf-8
+# 标准库导入
 from enum import Enum
 from typing import Union
 
-from PySide6.QtCore import Qt, QPropertyAnimation, QRect, QSize, QEvent, QEasingCurve, Signal, QPoint
-from PySide6.QtGui import QResizeEvent, QIcon, QColor, QPainterPath
-from PySide6.QtWidgets import QWidget, QVBoxLayout, QFrame, QApplication, QHBoxLayout
+# 第三方库导入
+from PySide6.QtGui import QIcon, QColor, QPainterPath, QResizeEvent
+from PySide6.QtCore import Qt, QRect, QSize, QEvent, QPoint, Signal, QEasingCurve, QPropertyAnimation
+from PySide6.QtWidgets import QFrame, QWidget, QHBoxLayout, QVBoxLayout, QApplication
 
-from .navigation_widget import (NavigationTreeWidgetBase, NavigationToolButton, NavigationWidget, NavigationSeparator,
-                                NavigationTreeWidget, NavigationFlyoutMenu)
-from ..widgets.acrylic_label import AcrylicBrush
-from ..widgets.scroll_area import ScrollArea
-from ..widgets.tool_tip import ToolTipFilter
-from ..widgets.flyout import Flyout, FlyoutAnimationType, FlyoutViewBase, SlideRightFlyoutAnimationManager
-from ..material.acrylic_flyout import AcrylicFlyout, AcrylicFlyoutViewBase
-from ...common.router import qrouter
-from ...common.style_sheet import FluentStyleSheet, isDarkTheme
-from ...common.icon import FluentIconBase
 from ...common.icon import FluentIcon as FIF
+from ...common.icon import FluentIconBase
+from ...common.router import qrouter
+from ..widgets.flyout import Flyout, FlyoutViewBase, FlyoutAnimationType, SlideRightFlyoutAnimationManager
+from ..widgets.tool_tip import ToolTipFilter
+from .navigation_widget import (
+    NavigationWidget,
+    NavigationSeparator,
+    NavigationFlyoutMenu,
+    NavigationToolButton,
+    NavigationTreeWidget,
+    NavigationTreeWidgetBase,
+)
+from ...common.style_sheet import FluentStyleSheet, isDarkTheme
+from ..widgets.scroll_area import ScrollArea
+from ..widgets.acrylic_label import AcrylicBrush
+from ..material.acrylic_flyout import AcrylicFlyout, AcrylicFlyoutViewBase
 
 
 class NavigationDisplayMode(Enum):

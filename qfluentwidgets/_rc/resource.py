@@ -3,6 +3,7 @@
 # Created by: The Resource Compiler for Qt version 6.4.2
 # WARNING! All changes made in this file will be lost!
 
+# 第三方库导入
 from PySide6 import QtCore
 
 qt_resource_data = b"\

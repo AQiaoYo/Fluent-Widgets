@@ -1,17 +1,19 @@
 # coding:utf-8
+# 标准库导入
 import sys
 from typing import Union, Iterable
 
-from PySide6.QtCore import Qt, Signal, QRectF, QPoint, QEvent
-from PySide6.QtGui import QPainter, QAction, QCursor, QIcon
+# 第三方库导入
+from PySide6.QtGui import QIcon, QAction, QCursor, QPainter
+from PySide6.QtCore import Qt, QEvent, QPoint, QRectF, Signal
 from PySide6.QtWidgets import QPushButton, QApplication
 
 from .menu import RoundMenu, MenuAnimationType, IndicatorMenuItemDelegate
 from .line_edit import LineEdit, LineEditButton
-from ...common.animation import TranslateYAnimation
-from ...common.icon import FluentIconBase, isDarkTheme
-from ...common.icon import FluentIcon as FIF
 from ...common.font import setFont
+from ...common.icon import FluentIcon as FIF
+from ...common.icon import FluentIconBase, isDarkTheme
+from ...common.animation import TranslateYAnimation
 from ...common.style_sheet import FluentStyleSheet
 
 

@@ -1,13 +1,21 @@
 # coding:utf-8
+# 标准库导入
 from math import floor
 
-from PySide6.QtCore import (QEasingCurve, Qt, QPropertyAnimation, Property,
-                          QParallelAnimationGroup, QSequentialAnimationGroup, QLocale)
-from PySide6.QtGui import QPainter, QColor
+# 第三方库导入
+from PySide6.QtGui import QColor, QPainter
+from PySide6.QtCore import (
+    Qt,
+    QLocale,
+    Property,
+    QEasingCurve,
+    QPropertyAnimation,
+    QParallelAnimationGroup,
+    QSequentialAnimationGroup,
+)
 from PySide6.QtWidgets import QProgressBar
 
 from ...common.style_sheet import themeColor, isDarkTheme
-
 
 
 class ProgressBar(QProgressBar):

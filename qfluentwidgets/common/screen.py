@@ -1,5 +1,6 @@
-from PySide6.QtCore import QRect
+# 第三方库导入
 from PySide6.QtGui import QCursor
+from PySide6.QtCore import QRect
 from PySide6.QtWidgets import QApplication
 
 

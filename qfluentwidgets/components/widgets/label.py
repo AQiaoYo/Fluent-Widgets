@@ -1,18 +1,19 @@
 # coding:utf-8
 
+# 标准库导入
 from typing import Union
 
-from PySide6.QtCore import Qt, Property, Signal, QSize, QRectF, QUrl
-from PySide6.QtGui import (QPainter, QPixmap, QColor, QFont, QImage, QPainterPath, QImageReader,
-                         QMovie, QDesktopServices)
+# 第三方库导入
+from PySide6.QtGui import QFont, QColor, QImage, QMovie, QPixmap, QPainter, QImageReader, QPainterPath, QDesktopServices
+from PySide6.QtCore import Qt, QUrl, QSize, QRectF, Signal, Property
 from PySide6.QtWidgets import QLabel, QWidget, QPushButton, QApplication
 
-from ...common.exception_handler import exceptionHandler
-from ...common.overload import singledispatchmethod
-from ...common.font import setFont, getFont
-from ...common.style_sheet import FluentStyleSheet, setCustomStyleSheet, setCustomStyleSheet
-from ...common.config import qconfig, isDarkTheme
 from .menu import LabelContextMenu
+from ...common.font import getFont, setFont
+from ...common.config import qconfig, isDarkTheme
+from ...common.overload import singledispatchmethod
+from ...common.style_sheet import FluentStyleSheet, setCustomStyleSheet
+from ...common.exception_handler import exceptionHandler
 
 
 class PixmapLabel(QLabel):

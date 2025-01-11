@@ -1,15 +1,15 @@
 # coding:utf-8
-from PySide6.QtCore import Qt, Signal, QEvent
+# 第三方库导入
 from PySide6.QtGui import QColor
-from PySide6.QtWidgets import QLabel, QFrame, QVBoxLayout, QHBoxLayout, QPushButton
+from PySide6.QtCore import Qt, QEvent, Signal
 from qframelesswindow import FramelessDialog
+from PySide6.QtWidgets import QFrame, QLabel, QHBoxLayout, QPushButton, QVBoxLayout
 
+from ..widgets.label import BodyLabel
+from ..widgets.button import PrimaryPushButton
+from .mask_dialog_base import MaskDialogBase
 from ...common.auto_wrap import TextWrap
 from ...common.style_sheet import FluentStyleSheet
-from ..widgets.button import PrimaryPushButton
-from ..widgets.label import BodyLabel
-
-from .mask_dialog_base import MaskDialogBase
 
 
 class Ui_MessageBox:

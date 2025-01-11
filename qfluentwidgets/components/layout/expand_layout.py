@@ -1,5 +1,6 @@
 # coding:utf-8
-from PySide6.QtCore import QSize, QPoint, Qt, QEvent, QRect
+# 第三方库导入
+from PySide6.QtCore import Qt, QRect, QSize, QEvent, QPoint
 from PySide6.QtWidgets import QLayout, QWidget
 
 

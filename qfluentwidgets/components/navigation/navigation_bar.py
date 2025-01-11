@@ -1,20 +1,21 @@
 # coding:utf-8
+# 标准库导入
 from typing import Union
 
-from PySide6.QtCore import Qt, QRect, QPropertyAnimation, Property, QRectF
-from PySide6.QtGui import QFont, QPainter, QColor, QIcon
+# 第三方库导入
+from PySide6.QtGui import QFont, QIcon, QColor, QPainter
+from PySide6.QtCore import Qt, QRect, QRectF, Property, QPropertyAnimation
 from PySide6.QtWidgets import QWidget, QVBoxLayout
 
-from ...common.config import isDarkTheme
 from ...common.font import setFont
-from ...common.style_sheet import themeColor
-from ...common.icon import drawIcon, FluentIconBase, toQIcon
 from ...common.icon import FluentIcon as FIF
+from ...common.icon import FluentIconBase, toQIcon, drawIcon
+from ...common.config import isDarkTheme
 from ...common.router import qrouter
-from ...common.style_sheet import FluentStyleSheet
-from ..widgets.scroll_area import ScrollArea
-from .navigation_widget import NavigationPushButton, NavigationWidget
 from .navigation_panel import RouteKeyError, NavigationItemPosition
+from .navigation_widget import NavigationWidget, NavigationPushButton
+from ...common.style_sheet import FluentStyleSheet, themeColor
+from ..widgets.scroll_area import ScrollArea
 
 
 class IconSlideAnimation(QPropertyAnimation):

@@ -1,13 +1,13 @@
 # coding:utf-8
+# 第三方库导入
 from PySide6.QtCore import Qt
 
-
+from ..settings import SettingCard
 from .acrylic_menu import AcrylicMenuBase, AcrylicMenuActionListWidget
+from ..widgets.menu import RoundMenu, MenuAnimationType, IndicatorMenuItemDelegate
+from ...common.config import OptionsConfigItem, qconfig
 from .acrylic_line_edit import AcrylicLineEditBase
 from ..widgets.combo_box import ComboBox, EditableComboBox
-from ..widgets.menu import MenuAnimationType, RoundMenu, IndicatorMenuItemDelegate
-from ..settings import SettingCard
-from ...common.config import OptionsConfigItem, qconfig
 
 
 class AcrylicComboMenuActionListWidget(AcrylicMenuActionListWidget):

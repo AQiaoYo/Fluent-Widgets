@@ -1,17 +1,28 @@
 # coding:utf-8
+# 标准库导入
 from enum import Enum
 
-from PySide6.QtCore import Qt, QSize, QRectF, QPoint
-from PySide6.QtGui import QPainter, QPainterPath, QColor
-from PySide6.QtWidgets import (QSpinBox, QDoubleSpinBox, QToolButton, QHBoxLayout,
-                               QDateEdit, QDateTimeEdit, QTimeEdit, QVBoxLayout, QApplication)
+# 第三方库导入
+from PySide6.QtGui import QColor, QPainter, QPainterPath
+from PySide6.QtCore import Qt, QSize, QPoint, QRectF
+from PySide6.QtWidgets import (
+    QSpinBox,
+    QDateEdit,
+    QTimeEdit,
+    QHBoxLayout,
+    QToolButton,
+    QVBoxLayout,
+    QApplication,
+    QDateTimeEdit,
+    QDoubleSpinBox,
+)
 
-from ...common.style_sheet import FluentStyleSheet, themeColor, isDarkTheme
-from ...common.icon import FluentIconBase, Theme, getIconColor
-from ...common.font import setFont
 from .button import TransparentToolButton
-from .line_edit import LineEditMenu
 from .flyout import Flyout, FlyoutViewBase, FlyoutAnimationType
+from .line_edit import LineEditMenu
+from ...common.font import setFont
+from ...common.icon import Theme, FluentIconBase, getIconColor
+from ...common.style_sheet import FluentStyleSheet, themeColor, isDarkTheme
 
 
 class SpinIcon(FluentIconBase, Enum):

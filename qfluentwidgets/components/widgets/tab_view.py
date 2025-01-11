@@ -1,18 +1,21 @@
 # coding:utf-8
+# 标准库导入
 from copy import deepcopy
 from enum import Enum
 from typing import Union
-from PySide6.QtCore import Qt, Signal, Property, QRectF, QSize, QPoint, QPropertyAnimation, QEasingCurve, QRect
-from PySide6.QtGui import QPainter, QColor, QIcon, QPainterPath, QLinearGradient, QPen, QBrush, QMouseEvent
-from PySide6.QtWidgets import QWidget, QGraphicsDropShadowEffect, QHBoxLayout, QApplication
 
-from ...common.icon import FluentIcon, FluentIconBase, drawIcon
-from ...common.style_sheet import isDarkTheme, FluentStyleSheet
-from ...common.font import setFont
-from ...common.router import qrouter
-from .button import TransparentToolButton, PushButton
-from .scroll_area import SingleDirectionScrollArea
+# 第三方库导入
+from PySide6.QtGui import QPen, QIcon, QBrush, QColor, QPainter, QMouseEvent, QPainterPath, QLinearGradient
+from PySide6.QtCore import Qt, QRect, QSize, QPoint, QRectF, Signal, Property, QEasingCurve, QPropertyAnimation
+from PySide6.QtWidgets import QWidget, QHBoxLayout, QApplication, QGraphicsDropShadowEffect
+
+from .button import PushButton, TransparentToolButton
 from .tool_tip import ToolTipFilter
+from .scroll_area import SingleDirectionScrollArea
+from ...common.font import setFont
+from ...common.icon import FluentIcon, FluentIconBase, drawIcon
+from ...common.router import qrouter
+from ...common.style_sheet import FluentStyleSheet, isDarkTheme
 
 
 class TabCloseButtonDisplayMode(Enum):

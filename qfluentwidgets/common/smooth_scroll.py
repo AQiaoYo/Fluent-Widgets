@@ -1,11 +1,13 @@
 # coding:utf-8
-from collections import deque
+# 标准库导入
 from enum import Enum
-from math import cos, pi
+from math import pi, cos
+from collections import deque
 
-from PySide6.QtCore import QDateTime, Qt, QTimer, QPoint
+# 第三方库导入
 from PySide6.QtGui import QWheelEvent
-from PySide6.QtWidgets import QApplication, QScrollArea, QAbstractScrollArea
+from PySide6.QtCore import Qt, QPoint, QTimer, QDateTime
+from PySide6.QtWidgets import QScrollArea, QApplication, QAbstractScrollArea
 
 
 class SmoothScroll:

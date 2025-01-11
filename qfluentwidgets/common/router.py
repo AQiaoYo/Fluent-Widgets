@@ -1,7 +1,9 @@
 # coding:utf-8
+# 标准库导入
 from itertools import groupby
 
-from PySide6.QtCore import QObject, Signal
+# 第三方库导入
+from PySide6.QtCore import Signal, QObject
 from PySide6.QtWidgets import QWidget, QStackedWidget
 
 

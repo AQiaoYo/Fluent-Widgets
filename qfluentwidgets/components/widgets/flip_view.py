@@ -1,15 +1,17 @@
 # coding:utf-8
+# 标准库导入
 from typing import List, Union
 
-from PySide6.QtCore import Qt, Signal, QModelIndex, QSize, Property, QRectF, QPropertyAnimation, QSizeF
-from PySide6.QtGui import QPixmap, QPainter, QColor, QImage, QWheelEvent, QPainterPath, QImageReader
-from PySide6.QtWidgets import QStyleOptionViewItem, QListWidget, QStyledItemDelegate, QListWidgetItem
+# 第三方库导入
+from PySide6.QtGui import QColor, QImage, QPixmap, QPainter, QWheelEvent, QImageReader, QPainterPath
+from PySide6.QtCore import Qt, QSize, QRectF, QSizeF, Signal, Property, QModelIndex, QPropertyAnimation
+from PySide6.QtWidgets import QListWidget, QListWidgetItem, QStyledItemDelegate, QStyleOptionViewItem
 
-from ...common.overload import singledispatchmethod
-from ...common.style_sheet import isDarkTheme, FluentStyleSheet
-from ...common.icon import drawIcon, FluentIcon
-from .scroll_bar import SmoothScrollBar
 from .button import ToolButton
+from .scroll_bar import SmoothScrollBar
+from ...common.icon import FluentIcon, drawIcon
+from ...common.overload import singledispatchmethod
+from ...common.style_sheet import FluentStyleSheet, isDarkTheme
 
 
 class ScrollButton(ToolButton):

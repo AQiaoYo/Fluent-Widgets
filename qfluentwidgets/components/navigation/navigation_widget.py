@@ -1,20 +1,32 @@
 # coding:utf-8
+# 标准库导入
 from typing import Union
-
-from PySide6.QtCore import (Qt, Signal, QRect, QRectF, QPropertyAnimation, Property, QMargins,
-                          QEasingCurve, QPoint, QEvent)
-from PySide6.QtGui import QColor, QPainter, QPen, QIcon, QCursor, QFont, QPixmap, QImage
-from PySide6.QtWidgets import QWidget, QVBoxLayout
 from collections import deque
 
-from ...common.config import isDarkTheme
-from ...common.style_sheet import themeColor
-from ...common.icon import drawIcon, toQIcon
-from ...common.icon import FluentIcon as FIF
+# 第三方库导入
+from PySide6.QtGui import QPen, QFont, QIcon, QColor, QImage, QCursor, QPixmap, QPainter
+from PySide6.QtCore import (
+    Qt,
+    QRect,
+    QEvent,
+    QPoint,
+    QRectF,
+    Signal,
+    Property,
+    QMargins,
+    QEasingCurve,
+    QPropertyAnimation,
+)
+from PySide6.QtWidgets import QWidget, QVBoxLayout
+
 from ...common.font import setFont
-from ..widgets.scroll_area import ScrollArea
+from ...common.icon import FluentIcon as FIF
+from ...common.icon import toQIcon, drawIcon
 from ..widgets.label import AvatarWidget
+from ...common.config import isDarkTheme
 from ..widgets.info_badge import InfoBadgeManager, InfoBadgePosition
+from ...common.style_sheet import themeColor
+from ..widgets.scroll_area import ScrollArea
 
 
 class NavigationWidget(QWidget):

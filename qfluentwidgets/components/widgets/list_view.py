@@ -1,9 +1,11 @@
 # coding:utf-8
+# 标准库导入
 from typing import List
 
-from PySide6.QtCore import Qt, QModelIndex, Property
+# 第三方库导入
 from PySide6.QtGui import QPainter
-from PySide6.QtWidgets import QStyleOptionViewItem, QListView, QListView, QListWidget, QWidget
+from PySide6.QtCore import Qt, Property, QModelIndex
+from PySide6.QtWidgets import QWidget, QListView, QListWidget, QStyleOptionViewItem
 
 from .scroll_bar import SmoothScrollDelegate
 from .table_view import TableItemDelegate

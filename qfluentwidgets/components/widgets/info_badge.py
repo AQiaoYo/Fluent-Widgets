@@ -1,15 +1,17 @@
 # coding:utf-8
+# 标准库导入
 from enum import Enum
 from typing import Union
 
-from PySide6.QtCore import Qt, QEvent, QRectF, QPoint, QObject, QSize
-from PySide6.QtGui import QPainter, QColor, QIcon
+# 第三方库导入
+from PySide6.QtGui import QIcon, QColor, QPainter
+from PySide6.QtCore import Qt, QSize, QEvent, QPoint, QRectF, QObject
 from PySide6.QtWidgets import QLabel, QWidget, QSizePolicy
 
 from ...common.font import setFont
-from ...common.icon import drawIcon, FluentIconBase, toQIcon
+from ...common.icon import FluentIconBase, toQIcon, drawIcon
 from ...common.overload import singledispatchmethod
-from ...common.style_sheet import themeColor, FluentStyleSheet, isDarkTheme, Theme
+from ...common.style_sheet import Theme, FluentStyleSheet, themeColor, isDarkTheme
 
 
 class InfoLevel(Enum):

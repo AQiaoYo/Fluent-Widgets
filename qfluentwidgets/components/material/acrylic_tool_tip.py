@@ -1,6 +1,7 @@
 # coding: utf-8
-from PySide6.QtCore import QRect, QRectF
+# 第三方库导入
 from PySide6.QtGui import QPainterPath
+from PySide6.QtCore import QRect, QRectF
 from PySide6.QtWidgets import QFrame
 
 from .acrylic_widget import AcrylicWidget

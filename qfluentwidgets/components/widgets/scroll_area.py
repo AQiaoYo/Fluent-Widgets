@@ -1,10 +1,11 @@
 # coding:utf-8
-from PySide6.QtCore import QEasingCurve, Qt
+# 第三方库导入
 from PySide6.QtGui import QWheelEvent
+from PySide6.QtCore import Qt, QEasingCurve
 from PySide6.QtWidgets import QScrollArea
 
-from ...common.smooth_scroll import SmoothScroll
 from .scroll_bar import SmoothScrollBar, SmoothScrollDelegate
+from ...common.smooth_scroll import SmoothScroll
 
 
 class ScrollArea(QScrollArea):

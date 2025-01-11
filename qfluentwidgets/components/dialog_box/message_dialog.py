@@ -1,10 +1,11 @@
 # coding:utf-8
+# 第三方库导入
 from PySide6.QtCore import Signal
 from PySide6.QtWidgets import QLabel, QPushButton
 
+from .mask_dialog_base import MaskDialogBase
 from ...common.auto_wrap import TextWrap
 from ...common.style_sheet import FluentStyleSheet
-from .mask_dialog_base import MaskDialogBase
 
 
 class MessageDialog(MaskDialogBase):

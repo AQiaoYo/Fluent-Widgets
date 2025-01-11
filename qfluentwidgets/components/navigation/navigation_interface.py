@@ -1,13 +1,15 @@
 # coding:utf-8
+# 标准库导入
 from typing import Union
 
+# 第三方库导入
+from PySide6.QtGui import QIcon, QResizeEvent
 from PySide6.QtCore import Qt, QEvent, Signal
-from PySide6.QtGui import QResizeEvent, QIcon
 from PySide6.QtWidgets import QWidget
 
-from .navigation_panel import NavigationPanel, NavigationItemPosition, NavigationWidget, NavigationDisplayMode
-from .navigation_widget import NavigationTreeWidget
 from ...common.icon import FluentIconBase
+from .navigation_panel import NavigationPanel, NavigationWidget, NavigationDisplayMode, NavigationItemPosition
+from .navigation_widget import NavigationTreeWidget
 
 
 class NavigationInterface(QWidget):

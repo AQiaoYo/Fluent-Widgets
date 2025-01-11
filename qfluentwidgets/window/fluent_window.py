@@ -1,22 +1,28 @@
 # coding:utf-8
-from typing import Union
+# 标准库导入
 import sys
+from typing import Union
 
-from PySide6.QtCore import Qt, QSize, QRect
-from PySide6.QtGui import QIcon, QPainter, QColor
-from PySide6.QtWidgets import QWidget, QHBoxLayout, QVBoxLayout, QLabel, QApplication
-
-from ..common.config import qconfig
-from ..common.icon import FluentIconBase
-from ..common.router import qrouter
-from ..common.style_sheet import FluentStyleSheet, isDarkTheme
-from ..common.animation import BackgroundAnimationWidget
-from ..components.widgets.frameless_window import FramelessWindow
-from ..components.navigation import (NavigationInterface, NavigationBar, NavigationItemPosition,
-                                     NavigationBarPushButton, NavigationTreeWidget)
-from .stacked_widget import StackedWidget
-
+# 第三方库导入
+from PySide6.QtGui import QIcon, QColor, QPainter
+from PySide6.QtCore import Qt, QRect, QSize
 from qframelesswindow import TitleBar, TitleBarBase
+from PySide6.QtWidgets import QLabel, QWidget, QHBoxLayout, QVBoxLayout, QApplication
+
+from ..common.icon import FluentIconBase
+from ..common.config import qconfig
+from ..common.router import qrouter
+from .stacked_widget import StackedWidget
+from ..common.animation import BackgroundAnimationWidget
+from ..common.style_sheet import FluentStyleSheet, isDarkTheme
+from ..components.navigation import (
+    NavigationBar,
+    NavigationInterface,
+    NavigationTreeWidget,
+    NavigationItemPosition,
+    NavigationBarPushButton,
+)
+from ..components.widgets.frameless_window import FramelessWindow
 
 
 class FluentWindowBase(BackgroundAnimationWidget, FramelessWindow):

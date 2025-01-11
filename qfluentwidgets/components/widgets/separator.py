@@ -1,5 +1,6 @@
 # coding:utf-8
-from PySide6.QtGui import QPainter, QColor
+# 第三方库导入
+from PySide6.QtGui import QColor, QPainter
 from PySide6.QtWidgets import QWidget
 
 from ...common.style_sheet import isDarkTheme

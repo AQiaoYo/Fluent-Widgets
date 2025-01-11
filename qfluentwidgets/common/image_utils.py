@@ -1,17 +1,18 @@
 # coding:utf-8
-from math import floor
+# 标准库导入
 from io import BytesIO
+from math import floor
 from typing import Union
 
+# 第三方库导入
 import numpy as np
-from colorthief import ColorThief
 from PIL import Image
+from colorthief import ColorThief
 from PySide6.QtGui import QImage, QPixmap
-from PySide6.QtCore import QIODevice, QBuffer
+from PySide6.QtCore import QBuffer, QIODevice
 from scipy.ndimage.filters import gaussian_filter
 
 from .exception_handler import exceptionHandler
-
 
 
 def gaussianBlur(image, blurRadius=18, brightFactor=1, blurPicSize= None):

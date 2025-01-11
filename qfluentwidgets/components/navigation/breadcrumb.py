@@ -1,8 +1,10 @@
 # coding:utf-8
+# 标准库导入
 import math
 
-from PySide6.QtCore import Qt, Signal, QRectF, Property, QPoint, QEvent
-from PySide6.QtGui import QPainter, QFont, QHoverEvent, QAction
+# 第三方库导入
+from PySide6.QtGui import QFont, QAction, QPainter, QHoverEvent
+from PySide6.QtCore import Qt, QEvent, QPoint, QRectF, Signal, Property
 from PySide6.QtWidgets import QWidget, QApplication
 
 from ...common.font import setFont

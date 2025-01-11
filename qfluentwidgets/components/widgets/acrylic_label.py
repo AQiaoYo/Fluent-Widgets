@@ -1,10 +1,12 @@
 # coding:utf-8
+# 标准库导入
 import warnings
-from  typing import Union
+from typing import Union
 
-from PySide6.QtCore import Qt, QThread, Signal, QRect
-from PySide6.QtGui import QBrush, QColor, QImage, QPainter, QPixmap, QPainterPath
-from PySide6.QtWidgets import QLabel, QApplication, QWidget
+# 第三方库导入
+from PySide6.QtGui import QBrush, QColor, QImage, QPixmap, QPainter, QPainterPath
+from PySide6.QtCore import Qt, QRect, Signal, QThread
+from PySide6.QtWidgets import QLabel, QWidget, QApplication
 
 from ...common.screen import getCurrentScreen
 

@@ -1,13 +1,15 @@
 # coding: utf-8
+# 标准库导入
 from enum import Enum
 
+# 第三方库导入
+from PySide6.QtGui import QColor, QPainter
 from PySide6.QtCore import Qt
-from PySide6.QtGui import QPainter, QColor
-from PySide6.QtWidgets import QCheckBox, QStyle, QStyleOptionButton, QWidget
+from PySide6.QtWidgets import QStyle, QWidget, QCheckBox, QStyleOptionButton
 
-from ...common.icon import FluentIconBase, Theme, getIconColor
-from ...common.style_sheet import FluentStyleSheet, isDarkTheme, ThemeColor, themeColor
+from ...common.icon import Theme, FluentIconBase, getIconColor
 from ...common.overload import singledispatchmethod
+from ...common.style_sheet import ThemeColor, FluentStyleSheet, themeColor, isDarkTheme
 
 
 class CheckBoxIcon(FluentIconBase, Enum):

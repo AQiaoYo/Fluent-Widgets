@@ -1,15 +1,17 @@
 # coding:utf-8
+# 标准库导入
 from typing import Union
 
-from PySide6.QtCore import Qt, Signal, QRectF, QDate, QPoint, Property
+# 第三方库导入
 from PySide6.QtGui import QPainter
+from PySide6.QtCore import Qt, QDate, QPoint, QRectF, Signal, Property
 from PySide6.QtWidgets import QPushButton, QApplication
 
-from ...common.style_sheet import FluentStyleSheet
 from ...common.icon import FluentIcon as FIF
-from ..widgets.flyout import Flyout, FlyoutAnimationType
 from .calendar_view import CalendarView
+from ..widgets.flyout import Flyout, FlyoutAnimationType
 from .fast_calendar_view import FastCalendarView
+from ...common.style_sheet import FluentStyleSheet
 
 
 class CalendarPicker(QPushButton):

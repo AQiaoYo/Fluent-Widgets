@@ -1,8 +1,8 @@
 # coding:utf-8
 
-from PySide6.QtCore import (QAbstractAnimation, QEasingCurve, QPoint, QPropertyAnimation,
-                          Signal)
-from PySide6.QtWidgets import QGraphicsOpacityEffect, QStackedWidget, QWidget
+# 第三方库导入
+from PySide6.QtCore import QPoint, Signal, QEasingCurve, QAbstractAnimation, QPropertyAnimation
+from PySide6.QtWidgets import QWidget, QStackedWidget, QGraphicsOpacityEffect
 
 
 class OpacityAniStackedWidget(QStackedWidget):

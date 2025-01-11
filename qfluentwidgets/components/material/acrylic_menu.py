@@ -1,13 +1,22 @@
 # coding:utf-8
-from PySide6.QtCore import Qt, QRect, QRectF, QSize
-from PySide6.QtGui import QPainter, QColor, QPainterPath
-from PySide6.QtWidgets import QLineEdit, QListWidgetItem, QListWidget
+# 第三方库导入
+from PySide6.QtGui import QColor, QPainter, QPainterPath
+from PySide6.QtCore import Qt, QRect, QSize, QRectF
+from PySide6.QtWidgets import QLineEdit, QListWidget, QListWidgetItem
 
-from ..widgets.menu  import (RoundMenu, MenuAnimationType, MenuAnimationManager, MenuActionListWidget,
-                             IndicatorMenuItemDelegate, LineEditMenu, MenuIndicatorType, CheckableMenu)
-from ..widgets.line_edit import CompleterMenu, LineEdit
-from ..widgets.acrylic_label import AcrylicBrush
+from ..widgets.menu import (
+    RoundMenu,
+    LineEditMenu,
+    CheckableMenu,
+    MenuAnimationType,
+    MenuIndicatorType,
+    MenuActionListWidget,
+    MenuAnimationManager,
+    IndicatorMenuItemDelegate,
+)
+from ..widgets.line_edit import LineEdit, CompleterMenu
 from ...common.style_sheet import isDarkTheme
+from ..widgets.acrylic_label import AcrylicBrush
 
 
 class AcrylicMenuActionListWidget(MenuActionListWidget):

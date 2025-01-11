@@ -1,16 +1,17 @@
 # coding:utf-8
+# 标准库导入
 import json
 from copy import deepcopy
 from enum import Enum
-from pathlib import Path
 from typing import List
+from pathlib import Path
 
+# 第三方库导入
 import darkdetect
-from PySide6.QtCore import QObject, Signal
 from PySide6.QtGui import QColor
+from PySide6.QtCore import Signal, QObject
 
 from .exception_handler import exceptionHandler
-
 
 ALERT = "\n\033[1;33m📢 Tips:\033[0m QFluentWidgets Pro is now released. Click \033[1;96mhttps://qfluentwidgets.com/pages/pro\033[0m to learn more about it.\n"
 

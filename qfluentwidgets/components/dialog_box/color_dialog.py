@@ -1,13 +1,13 @@
 # coding:utf-8
-from PySide6.QtCore import Qt, Signal, QPoint, QRegularExpression
-from PySide6.QtGui import (QBrush, QColor, QPixmap, QPainter,
-                           QPen, QIntValidator, QRegularExpressionValidator)
-from PySide6.QtWidgets import QApplication, QLabel, QWidget, QPushButton, QPushButton, QFrame, QVBoxLayout
+# 第三方库导入
+from PySide6.QtGui import QPen, QBrush, QColor, QPixmap, QPainter, QIntValidator, QRegularExpressionValidator
+from PySide6.QtCore import Qt, QPoint, Signal, QRegularExpression
+from PySide6.QtWidgets import QFrame, QLabel, QWidget, QPushButton, QVBoxLayout, QApplication
 
-from ...common.style_sheet import FluentStyleSheet, isDarkTheme
-from ..widgets import ClickableSlider, SingleDirectionScrollArea, PrimaryPushButton
-from ..widgets.line_edit import LineEdit
+from ..widgets import ClickableSlider, PrimaryPushButton, SingleDirectionScrollArea
 from .mask_dialog_base import MaskDialogBase
+from ..widgets.line_edit import LineEdit
+from ...common.style_sheet import FluentStyleSheet, isDarkTheme
 
 
 class HuePanel(QWidget):

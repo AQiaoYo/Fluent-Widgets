@@ -1,6 +1,18 @@
 # coding:utf-8
 
-from PySide6.QtCore import QSize, QPoint, Qt, QRect, QPropertyAnimation, QParallelAnimationGroup, QEasingCurve, QEvent, QTimer, QObject
+# 第三方库导入
+from PySide6.QtCore import (
+    Qt,
+    QRect,
+    QSize,
+    QEvent,
+    QPoint,
+    QTimer,
+    QObject,
+    QEasingCurve,
+    QPropertyAnimation,
+    QParallelAnimationGroup,
+)
 from PySide6.QtWidgets import QLayout, QWidgetItem
 
 

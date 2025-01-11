@@ -1,9 +1,10 @@
 # coding:utf-8
-from PySide6.QtCore import QPropertyAnimation, Qt, QTimer, Signal, QPoint, QRectF
+# 第三方库导入
 from PySide6.QtGui import QPainter
+from PySide6.QtCore import Qt, QPoint, QRectF, QTimer, Signal, QPropertyAnimation
 from PySide6.QtWidgets import QLabel, QWidget, QToolButton, QGraphicsOpacityEffect
 
-from ...common import FluentStyleSheet, isDarkTheme, Theme
+from ...common import Theme, FluentStyleSheet, isDarkTheme
 from ...common.icon import FluentIcon as FIF
 
 

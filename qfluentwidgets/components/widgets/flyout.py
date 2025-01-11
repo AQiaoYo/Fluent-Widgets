@@ -1,18 +1,30 @@
 # coding:utf-8
+# 标准库导入
 from enum import Enum
 from typing import Union
 
-from PySide6.QtCore import (Qt, QPropertyAnimation, QPoint, QParallelAnimationGroup, QEasingCurve, QMargins,
-                          QRectF, QObject, QSize, Signal)
-from PySide6.QtGui import QPixmap, QPainter, QColor, QCursor, QIcon, QImage
-from PySide6.QtWidgets import QWidget, QGraphicsDropShadowEffect, QLabel, QHBoxLayout, QVBoxLayout, QApplication
+# 第三方库导入
+from PySide6.QtGui import QIcon, QColor, QImage, QCursor, QPixmap, QPainter
+from PySide6.QtCore import (
+    Qt,
+    QSize,
+    QPoint,
+    QRectF,
+    Signal,
+    QObject,
+    QMargins,
+    QEasingCurve,
+    QPropertyAnimation,
+    QParallelAnimationGroup,
+)
+from PySide6.QtWidgets import QLabel, QWidget, QHBoxLayout, QVBoxLayout, QApplication, QGraphicsDropShadowEffect
 
-from ...common.auto_wrap import TextWrap
-from ...common.style_sheet import isDarkTheme, FluentStyleSheet
-from ...common.icon import FluentIconBase, drawIcon, FluentIcon
-from ...common.screen import getCurrentScreenGeometry
-from .button import TransparentToolButton
 from .label import ImageLabel
+from .button import TransparentToolButton
+from ...common.icon import FluentIcon, FluentIconBase, drawIcon
+from ...common.screen import getCurrentScreenGeometry
+from ...common.auto_wrap import TextWrap
+from ...common.style_sheet import FluentStyleSheet, isDarkTheme
 
 
 class FlyoutAnimationType(Enum):

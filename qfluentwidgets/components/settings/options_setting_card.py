@@ -1,11 +1,14 @@
 # coding:utf-8
+# 标准库导入
 from typing import Union
-from PySide6.QtCore import Signal
-from PySide6.QtGui import QIcon
-from PySide6.QtWidgets import QButtonGroup, QLabel
 
-from ...common.config import OptionsConfigItem, qconfig
+# 第三方库导入
+from PySide6.QtGui import QIcon
+from PySide6.QtCore import Signal
+from PySide6.QtWidgets import QLabel, QButtonGroup
+
 from ...common.icon import FluentIconBase
+from ...common.config import OptionsConfigItem, qconfig
 from ..widgets.button import RadioButton
 from .expand_setting_card import ExpandSettingCard
 

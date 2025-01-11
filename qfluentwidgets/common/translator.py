@@ -1,5 +1,6 @@
 # coding: utf-8
-from PySide6.QtCore import QTranslator, QLocale
+# 第三方库导入
+from PySide6.QtCore import QLocale, QTranslator
 
 
 class FluentTranslator(QTranslator):

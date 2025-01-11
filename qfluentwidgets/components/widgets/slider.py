@@ -1,11 +1,11 @@
 # coding:utf-8
-from PySide6.QtCore import QSize, Qt, Signal, QPoint, QRectF, QPropertyAnimation, Property
-from PySide6.QtGui import QColor, QMouseEvent, QPainter, QPainterPath
-from PySide6.QtWidgets import QProxyStyle, QSlider, QStyle, QStyleOptionSlider, QWidget
+# 第三方库导入
+from PySide6.QtGui import QColor, QPainter, QMouseEvent, QPainterPath
+from PySide6.QtCore import Qt, QSize, QPoint, QRectF, Signal, Property, QPropertyAnimation
+from PySide6.QtWidgets import QStyle, QSlider, QWidget, QProxyStyle, QStyleOptionSlider
 
-from ...common.style_sheet import themeColor, isDarkTheme
 from ...common.overload import singledispatchmethod
-
+from ...common.style_sheet import themeColor, isDarkTheme
 
 
 class SliderHandle(QWidget):

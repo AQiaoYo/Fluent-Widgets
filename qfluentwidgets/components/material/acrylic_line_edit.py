@@ -1,5 +1,5 @@
 # coding:utf-8
-from .acrylic_menu import AcrylicCompleterMenu, AcrylicLineEditMenu
+from .acrylic_menu import AcrylicLineEditMenu, AcrylicCompleterMenu
 from ..widgets.line_edit import LineEdit, SearchLineEdit
 
 

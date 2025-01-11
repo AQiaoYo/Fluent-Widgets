@@ -1,13 +1,16 @@
 # coding:utf-8
+# 标准库导入
 from typing import Union
-from PySide6.QtCore import QEvent, Qt, QPropertyAnimation, Property, QEasingCurve, QRectF
-from PySide6.QtGui import QColor, QPainter, QIcon, QPainterPath
-from PySide6.QtWidgets import QFrame, QWidget, QAbstractButton, QApplication, QScrollArea, QVBoxLayout
 
-from ...common.config import isDarkTheme
-from ...common.icon import FluentIcon as FIF
-from ...common.style_sheet import FluentStyleSheet
+# 第三方库导入
+from PySide6.QtGui import QIcon, QColor, QPainter, QPainterPath
+from PySide6.QtCore import Qt, QEvent, QRectF, Property, QEasingCurve, QPropertyAnimation
+from PySide6.QtWidgets import QFrame, QWidget, QScrollArea, QVBoxLayout, QApplication, QAbstractButton
+
 from .setting_card import SettingCard
+from ...common.icon import FluentIcon as FIF
+from ...common.config import isDarkTheme
+from ...common.style_sheet import FluentStyleSheet
 
 
 class ExpandButton(QAbstractButton):

@@ -1,10 +1,20 @@
 # coding:utf-8
+# 标准库导入
 from enum import Enum
 
-from PySide6.QtCore import QEvent, QObject, QPoint, QTimer, Qt, QPropertyAnimation, QModelIndex, QRect
+# 第三方库导入
 from PySide6.QtGui import QColor, QHelpEvent
-from PySide6.QtWidgets import (QFrame, QGraphicsDropShadowEffect, QHBoxLayout,
-                             QLabel, QWidget, QAbstractItemView, QStyleOptionViewItem, QTableView)
+from PySide6.QtCore import Qt, QRect, QEvent, QPoint, QTimer, QObject, QModelIndex, QPropertyAnimation
+from PySide6.QtWidgets import (
+    QFrame,
+    QLabel,
+    QWidget,
+    QTableView,
+    QHBoxLayout,
+    QAbstractItemView,
+    QStyleOptionViewItem,
+    QGraphicsDropShadowEffect,
+)
 
 from ...common import FluentStyleSheet
 from ...common.screen import getCurrentScreenGeometry

@@ -1,16 +1,19 @@
 # coding:utf-8
+# 标准库导入
 from typing import Union
-from PySide6.QtCore import Qt, Signal, Property, QPropertyAnimation, QPoint, QSize
-from PySide6.QtGui import QPainter, QColor, QPainterPath, QFont, QIcon
-from PySide6.QtWidgets import QWidget, QFrame, QVBoxLayout, QHBoxLayout, QLabel
 
-from ...common.overload import singledispatchmethod
-from ...common.style_sheet import isDarkTheme, FluentStyleSheet
-from ...common.animation import BackgroundAnimationWidget, DropShadowAnimation
-from ...common.font import setFont
-from ...common.icon import FluentIconBase
+# 第三方库导入
+from PySide6.QtGui import QFont, QIcon, QColor, QPainter, QPainterPath
+from PySide6.QtCore import Qt, QSize, QPoint, Signal, Property, QPropertyAnimation
+from PySide6.QtWidgets import QFrame, QLabel, QWidget, QHBoxLayout, QVBoxLayout
+
 from .label import BodyLabel, CaptionLabel
 from .icon_widget import IconWidget
+from ...common.font import setFont
+from ...common.icon import FluentIconBase
+from ...common.overload import singledispatchmethod
+from ...common.animation import DropShadowAnimation, BackgroundAnimationWidget
+from ...common.style_sheet import FluentStyleSheet, isDarkTheme
 
 
 class CardWidget(BackgroundAnimationWidget, QFrame):

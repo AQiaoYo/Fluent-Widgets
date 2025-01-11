@@ -1,12 +1,12 @@
 # coding:utf-8
-from PySide6.QtCore import Qt
+# 第三方库导入
 from PySide6.QtGui import QColor
-from PySide6.QtWidgets import QFrame, QVBoxLayout, QHBoxLayout, QPushButton
+from PySide6.QtCore import Qt
+from PySide6.QtWidgets import QFrame, QHBoxLayout, QPushButton, QVBoxLayout
 
-from ...common.style_sheet import FluentStyleSheet
 from ..widgets.button import PrimaryPushButton
-
 from .mask_dialog_base import MaskDialogBase
+from ...common.style_sheet import FluentStyleSheet
 
 
 class MessageBoxBase(MaskDialogBase):

@@ -1,16 +1,16 @@
 # coding:utf-8
+# 标准库导入
 from pathlib import Path
 
-from PySide6.QtCore import Qt, Signal, QSize
-from PySide6.QtWidgets import (QFileDialog, QWidget, QLabel, QHBoxLayout,
-                               QSizePolicy)
+# 第三方库导入
+from PySide6.QtCore import Qt, QSize, Signal
+from PySide6.QtWidgets import QLabel, QWidget, QFileDialog, QHBoxLayout, QSizePolicy
 
-from ...components.widgets.button import ToolButton, PushButton
-from ...common.config import ConfigItem, qconfig
 from ...common.icon import FluentIcon as FIF
+from ...common.config import ConfigItem, qconfig
 from ..dialog_box.dialog import Dialog
 from .expand_setting_card import ExpandSettingCard
-
+from ...components.widgets.button import PushButton, ToolButton
 
 
 class FolderItem(QWidget):

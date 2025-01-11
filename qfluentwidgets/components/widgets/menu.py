@@ -1,23 +1,63 @@
 # coding:utf-8
+# 标准库导入
 from enum import Enum
 from typing import List, Union
 
+# 第三方库导入
+from PySide6.QtGui import (
+    QPen,
+    QIcon,
+    QColor,
+    QAction,
+    QPixmap,
+    QRegion,
+    QPainter,
+    QHoverEvent,
+    QTextCursor,
+    QFontMetrics,
+    QKeySequence,
+)
+from PySide6.QtCore import (
+    Qt,
+    QSize,
+    QEvent,
+    QPoint,
+    QRectF,
+    QTimer,
+    Signal,
+    QObject,
+    QModelIndex,
+    QEasingCurve,
+    QPropertyAnimation,
+    QParallelAnimationGroup,
+)
 from qframelesswindow import WindowEffect
-from PySide6.QtCore import (QEasingCurve, QEvent, QPropertyAnimation, QObject, QModelIndex,
-                          Qt, QSize, QRectF, Signal, QPoint, QTimer, QObject, QParallelAnimationGroup)
-from PySide6.QtGui import (QAction, QIcon, QColor, QPainter, QPen, QPixmap, QRegion, QTextCursor, QHoverEvent, QFontMetrics,
-                           QKeySequence)
-from PySide6.QtWidgets import (QApplication, QMenu, QProxyStyle, QStyle, QStyleFactory,
-                               QGraphicsDropShadowEffect, QListWidget, QWidget, QHBoxLayout,
-                               QListWidgetItem, QLineEdit, QTextEdit, QStyledItemDelegate, QStyleOptionViewItem, QLabel)
+from PySide6.QtWidgets import (
+    QMenu,
+    QLabel,
+    QStyle,
+    QWidget,
+    QLineEdit,
+    QTextEdit,
+    QHBoxLayout,
+    QListWidget,
+    QProxyStyle,
+    QApplication,
+    QStyleFactory,
+    QListWidgetItem,
+    QStyledItemDelegate,
+    QStyleOptionViewItem,
+    QGraphicsDropShadowEffect,
+)
 
-from ...common.icon import FluentIcon as FIF
-from ...common.icon import FluentIconEngine, Action, FluentIconBase, Icon
-from ...common.style_sheet import FluentStyleSheet, themeColor
-from ...common.screen import getCurrentScreenGeometry
-from ...common.font import getFont
-from ...common.config import isDarkTheme
 from .scroll_bar import SmoothScrollDelegate
+from ...common.font import getFont
+from ...common.icon import Icon, Action
+from ...common.icon import FluentIcon as FIF
+from ...common.icon import FluentIconBase, FluentIconEngine
+from ...common.config import isDarkTheme
+from ...common.screen import getCurrentScreenGeometry
+from ...common.style_sheet import FluentStyleSheet, themeColor
 
 
 class CustomMenuStyle(QProxyStyle):

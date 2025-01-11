@@ -1,19 +1,21 @@
 # coding:utf-8
+# 标准库导入
 from typing import Union
 
+# 第三方库导入
+from PySide6.QtGui import QIcon, QColor, QPainter
 from PySide6.QtCore import Qt, Signal
-from PySide6.QtGui import QColor, QIcon, QPainter
-from PySide6.QtWidgets import QFrame, QHBoxLayout, QLabel, QToolButton, QVBoxLayout, QPushButton
+from PySide6.QtWidgets import QFrame, QLabel, QHBoxLayout, QPushButton, QToolButton, QVBoxLayout
 
-from ..dialog_box.color_dialog import ColorDialog
-from ..widgets.combo_box import ComboBox
-from ..widgets.switch_button import SwitchButton, IndicatorPosition
-from ..widgets.slider import Slider
-from ..widgets.icon_widget import IconWidget
-from ..widgets.button import HyperlinkButton
-from ...common.style_sheet import FluentStyleSheet
-from ...common.config import qconfig, isDarkTheme, ConfigItem, OptionsConfigItem
 from ...common.icon import FluentIconBase, drawIcon
+from ...common.config import ConfigItem, OptionsConfigItem, qconfig, isDarkTheme
+from ..widgets.button import HyperlinkButton
+from ..widgets.slider import Slider
+from ..widgets.combo_box import ComboBox
+from ...common.style_sheet import FluentStyleSheet
+from ..widgets.icon_widget import IconWidget
+from ..widgets.switch_button import SwitchButton, IndicatorPosition
+from ..dialog_box.color_dialog import ColorDialog
 
 
 class SettingIconWidget(IconWidget):

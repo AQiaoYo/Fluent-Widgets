@@ -1,7 +1,8 @@
 # coding:utf-8
-from PySide6.QtCore import Signal, QTime, Property
+# 第三方库导入
+from PySide6.QtCore import QTime, Signal, Property
 
-from .picker_base import PickerBase, PickerColumnFormatter, DigitFormatter
+from .picker_base import PickerBase, DigitFormatter, PickerColumnFormatter
 
 
 class TimePickerBase(PickerBase):

@@ -1,17 +1,19 @@
 # coding:utf-8
-from typing import Iterable, List
+# 标准库导入
+from typing import List, Iterable
 
-from PySide6.QtCore import Qt, QSize, QRectF, QPoint, QEvent
-from PySide6.QtGui import QAction, QPainter, QColor, QFont, QHoverEvent, QPainterPath
-from PySide6.QtWidgets import QWidget, QFrame, QHBoxLayout, QApplication
+# 第三方库导入
+from PySide6.QtGui import QFont, QColor, QAction, QPainter, QHoverEvent, QPainterPath
+from PySide6.QtCore import Qt, QSize, QEvent, QPoint, QRectF
+from PySide6.QtWidgets import QFrame, QWidget, QHBoxLayout, QApplication
 
+from .menu import RoundMenu, MenuAnimationType
+from .button import TransparentToggleToolButton
+from .flyout import FlyoutViewBase
+from .tool_tip import ToolTipFilter
 from ...common.font import setFont
 from ...common.icon import FluentIcon
 from ...common.style_sheet import isDarkTheme
-from .menu import RoundMenu, MenuAnimationType
-from .button import TransparentToggleToolButton
-from .tool_tip import ToolTipFilter
-from .flyout import FlyoutViewBase
 
 
 class CommandButton(TransparentToggleToolButton):

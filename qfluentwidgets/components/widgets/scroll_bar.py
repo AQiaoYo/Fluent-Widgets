@@ -1,13 +1,33 @@
 # coding:utf-8
-from PySide6.QtCore import (QEvent, QEasingCurve, Qt, Signal, QPropertyAnimation, Property, QRectF,
-                          QTimer, QPoint, QObject)
-from PySide6.QtGui import QPainter, QColor, QMouseEvent
-from PySide6.QtWidgets import (QWidget, QToolButton, QAbstractScrollArea, QHBoxLayout,
-                             QVBoxLayout, QApplication, QAbstractItemView, QListView)
+# 第三方库导入
+from PySide6.QtGui import QColor, QPainter, QMouseEvent
+from PySide6.QtCore import (
+    Qt,
+    QEvent,
+    QPoint,
+    QRectF,
+    QTimer,
+    Signal,
+    QObject,
+    Property,
+    QEasingCurve,
+    QPropertyAnimation,
+)
+from PySide6.QtWidgets import (
+    QWidget,
+    QListView,
+    QHBoxLayout,
+    QToolButton,
+    QVBoxLayout,
+    QApplication,
+    QAbstractItemView,
+    QAbstractScrollArea,
+)
 
 from ...common.icon import FluentIcon
 from ...common.style_sheet import isDarkTheme
 from ...common.smooth_scroll import SmoothScroll
+
 
 class ArrowButton(QToolButton):
     """ Arrow button """

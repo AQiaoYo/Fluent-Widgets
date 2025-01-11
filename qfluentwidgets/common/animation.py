@@ -1,7 +1,10 @@
 # coding: utf-8
+# 标准库导入
 from enum import Enum
-from PySide6.QtCore import QEasingCurve, QEvent, QObject, QPropertyAnimation, Property, Signal, QPoint, QPointF
-from PySide6.QtGui import QMouseEvent, QEnterEvent, QColor
+
+# 第三方库导入
+from PySide6.QtGui import QColor, QEnterEvent, QMouseEvent
+from PySide6.QtCore import QEvent, QPoint, Signal, QObject, QPointF, Property, QEasingCurve, QPropertyAnimation
 from PySide6.QtWidgets import QWidget, QLineEdit, QGraphicsDropShadowEffect
 
 from .config import qconfig

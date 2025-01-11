@@ -1,17 +1,20 @@
 # coding:utf-8
+# 标准库导入
 from typing import Union
 
-from PySide6.QtCore import Signal, QUrl, Qt, QRectF, QSize, QPoint, Property, QRect
-from PySide6.QtGui import QDesktopServices, QIcon, QPainter, QColor, QPainterPath
-from PySide6.QtWidgets import QHBoxLayout, QPushButton, QRadioButton, QToolButton, QApplication, QWidget, QSizePolicy
+# 第三方库导入
+from PySide6.QtGui import QIcon, QColor, QPainter, QPainterPath, QDesktopServices
+from PySide6.QtCore import Qt, QUrl, QRect, QSize, QPoint, QRectF, Signal, Property
+from PySide6.QtWidgets import QWidget, QHBoxLayout, QPushButton, QSizePolicy, QToolButton, QApplication, QRadioButton
 
-from ...common.animation import TranslateYAnimation
-from ...common.icon import FluentIconBase, drawIcon, isDarkTheme, Theme, toQIcon, Icon
-from ...common.icon import FluentIcon as FIF
-from ...common.font import setFont
-from ...common.style_sheet import FluentStyleSheet, themeColor, ThemeColor
-from ...common.overload import singledispatchmethod
 from .menu import RoundMenu, MenuAnimationType
+from ...common.font import setFont
+from ...common.icon import Icon, Theme
+from ...common.icon import FluentIcon as FIF
+from ...common.icon import FluentIconBase, toQIcon, drawIcon, isDarkTheme
+from ...common.overload import singledispatchmethod
+from ...common.animation import TranslateYAnimation
+from ...common.style_sheet import ThemeColor, FluentStyleSheet, themeColor
 
 
 class PushButton(QPushButton):

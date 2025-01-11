@@ -1,20 +1,32 @@
 # coding:utf-8
+# 标准库导入
+import weakref
 from enum import Enum
 from typing import Union
-import weakref
 
-from PySide6.QtCore import (Qt, QEvent, QSize, QRectF, QObject, QPropertyAnimation,
-                          QEasingCurve, QTimer, Signal, QParallelAnimationGroup, QPoint)
-from PySide6.QtGui import QPainter, QIcon, QColor
-from PySide6.QtWidgets import (QWidget, QFrame, QLabel, QHBoxLayout, QVBoxLayout,
-                             QGraphicsOpacityEffect)
+# 第三方库导入
+from PySide6.QtGui import QIcon, QColor, QPainter
+from PySide6.QtCore import (
+    Qt,
+    QSize,
+    QEvent,
+    QPoint,
+    QRectF,
+    QTimer,
+    Signal,
+    QObject,
+    QEasingCurve,
+    QPropertyAnimation,
+    QParallelAnimationGroup,
+)
+from PySide6.QtWidgets import QFrame, QLabel, QWidget, QHBoxLayout, QVBoxLayout, QGraphicsOpacityEffect
 
+from .button import TransparentToolButton
+from ...common.icon import Theme
+from ...common.icon import FluentIcon as FIF
+from ...common.icon import FluentIconBase, drawIcon, isDarkTheme
 from ...common.auto_wrap import TextWrap
 from ...common.style_sheet import FluentStyleSheet, themeColor
-from ...common.icon import FluentIconBase, Theme, isDarkTheme, drawIcon
-from ...common.icon import FluentIcon as FIF
-from .button import TransparentToolButton
-
 
 
 class InfoBarIcon(FluentIconBase, Enum):

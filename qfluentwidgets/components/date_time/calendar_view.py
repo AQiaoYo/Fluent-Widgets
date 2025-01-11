@@ -1,21 +1,47 @@
 # coding: utf-8
+# 标准库导入
 from math import ceil
-from collections import defaultdict, Counter
 from typing import Type
+from collections import Counter, defaultdict
 
-from PySide6.QtCore import (Qt, QRectF, Signal, QSize, QModelIndex, QDate, QCalendar, QEasingCurve, QPropertyAnimation,
-                          QParallelAnimationGroup, QPoint, QRect)
-from PySide6.QtGui import QPainter, QColor
-from PySide6.QtWidgets import (QFrame, QPushButton, QHBoxLayout, QVBoxLayout, QListWidget, QListWidgetItem,
-                             QStyledItemDelegate, QStyle, QStyleOptionViewItem, QLabel,
-                             QWidget, QStackedWidget, QGraphicsDropShadowEffect)
+# 第三方库导入
+from PySide6.QtGui import QColor, QPainter
+from PySide6.QtCore import (
+    Qt,
+    QDate,
+    QRect,
+    QSize,
+    QPoint,
+    QRectF,
+    Signal,
+    QCalendar,
+    QModelIndex,
+    QEasingCurve,
+    QPropertyAnimation,
+    QParallelAnimationGroup,
+)
+from PySide6.QtWidgets import (
+    QFrame,
+    QLabel,
+    QStyle,
+    QWidget,
+    QHBoxLayout,
+    QListWidget,
+    QPushButton,
+    QVBoxLayout,
+    QStackedWidget,
+    QListWidgetItem,
+    QStyledItemDelegate,
+    QStyleOptionViewItem,
+    QGraphicsDropShadowEffect,
+)
 
-from ...common.icon import FluentIcon as FIF
-from ...common.style_sheet import isDarkTheme, FluentStyleSheet, themeColor, ThemeColor
 from ...common.font import getFont
+from ...common.icon import FluentIcon as FIF
 from ...common.screen import getCurrentScreenGeometry
 from ..widgets.button import TransparentToolButton
 from ..widgets.scroll_bar import SmoothScrollBar
+from ...common.style_sheet import ThemeColor, FluentStyleSheet, themeColor, isDarkTheme
 
 
 class ScrollButton(TransparentToolButton):

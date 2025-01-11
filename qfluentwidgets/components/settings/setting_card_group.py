@@ -1,11 +1,13 @@
 # coding:utf-8
+# 标准库导入
 from typing import List
 
+# 第三方库导入
 from PySide6.QtCore import Qt
-from PySide6.QtWidgets import QWidget, QLabel, QVBoxLayout
+from PySide6.QtWidgets import QLabel, QWidget, QVBoxLayout
 
-from ...common.style_sheet import FluentStyleSheet
 from ...common.font import setFont
+from ...common.style_sheet import FluentStyleSheet
 from ..layout.expand_layout import ExpandLayout
 
 

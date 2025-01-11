@@ -1,16 +1,27 @@
 # coding:utf-8
-from typing import Iterable, List
+# 标准库导入
+from typing import List, Iterable
 
-from PySide6.QtCore import Qt, Signal, QSize, QRectF, QPoint, QPropertyAnimation, QEasingCurve, QObject
-from PySide6.QtGui import QColor, QPainter, QRegion
-from PySide6.QtWidgets import (QApplication, QWidget, QFrame, QVBoxLayout, QHBoxLayout,
-                             QGraphicsDropShadowEffect, QSizePolicy, QPushButton, QListWidgetItem)
+# 第三方库导入
+from PySide6.QtGui import QColor, QRegion, QPainter
+from PySide6.QtCore import Qt, QSize, QPoint, QRectF, Signal, QObject, QEasingCurve, QPropertyAnimation
+from PySide6.QtWidgets import (
+    QFrame,
+    QWidget,
+    QHBoxLayout,
+    QPushButton,
+    QSizePolicy,
+    QVBoxLayout,
+    QApplication,
+    QListWidgetItem,
+    QGraphicsDropShadowEffect,
+)
 
-from ..widgets.cycle_list_widget import CycleListWidget
-from ..widgets.button import TransparentToolButton
 from ...common.icon import FluentIcon
 from ...common.screen import getCurrentScreenGeometry
+from ..widgets.button import TransparentToolButton
 from ...common.style_sheet import FluentStyleSheet, themeColor, isDarkTheme
+from ..widgets.cycle_list_widget import CycleListWidget
 
 
 class SeparatorWidget(QWidget):

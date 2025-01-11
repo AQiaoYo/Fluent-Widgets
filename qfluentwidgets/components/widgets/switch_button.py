@@ -1,13 +1,15 @@
 # coding: utf-8
+# 标准库导入
 from enum import Enum
 
-from PySide6.QtCore import Qt, Property, Signal, QEvent, QPropertyAnimation
+# 第三方库导入
 from PySide6.QtGui import QColor, QPainter
-from PySide6.QtWidgets import QHBoxLayout, QLabel, QWidget
+from PySide6.QtCore import Qt, QEvent, Signal, Property, QPropertyAnimation
+from PySide6.QtWidgets import QLabel, QWidget, QHBoxLayout
 
-from ...common.style_sheet import FluentStyleSheet, themeColor, ThemeColor, isDarkTheme
-from ...common.overload import singledispatchmethod
 from .button import ToolButton
+from ...common.overload import singledispatchmethod
+from ...common.style_sheet import ThemeColor, FluentStyleSheet, themeColor, isDarkTheme
 
 
 class Indicator(ToolButton):

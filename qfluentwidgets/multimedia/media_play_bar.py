@@ -1,16 +1,17 @@
 # coding:utf-8
-from PySide6.QtCore import Qt, Signal, QSize, QPropertyAnimation
-from PySide6.QtGui import QPainter, QColor
-from PySide6.QtWidgets import QWidget, QGraphicsOpacityEffect, QHBoxLayout, QVBoxLayout
+# 第三方库导入
+from PySide6.QtGui import QColor, QPainter
+from PySide6.QtCore import Qt, QSize, Signal, QPropertyAnimation
+from PySide6.QtWidgets import QWidget, QHBoxLayout, QVBoxLayout, QGraphicsOpacityEffect
 
 from ..common.icon import FluentIcon
-from ..common.style_sheet import isDarkTheme, FluentStyleSheet
-from ..components.widgets.button import TransparentToolButton
-from ..components.widgets.tool_tip import ToolTipFilter
-from ..components.widgets.slider import Slider
-from ..components.widgets.label import CaptionLabel
-from ..components.widgets.flyout import Flyout, FlyoutViewBase, PullUpFlyoutAnimationManager
 from .media_player import MediaPlayer, MediaPlayerBase
+from ..common.style_sheet import FluentStyleSheet, isDarkTheme
+from ..components.widgets.label import CaptionLabel
+from ..components.widgets.button import TransparentToolButton
+from ..components.widgets.flyout import Flyout, FlyoutViewBase, PullUpFlyoutAnimationManager
+from ..components.widgets.slider import Slider
+from ..components.widgets.tool_tip import ToolTipFilter
 
 
 class MediaPlayBarButton(TransparentToolButton):

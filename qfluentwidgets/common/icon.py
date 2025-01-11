@@ -1,13 +1,15 @@
 # coding:utf-8
+# 标准库导入
 from enum import Enum
 from typing import Union
 
-from PySide6.QtXml import QDomDocument
-from PySide6.QtCore import QRectF, Qt, QFile, QObject, QRect
-from PySide6.QtGui import QIcon, QIconEngine, QColor, QPixmap, QImage, QPainter, QAction
+# 第三方库导入
+from PySide6.QtGui import QIcon, QColor, QImage, QAction, QPixmap, QPainter, QIconEngine
 from PySide6.QtSvg import QSvgRenderer
+from PySide6.QtXml import QDomDocument
+from PySide6.QtCore import Qt, QFile, QRect, QRectF, QObject
 
-from .config import isDarkTheme, Theme
+from .config import Theme, isDarkTheme
 from .overload import singledispatchmethod
 
 

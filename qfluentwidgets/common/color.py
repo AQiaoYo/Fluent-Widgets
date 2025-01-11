@@ -1,6 +1,8 @@
 # coding: utf-8
+# 标准库导入
 from enum import Enum
 
+# 第三方库导入
 from PySide6.QtGui import QColor
 
 

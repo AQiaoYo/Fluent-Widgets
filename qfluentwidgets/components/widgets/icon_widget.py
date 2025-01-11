@@ -1,11 +1,13 @@
 # coding:utf-8
+# 标准库导入
 from typing import Union
 
-from PySide6.QtCore import Property
+# 第三方库导入
 from PySide6.QtGui import QIcon, QPainter
+from PySide6.QtCore import Property
 from PySide6.QtWidgets import QWidget
 
-from ...common.icon import FluentIconBase, drawIcon, toQIcon
+from ...common.icon import FluentIconBase, toQIcon, drawIcon
 from ...common.overload import singledispatchmethod
 
 

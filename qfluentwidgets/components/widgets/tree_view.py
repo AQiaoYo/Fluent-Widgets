@@ -1,12 +1,13 @@
 # coding:utf-8
+# 第三方库导入
+from PySide6.QtGui import QColor, QPainter, QPalette
 from PySide6.QtCore import Qt, QSize, QRectF, QModelIndex
-from PySide6.QtGui import QPainter, QColor, QPalette
-from PySide6.QtWidgets import QTreeWidget, QStyledItemDelegate, QStyle, QTreeView, QApplication, QStyleOptionViewItem
+from PySide6.QtWidgets import QStyle, QTreeView, QTreeWidget, QApplication, QStyledItemDelegate, QStyleOptionViewItem
 
-from ...common.style_sheet import FluentStyleSheet, themeColor, isDarkTheme, setCustomStyleSheet
-from ...common.font import getFont
 from .check_box import CheckBoxIcon
 from .scroll_area import SmoothScrollDelegate
+from ...common.font import getFont
+from ...common.style_sheet import FluentStyleSheet, themeColor, isDarkTheme, setCustomStyleSheet
 
 
 class TreeItemDelegate(QStyledItemDelegate):

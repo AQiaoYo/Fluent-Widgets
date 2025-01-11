@@ -1,6 +1,7 @@
 # coding:utf-8
-from PySide6.QtCore import Signal, QObject, QUrl
-from PySide6.QtMultimedia import QMediaPlayer, QAudioOutput
+# 第三方库导入
+from PySide6.QtCore import QUrl, Signal, QObject
+from PySide6.QtMultimedia import QAudioOutput, QMediaPlayer
 
 
 class MediaPlayerBase(QObject):

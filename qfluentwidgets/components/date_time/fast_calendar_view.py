@@ -1,17 +1,16 @@
 # coding: utf-8
+# 标准库导入
 from math import ceil
 from typing import Type
 
-from PySide6.QtCore import Qt, Signal, QSize, QDate, QCalendar
-from PySide6.QtGui import QPainter, QColor
-from PySide6.QtWidgets import QHBoxLayout, QListWidgetItem, QLabel, QWidget, QStackedWidget, QStyle
+# 第三方库导入
+from PySide6.QtGui import QColor, QPainter
+from PySide6.QtCore import Qt, QDate, QSize, Signal, QCalendar
+from PySide6.QtWidgets import QLabel, QStyle, QWidget, QHBoxLayout, QStackedWidget, QListWidgetItem
 
+from .calendar_view import ScrollViewBase, CalendarViewBase, ScrollItemDelegate
 from ..widgets.flyout import FlyoutViewBase
-from ...common.style_sheet import isDarkTheme, themeColor, ThemeColor
-
-
-from .calendar_view import (ScrollItemDelegate, ScrollViewBase,
-                            CalendarViewBase)
+from ...common.style_sheet import ThemeColor, themeColor, isDarkTheme
 
 
 class FastScrollItemDelegate(ScrollItemDelegate):

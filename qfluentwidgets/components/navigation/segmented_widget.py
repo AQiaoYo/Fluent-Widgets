@@ -1,14 +1,17 @@
 # coding:utf-8
+# 标准库导入
 from typing import Union
-from PySide6.QtCore import Qt, Signal, QRectF
-from PySide6.QtGui import QPainter, QIcon, QColor
-from PySide6.QtWidgets import QApplication, QWidget
 
-from ...common.font import setFont
-from ...common.icon import FluentIconBase, drawIcon, Theme
-from ...common.style_sheet import themeColor, FluentStyleSheet, isDarkTheme
-from ..widgets.button import ToolButton, TransparentToolButton
+# 第三方库导入
+from PySide6.QtGui import QIcon, QColor, QPainter
+from PySide6.QtCore import Qt, QRectF, Signal
+from PySide6.QtWidgets import QWidget, QApplication
+
 from .pivot import Pivot, PivotItem
+from ...common.font import setFont
+from ...common.icon import Theme, FluentIconBase, drawIcon
+from ..widgets.button import ToolButton, TransparentToolButton
+from ...common.style_sheet import FluentStyleSheet, themeColor, isDarkTheme
 
 
 class SegmentedItem(PivotItem):

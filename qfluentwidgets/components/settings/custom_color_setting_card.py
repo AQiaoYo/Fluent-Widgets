@@ -1,14 +1,17 @@
 # coding:utf-8
+# 标准库导入
 from typing import Union
-from PySide6.QtCore import Qt, Signal
+
+# 第三方库导入
 from PySide6.QtGui import QIcon, QColor
-from PySide6.QtWidgets import QWidget, QLabel, QButtonGroup, QVBoxLayout, QPushButton, QHBoxLayout
+from PySide6.QtCore import Qt, Signal
+from PySide6.QtWidgets import QLabel, QWidget, QHBoxLayout, QPushButton, QVBoxLayout, QButtonGroup
 
 from ..dialog_box import ColorDialog
-from .expand_setting_card import ExpandGroupSettingCard
-from ..widgets.button import RadioButton
-from ...common.config import qconfig, ColorConfigItem
 from ...common.icon import FluentIconBase
+from ...common.config import ColorConfigItem, qconfig
+from ..widgets.button import RadioButton
+from .expand_setting_card import ExpandGroupSettingCard
 
 
 class CustomColorSettingCard(ExpandGroupSettingCard):

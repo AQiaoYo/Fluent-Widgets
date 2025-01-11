@@ -1,14 +1,16 @@
 # coding:utf-8
+# 标准库导入
+import weakref
 from enum import Enum
 from string import Template
 from typing import List, Union
-import weakref
 
-from PySide6.QtCore import QFile, QObject, QEvent, QDynamicPropertyChangeEvent
+# 第三方库导入
 from PySide6.QtGui import QColor
+from PySide6.QtCore import QFile, QEvent, QObject, QDynamicPropertyChangeEvent
 from PySide6.QtWidgets import QWidget
 
-from .config import qconfig, Theme, isDarkTheme
+from .config import Theme, qconfig, isDarkTheme
 
 
 class StyleSheetManager(QObject):

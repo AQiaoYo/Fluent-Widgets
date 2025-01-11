@@ -1,7 +1,10 @@
 # coding:utf-8
+# 标准库导入
 from typing import List
+
+# 第三方库导入
 from PySide6.QtCore import Qt
-from PySide6.QtWidgets import QVBoxLayout, QWidget
+from PySide6.QtWidgets import QWidget, QVBoxLayout
 
 
 class VBoxLayout(QVBoxLayout):

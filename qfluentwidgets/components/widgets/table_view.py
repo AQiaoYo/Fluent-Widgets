@@ -1,17 +1,27 @@
 # coding: utf-8
+# 标准库导入
 from typing import List
 
-from PySide6.QtCore import Qt, QMargins, QModelIndex, Property, QRectF
-from PySide6.QtGui import QHelpEvent, QPainter, QColor, QKeyEvent, QPalette
-from PySide6.QtWidgets import (QAbstractItemView, QStyledItemDelegate, QApplication, QStyleOptionViewItem,
-                             QTableView, QTableWidget, QWidget, QTableWidgetItem)
+# 第三方库导入
+from PySide6.QtGui import QColor, QPainter, QPalette, QKeyEvent, QHelpEvent
+from PySide6.QtCore import Qt, QRectF, Property, QMargins, QModelIndex
+from PySide6.QtWidgets import (
+    QWidget,
+    QTableView,
+    QApplication,
+    QTableWidget,
+    QTableWidgetItem,
+    QAbstractItemView,
+    QStyledItemDelegate,
+    QStyleOptionViewItem,
+)
 
+from .tool_tip import ItemViewToolTipType, ItemViewToolTipDelegate
 from .check_box import CheckBoxIcon
-from ...common.font import getFont
-from ...common.style_sheet import isDarkTheme, FluentStyleSheet, themeColor, setCustomStyleSheet
 from .line_edit import LineEdit
 from .scroll_bar import SmoothScrollDelegate
-from .tool_tip import ItemViewToolTipDelegate, ItemViewToolTipType
+from ...common.font import getFont
+from ...common.style_sheet import FluentStyleSheet, themeColor, isDarkTheme, setCustomStyleSheet
 
 
 class TableItemDelegate(QStyledItemDelegate):

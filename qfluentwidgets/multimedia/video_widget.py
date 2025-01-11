@@ -1,11 +1,12 @@
 # coding:utf-8
-from PySide6.QtCore import Qt, QUrl, QSizeF, QTimer
+# 第三方库导入
 from PySide6.QtGui import QPainter
+from PySide6.QtCore import Qt, QUrl, QSizeF, QTimer
+from PySide6.QtWidgets import QVBoxLayout, QGraphicsView, QGraphicsScene
 from PySide6.QtMultimediaWidgets import QGraphicsVideoItem
-from PySide6.QtWidgets import QGraphicsView, QVBoxLayout, QGraphicsScene
 
-from ..common.style_sheet import FluentStyleSheet
 from .media_play_bar import StandardMediaPlayBar
+from ..common.style_sheet import FluentStyleSheet
 
 
 class GraphicsVideoItem(QGraphicsVideoItem):

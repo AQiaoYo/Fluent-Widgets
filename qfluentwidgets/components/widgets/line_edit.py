@@ -1,18 +1,29 @@
 # coding: utf-8
+# 标准库导入
 from typing import List, Union
-from PySide6.QtCore import QSize, Qt, QRectF, Signal, QPoint, QTimer, QEvent, QAbstractItemModel, Property
-from PySide6.QtGui import QPainter, QPainterPath, QIcon, QColor, QAction
-from PySide6.QtWidgets import (QApplication, QHBoxLayout, QLineEdit, QToolButton, QTextEdit,
-                               QPlainTextEdit, QCompleter, QWidget, QTextBrowser)
 
+# 第三方库导入
+from PySide6.QtGui import QIcon, QColor, QAction, QPainter, QPainterPath
+from PySide6.QtCore import Qt, QSize, QEvent, QPoint, QRectF, QTimer, Signal, Property, QAbstractItemModel
+from PySide6.QtWidgets import (
+    QWidget,
+    QLineEdit,
+    QTextEdit,
+    QCompleter,
+    QHBoxLayout,
+    QToolButton,
+    QApplication,
+    QTextBrowser,
+    QPlainTextEdit,
+)
 
-from ...common.style_sheet import FluentStyleSheet, themeColor
-from ...common.icon import isDarkTheme, FluentIconBase, drawIcon
-from ...common.icon import FluentIcon as FIF
-from ...common.font import setFont
+from .menu import RoundMenu, LineEditMenu, TextEditMenu, MenuAnimationType, IndicatorMenuItemDelegate
 from .tool_tip import ToolTipFilter
-from .menu import LineEditMenu, TextEditMenu, RoundMenu, MenuAnimationType, IndicatorMenuItemDelegate
 from .scroll_bar import SmoothScrollDelegate
+from ...common.font import setFont
+from ...common.icon import FluentIcon as FIF
+from ...common.icon import FluentIconBase, drawIcon, isDarkTheme
+from ...common.style_sheet import FluentStyleSheet, themeColor
 
 
 class LineEditButton(QToolButton):

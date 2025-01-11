@@ -1,16 +1,17 @@
 # coding:utf-8
-from typing import Union
+# 标准库导入
 import sys
+from typing import Union
 
+# 第三方库导入
+from PySide6.QtGui import QIcon, QColor, QPainter
 from PySide6.QtCore import Qt, QSize, QEvent
-from PySide6.QtGui import QPainter, QColor, QIcon
+from qframelesswindow import TitleBar
 from PySide6.QtWidgets import QWidget, QGraphicsDropShadowEffect
 
 from ..common.icon import FluentIconBase, toQIcon
-from ..common.style_sheet import isDarkTheme, FluentStyleSheet
+from ..common.style_sheet import FluentStyleSheet, isDarkTheme
 from ..components.widgets import IconWidget
-from qframelesswindow import TitleBar
-
 
 
 class SplashScreen(QWidget):

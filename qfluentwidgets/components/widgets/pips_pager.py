@@ -1,15 +1,18 @@
 # coding:utf-8
+# 标准库导入
 from enum import Enum
-from PySide6.QtCore import Qt, Signal, QModelIndex, Property, QSize, QRectF
-from PySide6.QtGui import QPainter, QColor
-from PySide6.QtWidgets import (QStyleOptionViewItem, QStyle, QListWidget, QListWidgetItem, QStyledItemDelegate)
 
-from ...common.overload import singledispatchmethod
-from ...common.icon import FluentIcon, drawIcon
-from ...common.style_sheet import isDarkTheme, FluentStyleSheet
+# 第三方库导入
+from PySide6.QtGui import QColor, QPainter
+from PySide6.QtCore import Qt, QSize, QRectF, Signal, Property, QModelIndex
+from PySide6.QtWidgets import QStyle, QListWidget, QListWidgetItem, QStyledItemDelegate, QStyleOptionViewItem
+
 from .button import ToolButton
 from .tool_tip import ToolTipFilter, ToolTipPosition
 from .scroll_bar import SmoothScrollBar
+from ...common.icon import FluentIcon, drawIcon
+from ...common.overload import singledispatchmethod
+from ...common.style_sheet import FluentStyleSheet, isDarkTheme
 
 
 class PipsScrollButtonDisplayMode(Enum):

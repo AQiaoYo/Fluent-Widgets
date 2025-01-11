@@ -1,15 +1,17 @@
 # coding:utf-8
+# 标准库导入
 from enum import Enum
 from typing import Union
 
-from PySide6.QtCore import Qt, QPoint, QObject, QPointF, QTimer, QPropertyAnimation, QEvent
-from PySide6.QtGui import QPainter, QColor, QPainterPath, QIcon, QPolygonF, QPixmap, QImage
+# 第三方库导入
+from PySide6.QtGui import QIcon, QColor, QImage, QPixmap, QPainter, QPolygonF, QPainterPath
+from PySide6.QtCore import Qt, QEvent, QPoint, QTimer, QObject, QPointF, QPropertyAnimation
 from PySide6.QtWidgets import QWidget, QHBoxLayout, QGraphicsDropShadowEffect
 
+from .flyout import FlyoutView, FlyoutViewBase
 from ...common.icon import FluentIconBase
 from ...common.screen import getCurrentScreenGeometry
 from ...common.style_sheet import isDarkTheme
-from .flyout import FlyoutView, FlyoutViewBase
 
 
 class TeachingTipTailPosition(Enum):

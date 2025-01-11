@@ -1,17 +1,17 @@
 # coding:utf-8
+# 标准库导入
 import os
 
+# 第三方库导入
+from PySide6.QtGui import QPen, QFont, QBrush, QColor, QPixmap, QPainter, QMouseEvent, QFontMetrics
 from PySide6.QtCore import Qt, Signal
-from PySide6.QtGui import (QBrush, QColor, QFont, QFontMetrics, QMouseEvent,
-                         QPainter, QPen, QPixmap)
-from PySide6.QtWidgets import (QApplication, QFileDialog, QHBoxLayout, QLabel,
-                             QVBoxLayout, QWidget, QPushButton)
+from PySide6.QtWidgets import QLabel, QWidget, QFileDialog, QHBoxLayout, QPushButton, QVBoxLayout, QApplication
 
-from ...common.config import isDarkTheme
-from ...common.icon import getIconColor
-from ...common.style_sheet import FluentStyleSheet
 from .dialog import Dialog
+from ...common.icon import getIconColor
+from ...common.config import isDarkTheme
 from .mask_dialog_base import MaskDialogBase
+from ...common.style_sheet import FluentStyleSheet
 from ..widgets.scroll_area import SingleDirectionScrollArea
 
 
