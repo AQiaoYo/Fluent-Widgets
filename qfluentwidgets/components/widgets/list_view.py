@@ -13,7 +13,7 @@ from ...common.style_sheet import FluentStyleSheet, themeColor
 
 
 class ListItemDelegate(TableItemDelegate):
-    """ List item delegate """
+    """List item delegate"""
 
     def __init__(self, parent: QListView):
         super().__init__(parent)
@@ -23,9 +23,9 @@ class ListItemDelegate(TableItemDelegate):
 
     def _drawIndicator(self, painter: QPainter, option: QStyleOptionViewItem, index: QModelIndex):
         y, h = option.rect.y(), option.rect.height()
-        ph = round(0.35*h if self.pressedRow == index.row() else 0.257*h)
+        ph = round(0.35 * h if self.pressedRow == index.row() else 0.257 * h)
         painter.setBrush(themeColor())
-        painter.drawRoundedRect(0, ph + y, 3, h - 2*ph, 1.5, 1.5)
+        painter.drawRoundedRect(0, ph + y, 3, h - 2 * ph, 1.5, 1.5)
 
 
 class ListBase:
@@ -44,20 +44,20 @@ class ListBase:
         self.pressed.connect(lambda i: self._setPressedRow(i.row()))
 
     def _setHoverRow(self, row: int):
-        """ set hovered row """
+        """set hovered row"""
         self.delegate.setHoverRow(row)
         self.viewport().update()
 
     def _setPressedRow(self, row: int):
-        """ set pressed row """
+        """set pressed row"""
         if self.selectionMode() == QListView.SelectionMode.NoSelection:
             return
-        
+
         self.delegate.setPressedRow(row)
         self.viewport().update()
 
     def _setSelectedRows(self, indexes: List[QModelIndex]):
-        if self.selectionMode() ==  QListView.SelectionMode.NoSelection:
+        if self.selectionMode() == QListView.SelectionMode.NoSelection:
             return
 
         self.delegate.setSelectedRows(indexes)
@@ -109,7 +109,7 @@ class ListBase:
 
 
 class ListWidget(ListBase, QListWidget):
-    """ List widget """
+    """List widget"""
 
     def __init__(self, parent=None):
         super().__init__(parent)
@@ -135,7 +135,7 @@ class ListWidget(ListBase, QListWidget):
 
 
 class ListView(ListBase, QListView):
-    """ List view """
+    """List view"""
 
     def __init__(self, parent=None):
         super().__init__(parent)

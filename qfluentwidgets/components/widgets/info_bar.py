@@ -30,7 +30,7 @@ from ...common.style_sheet import FluentStyleSheet, themeColor
 
 
 class InfoBarIcon(FluentIconBase, Enum):
-    """ Info bar icon """
+    """Info bar icon"""
 
     INFORMATION = "Info"
     SUCCESS = "Success"
@@ -43,11 +43,12 @@ class InfoBarIcon(FluentIconBase, Enum):
         else:
             color = theme.value.lower()
 
-        return f':/qfluentwidgets/images/info_bar/{self.value}_{color}.svg'
+        return f":/qfluentwidgets/images/info_bar/{self.value}_{color}.svg"
 
 
 class InfoBarPosition(Enum):
-    """ Info bar position """
+    """Info bar position"""
+
     TOP = 0
     BOTTOM = 1
     TOP_LEFT = 2
@@ -58,7 +59,7 @@ class InfoBarPosition(Enum):
 
 
 class InfoIconWidget(QWidget):
-    """ Icon widget """
+    """Icon widget"""
 
     def __init__(self, icon: InfoBarIcon, parent=None):
         super().__init__(parent=parent)
@@ -67,8 +68,7 @@ class InfoIconWidget(QWidget):
 
     def paintEvent(self, e):
         painter = QPainter(self)
-        painter.setRenderHints(QPainter.Antialiasing |
-                               QPainter.SmoothPixmapTransform)
+        painter.setRenderHints(QPainter.Antialiasing | QPainter.SmoothPixmapTransform)
 
         rect = QRectF(10, 10, 15, 15)
         if self.icon != InfoBarIcon.INFORMATION:
@@ -78,13 +78,21 @@ class InfoIconWidget(QWidget):
 
 
 class InfoBar(QFrame):
-    """ Information bar """
+    """Information bar"""
 
     closedSignal = Signal()
 
-    def __init__(self, icon: Union[InfoBarIcon, FluentIconBase, QIcon, str], title: str, content: str,
-                 orient=Qt.Horizontal, isClosable=True, duration=1000, position=InfoBarPosition.TOP_RIGHT,
-                 parent=None):
+    def __init__(
+        self,
+        icon: Union[InfoBarIcon, FluentIconBase, QIcon, str],
+        title: str,
+        content: str,
+        orient=Qt.Horizontal,
+        isClosable=True,
+        duration=1000,
+        position=InfoBarPosition.TOP_RIGHT,
+        parent=None,
+    ):
         """
         Parameters
         ----------
@@ -129,8 +137,7 @@ class InfoBar(QFrame):
         self.widgetLayout = QHBoxLayout() if self.orient == Qt.Horizontal else QVBoxLayout()
 
         self.opacityEffect = QGraphicsOpacityEffect(self)
-        self.opacityAni = QPropertyAnimation(
-            self.opacityEffect, b'opacity', self)
+        self.opacityAni = QPropertyAnimation(self.opacityEffect, b"opacity", self)
 
         self.lightBackgroundColor = None
         self.darkBackgroundColor = None
@@ -190,15 +197,15 @@ class InfoBar(QFrame):
         self._adjustText()
 
     def __setQss(self):
-        self.titleLabel.setObjectName('titleLabel')
-        self.contentLabel.setObjectName('contentLabel')
+        self.titleLabel.setObjectName("titleLabel")
+        self.contentLabel.setObjectName("contentLabel")
         if isinstance(self.icon, Enum):
-            self.setProperty('type', self.icon.value)
+            self.setProperty("type", self.icon.value)
 
         FluentStyleSheet.INFO_BAR.apply(self)
 
     def __fadeOut(self):
-        """ fade out """
+        """fade out"""
         self.opacityAni.setDuration(200)
         self.opacityAni.setStartValue(1)
         self.opacityAni.setEndValue(0)
@@ -218,13 +225,13 @@ class InfoBar(QFrame):
         self.adjustSize()
 
     def addWidget(self, widget: QWidget, stretch=0):
-        """ add widget to info bar """
+        """add widget to info bar"""
         self.widgetLayout.addSpacing(6)
         align = Qt.AlignTop if self.orient == Qt.Vertical else Qt.AlignVCenter
         self.widgetLayout.addWidget(widget, stretch, Qt.AlignLeft | align)
 
     def setCustomBackgroundColor(self, light, dark):
-        """ set the custom background color
+        """set the custom background color
 
         Parameters
         ----------
@@ -279,44 +286,83 @@ class InfoBar(QFrame):
         painter.drawRoundedRect(rect, 6, 6)
 
     @classmethod
-    def new(cls, icon, title, content, orient=Qt.Horizontal, isClosable=True, duration=1000,
-            position=InfoBarPosition.TOP_RIGHT, parent=None):
-        w = InfoBar(icon, title, content, orient,
-                    isClosable, duration, position, parent)
+    def new(
+        cls,
+        icon,
+        title,
+        content,
+        orient=Qt.Horizontal,
+        isClosable=True,
+        duration=1000,
+        position=InfoBarPosition.TOP_RIGHT,
+        parent=None,
+    ):
+        w = InfoBar(icon, title, content, orient, isClosable, duration, position, parent)
         w.show()
         return w
 
     @classmethod
-    def info(cls, title, content, orient=Qt.Horizontal, isClosable=True, duration=1000,
-             position=InfoBarPosition.TOP_RIGHT, parent=None):
+    def info(
+        cls,
+        title,
+        content,
+        orient=Qt.Horizontal,
+        isClosable=True,
+        duration=1000,
+        position=InfoBarPosition.TOP_RIGHT,
+        parent=None,
+    ):
         return cls.new(InfoBarIcon.INFORMATION, title, content, orient, isClosable, duration, position, parent)
 
     @classmethod
-    def success(cls, title, content, orient=Qt.Horizontal, isClosable=True, duration=1000,
-                position=InfoBarPosition.TOP_RIGHT, parent=None):
+    def success(
+        cls,
+        title,
+        content,
+        orient=Qt.Horizontal,
+        isClosable=True,
+        duration=1000,
+        position=InfoBarPosition.TOP_RIGHT,
+        parent=None,
+    ):
         return cls.new(InfoBarIcon.SUCCESS, title, content, orient, isClosable, duration, position, parent)
 
     @classmethod
-    def warning(cls, title, content, orient=Qt.Horizontal, isClosable=True, duration=1000,
-                position=InfoBarPosition.TOP_RIGHT, parent=None):
+    def warning(
+        cls,
+        title,
+        content,
+        orient=Qt.Horizontal,
+        isClosable=True,
+        duration=1000,
+        position=InfoBarPosition.TOP_RIGHT,
+        parent=None,
+    ):
         return cls.new(InfoBarIcon.WARNING, title, content, orient, isClosable, duration, position, parent)
 
     @classmethod
-    def error(cls, title, content, orient=Qt.Horizontal, isClosable=True, duration=1000,
-              position=InfoBarPosition.TOP_RIGHT, parent=None):
+    def error(
+        cls,
+        title,
+        content,
+        orient=Qt.Horizontal,
+        isClosable=True,
+        duration=1000,
+        position=InfoBarPosition.TOP_RIGHT,
+        parent=None,
+    ):
         return cls.new(InfoBarIcon.ERROR, title, content, orient, isClosable, duration, position, parent)
 
 
 class InfoBarManager(QObject):
-    """ Info bar manager """
+    """Info bar manager"""
 
     _instance = None
     managers = {}
 
     def __new__(cls, *args, **kwargs):
         if cls._instance is None:
-            cls._instance = super(InfoBarManager, cls).__new__(
-                cls, *args, **kwargs)
+            cls._instance = super(InfoBarManager, cls).__new__(cls, *args, **kwargs)
             cls._instance.__initialized = False
 
         return cls._instance
@@ -335,8 +381,8 @@ class InfoBarManager(QObject):
         self.__initialized = True
 
     def add(self, infoBar: InfoBar):
-        """ add info bar """
-        p = infoBar.parent()    # type:QWidget
+        """add info bar"""
+        p = infoBar.parent()  # type:QWidget
         if not p:
             return
 
@@ -350,26 +396,26 @@ class InfoBarManager(QObject):
 
         # add drop animation
         if self.infoBars[p]:
-            dropAni = QPropertyAnimation(infoBar, b'pos')
+            dropAni = QPropertyAnimation(infoBar, b"pos")
             dropAni.setDuration(200)
 
             self.aniGroups[p].addAnimation(dropAni)
             self.dropAnis.append(dropAni)
 
-            infoBar.setProperty('dropAni', dropAni)
+            infoBar.setProperty("dropAni", dropAni)
 
         # add slide animation
         self.infoBars[p].append(infoBar)
         slideAni = self._createSlideAni(infoBar)
         self.slideAnis.append(slideAni)
 
-        infoBar.setProperty('slideAni', slideAni)
+        infoBar.setProperty("slideAni", slideAni)
         infoBar.closedSignal.connect(lambda: self.remove(infoBar))
 
         slideAni.start()
 
     def remove(self, infoBar: InfoBar):
-        """ remove info bar """
+        """remove info bar"""
         p = infoBar.parent()
         if p not in self.infoBars:
             return
@@ -380,13 +426,13 @@ class InfoBarManager(QObject):
         self.infoBars[p].remove(infoBar)
 
         # remove drop animation
-        dropAni = infoBar.property('dropAni')   # type: QPropertyAnimation
+        dropAni = infoBar.property("dropAni")  # type: QPropertyAnimation
         if dropAni:
             self.aniGroups[p].removeAnimation(dropAni)
             self.dropAnis.remove(dropAni)
 
         # remove slider animation
-        slideAni = infoBar.property('slideAni')
+        slideAni = infoBar.property("slideAni")
         if slideAni:
             self.slideAnis.remove(slideAni)
 
@@ -395,7 +441,7 @@ class InfoBarManager(QObject):
         self.aniGroups[p].start()
 
     def _createSlideAni(self, infoBar: InfoBar):
-        slideAni = QPropertyAnimation(infoBar, b'pos')
+        slideAni = QPropertyAnimation(infoBar, b"pos")
         slideAni.setEasingCurve(QEasingCurve.OutQuad)
         slideAni.setDuration(200)
 
@@ -406,7 +452,7 @@ class InfoBarManager(QObject):
 
     def _updateDropAni(self, parent):
         for bar in self.infoBars[parent]:
-            ani = bar.property('dropAni')
+            ani = bar.property("dropAni")
             if not ani:
                 continue
 
@@ -414,11 +460,11 @@ class InfoBarManager(QObject):
             ani.setEndValue(self._pos(bar))
 
     def _pos(self, infoBar: InfoBar, parentSize=None) -> QPoint:
-        """ return the position of info bar """
+        """return the position of info bar"""
         raise NotImplementedError
 
     def _slideStartPos(self, infoBar: InfoBar) -> QPoint:
-        """ return the start position of slide animation  """
+        """return the start position of slide animation"""
         raise NotImplementedError
 
     def eventFilter(self, obj, e: QEvent):
@@ -434,13 +480,14 @@ class InfoBarManager(QObject):
 
     @classmethod
     def register(cls, name):
-        """ register menu animation manager
+        """register menu animation manager
 
         Parameters
         ----------
         name: Any
             the name of manager, it should be unique
         """
+
         def wrapper(Manager):
             if name not in cls.managers:
                 cls.managers[name] = Manager
@@ -451,16 +498,16 @@ class InfoBarManager(QObject):
 
     @classmethod
     def make(cls, position: InfoBarPosition):
-        """ mask info bar manager according to the display position """
+        """mask info bar manager according to the display position"""
         if position not in cls.managers:
-            raise ValueError(f'`{position}` is an invalid animation type.')
+            raise ValueError(f"`{position}` is an invalid animation type.")
 
         return cls.managers[position]()
 
 
 @InfoBarManager.register(InfoBarPosition.TOP)
 class TopInfoBarManager(InfoBarManager):
-    """ Top position info bar manager """
+    """Top position info bar manager"""
 
     def _pos(self, infoBar: InfoBar, parentSize=None):
         p = infoBar.parent()
@@ -470,7 +517,7 @@ class TopInfoBarManager(InfoBarManager):
         y = self.margin
         index = self.infoBars[p].index(infoBar)
         for bar in self.infoBars[p][0:index]:
-            y += (bar.height() + self.spacing)
+            y += bar.height() + self.spacing
 
         return QPoint(x, y)
 
@@ -481,7 +528,7 @@ class TopInfoBarManager(InfoBarManager):
 
 @InfoBarManager.register(InfoBarPosition.TOP_RIGHT)
 class TopRightInfoBarManager(InfoBarManager):
-    """ Top right position info bar manager """
+    """Top right position info bar manager"""
 
     def _pos(self, infoBar: InfoBar, parentSize=None):
         p = infoBar.parent()
@@ -491,7 +538,7 @@ class TopRightInfoBarManager(InfoBarManager):
         y = self.margin
         index = self.infoBars[p].index(infoBar)
         for bar in self.infoBars[p][0:index]:
-            y += (bar.height() + self.spacing)
+            y += bar.height() + self.spacing
 
         return QPoint(x, y)
 
@@ -501,7 +548,7 @@ class TopRightInfoBarManager(InfoBarManager):
 
 @InfoBarManager.register(InfoBarPosition.BOTTOM_RIGHT)
 class BottomRightInfoBarManager(InfoBarManager):
-    """ Bottom right position info bar manager """
+    """Bottom right position info bar manager"""
 
     def _pos(self, infoBar: InfoBar, parentSize=None) -> QPoint:
         p = infoBar.parent()
@@ -512,7 +559,7 @@ class BottomRightInfoBarManager(InfoBarManager):
 
         index = self.infoBars[p].index(infoBar)
         for bar in self.infoBars[p][0:index]:
-            y -= (bar.height() + self.spacing)
+            y -= bar.height() + self.spacing
 
         return QPoint(x, y)
 
@@ -522,7 +569,7 @@ class BottomRightInfoBarManager(InfoBarManager):
 
 @InfoBarManager.register(InfoBarPosition.TOP_LEFT)
 class TopLeftInfoBarManager(InfoBarManager):
-    """ Top left position info bar manager """
+    """Top left position info bar manager"""
 
     def _pos(self, infoBar: InfoBar, parentSize=None) -> QPoint:
         p = infoBar.parent()
@@ -532,7 +579,7 @@ class TopLeftInfoBarManager(InfoBarManager):
         index = self.infoBars[p].index(infoBar)
 
         for bar in self.infoBars[p][0:index]:
-            y += (bar.height() + self.spacing)
+            y += bar.height() + self.spacing
 
         return QPoint(self.margin, y)
 
@@ -542,7 +589,7 @@ class TopLeftInfoBarManager(InfoBarManager):
 
 @InfoBarManager.register(InfoBarPosition.BOTTOM_LEFT)
 class BottomLeftInfoBarManager(InfoBarManager):
-    """ Bottom left position info bar manager """
+    """Bottom left position info bar manager"""
 
     def _pos(self, infoBar: InfoBar, parentSize: QSize = None) -> QPoint:
         p = infoBar.parent()
@@ -552,7 +599,7 @@ class BottomLeftInfoBarManager(InfoBarManager):
         index = self.infoBars[p].index(infoBar)
 
         for bar in self.infoBars[p][0:index]:
-            y -= (bar.height() + self.spacing)
+            y -= bar.height() + self.spacing
 
         return QPoint(self.margin, y)
 
@@ -562,7 +609,7 @@ class BottomLeftInfoBarManager(InfoBarManager):
 
 @InfoBarManager.register(InfoBarPosition.BOTTOM)
 class BottomInfoBarManager(InfoBarManager):
-    """ Bottom position info bar manager """
+    """Bottom position info bar manager"""
 
     def _pos(self, infoBar: InfoBar, parentSize: QSize = None) -> QPoint:
         p = infoBar.parent()
@@ -573,7 +620,7 @@ class BottomInfoBarManager(InfoBarManager):
         index = self.infoBars[p].index(infoBar)
 
         for bar in self.infoBars[p][0:index]:
-            y -= (bar.height() + self.spacing)
+            y -= bar.height() + self.spacing
 
         return QPoint(x, y)
 

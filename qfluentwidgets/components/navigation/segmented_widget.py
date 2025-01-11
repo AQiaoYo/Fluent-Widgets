@@ -15,7 +15,7 @@ from ...common.style_sheet import FluentStyleSheet, themeColor, isDarkTheme
 
 
 class SegmentedItem(PivotItem):
-    """ Segmented item """
+    """Segmented item"""
 
     def _postInit(self):
         super()._postInit()
@@ -23,13 +23,13 @@ class SegmentedItem(PivotItem):
 
 
 class SegmentedToolItem(ToolButton):
-    """ Pivot item """
+    """Pivot item"""
 
     itemClicked = Signal(bool)
 
     def _postInit(self):
         self.isSelected = False
-        self.setProperty('isSelected', False)
+        self.setProperty("isSelected", False)
         self.clicked.connect(lambda: self.itemClicked.emit(True))
 
         self.setFixedSize(38, 33)
@@ -40,7 +40,7 @@ class SegmentedToolItem(ToolButton):
             return
 
         self.isSelected = isSelected
-        self.setProperty('isSelected', isSelected)
+        self.setProperty("isSelected", isSelected)
         self.setStyle(QApplication.style())
         self.update()
 
@@ -72,7 +72,7 @@ class SegmentedToggleToolItem(TransparentToolButton):
 
 
 class SegmentedWidget(Pivot):
-    """ Segmented widget """
+    """Segmented widget"""
 
     def __init__(self, parent=None):
         super().__init__(parent)
@@ -119,14 +119,14 @@ class SegmentedWidget(Pivot):
 
 
 class SegmentedToolWidget(SegmentedWidget):
-    """ Segmented tool widget """
+    """Segmented tool widget"""
 
     def __init__(self, parent=None):
         super().__init__(parent)
         self.setAttribute(Qt.WA_StyledBackground)
 
     def addItem(self, routeKey: str, icon: Union[str, QIcon, FluentIconBase], onClick=None):
-        """ add item
+        """add item
 
         Parameters
         ----------
@@ -154,7 +154,7 @@ class SegmentedToolWidget(SegmentedWidget):
 
 
 class SegmentedToggleToolWidget(SegmentedToolWidget):
-    """ Segmented toggle tool widget """
+    """Segmented toggle tool widget"""
 
     def _createItem(self, icon):
         return SegmentedToggleToolItem(icon)
@@ -172,5 +172,4 @@ class SegmentedToggleToolWidget(SegmentedToolWidget):
         painter.setBrush(themeColor())
 
         item = self.currentItem()
-        painter.drawRoundedRect(
-            QRectF(self.slideAni.value(), 0, item.width(), item.height()), 4, 4)
+        painter.drawRoundedRect(QRectF(self.slideAni.value(), 0, item.width(), item.height()), 4, 4)

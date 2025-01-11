@@ -10,7 +10,7 @@ from ..common.style_sheet import FluentStyleSheet
 
 
 class GraphicsVideoItem(QGraphicsVideoItem):
-    """ Graphics video item """
+    """Graphics video item"""
 
     def paint(self, painter: QPainter, option, widget):
         painter.setCompositionMode(QPainter.CompositionMode_Difference)
@@ -18,7 +18,7 @@ class GraphicsVideoItem(QGraphicsVideoItem):
 
 
 class VideoWidget(QGraphicsView):
-    """ Video widget """
+    """Video widget"""
 
     def __init__(self, parent=None):
         super().__init__(parent)
@@ -43,7 +43,7 @@ class VideoWidget(QGraphicsView):
         self.timer.timeout.connect(self._onHideTimeOut)
 
     def setVideo(self, url: QUrl):
-        """ set the video to play """
+        """set the video to play"""
         self.player.setSource(url)
         self.fitInView(self.videoItem, Qt.KeepAspectRatio)
 
@@ -76,7 +76,7 @@ class VideoWidget(QGraphicsView):
         self.playBar.stop()
 
     def togglePlayState(self):
-        """ toggle play state """
+        """toggle play state"""
         if self.player.isPlaying():
             self.pause()
         else:

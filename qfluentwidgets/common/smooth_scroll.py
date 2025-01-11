@@ -11,7 +11,7 @@ from PySide6.QtWidgets import QScrollArea, QApplication, QAbstractScrollArea
 
 
 class SmoothScroll:
-    """ Scroll smoothly """
+    """Scroll smoothly"""
 
     def __init__(self, widget: QScrollArea, orient=Qt.Vertical):
         """
@@ -38,7 +38,7 @@ class SmoothScroll:
         self.smoothMoveTimer.timeout.connect(self.__smoothMove)
 
     def setSmoothMode(self, smoothMode):
-        """ set smooth mode """
+        """set smooth mode"""
         self.smoothMode = smoothMode
 
     def wheelEvent(self, e):
@@ -63,7 +63,7 @@ class SmoothScroll:
         self.stepsTotal = self.fps * self.duration / 1000
 
         # get the moving distance corresponding to each event
-        delta = delta* self.stepRatio
+        delta = delta * self.stepRatio
         if self.acceleration > 0:
             delta += delta * self.acceleration * accerationRatio
 
@@ -74,7 +74,7 @@ class SmoothScroll:
         self.smoothMoveTimer.start(int(1000 / self.fps))
 
     def __smoothMove(self):
-        """ scroll smoothly when timer time out """
+        """scroll smoothly when timer time out"""
         totalDelta = 0
 
         # Calculate the scrolling distance of all unprocessed events,
@@ -114,7 +114,7 @@ class SmoothScroll:
             self.smoothMoveTimer.stop()
 
     def __subDelta(self, delta, stepsLeft):
-        """ get the interpolation for each step """
+        """get the interpolation for each step"""
         m = self.stepsTotal / 2
         x = abs(self.stepsTotal - stepsLeft - m)
 
@@ -134,10 +134,10 @@ class SmoothScroll:
 
 
 class SmoothMode(Enum):
-    """ Smooth mode """
+    """Smooth mode"""
+
     NO_SMOOTH = 0
     CONSTANT = 1
     LINEAR = 2
     QUADRATI = 3
     COSINE = 4
-

@@ -24,7 +24,7 @@ class AcrylicComboBoxMenu(AcrylicMenuBase, RoundMenu):
 
         self.view.setVerticalScrollBarPolicy(Qt.ScrollBarAsNeeded)
         self.view.setItemDelegate(IndicatorMenuItemDelegate())
-        self.view.setObjectName('comboListWidget')
+        self.view.setObjectName("comboListWidget")
         self.setItemHeight(33)
 
     def exec(self, pos, ani=True, aniType=MenuAnimationType.DROP_DOWN):
@@ -32,21 +32,21 @@ class AcrylicComboBoxMenu(AcrylicMenuBase, RoundMenu):
 
 
 class AcrylicComboBox(ComboBox):
-    """ Acrylic combo box """
+    """Acrylic combo box"""
 
     def _createComboMenu(self):
         return AcrylicComboBoxMenu(self)
 
 
 class AcrylicEditableComboBox(AcrylicLineEditBase, EditableComboBox):
-    """ Acrylic combo box """
+    """Acrylic combo box"""
 
     def _createComboMenu(self):
         return AcrylicComboBoxMenu(self)
 
 
 class AcrylicComboBoxSettingCard(SettingCard):
-    """ Setting card with a combo box """
+    """Setting card with a combo box"""
 
     def __init__(self, configItem: OptionsConfigItem, icon, title, content=None, texts=None, parent=None):
         """

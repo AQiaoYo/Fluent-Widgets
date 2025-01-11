@@ -48,7 +48,7 @@ class AcrylicMenuActionListWidget(MenuActionListWidget):
         return 6
 
     def setItemHeight(self, height: int):
-        """ set the height of item """
+        """set the height of item"""
         if height == self._itemHeight:
             return
 
@@ -76,8 +76,7 @@ class AcrylicMenuActionListWidget(MenuActionListWidget):
 
     def paintEvent(self, e) -> None:
         painter = QPainter(self.viewport())
-        painter.setRenderHints(QPainter.Antialiasing |
-                               QPainter.SmoothPixmapTransform)
+        painter.setRenderHints(QPainter.Antialiasing | QPainter.SmoothPixmapTransform)
 
         self.acrylicBrush.clipPath = self.clipPath()
         self._updateAcrylicColor()
@@ -110,7 +109,7 @@ class AcrylicMenuBase:
 
 
 class AcrylicMenu(AcrylicMenuBase, RoundMenu):
-    """ Acrylic menu """
+    """Acrylic menu"""
 
     def __init__(self, title="", parent=None):
         super().__init__(title, parent)
@@ -138,13 +137,13 @@ class AcrylicCompleterMenuActionListWidget(AcrylicMenuActionListWidget):
 
 
 class AcrylicCompleterMenu(AcrylicMenuBase, CompleterMenu):
-    """ Acrylic completer menu """
+    """Acrylic completer menu"""
 
     def __init__(self, lineEdit: LineEdit):
         super().__init__(lineEdit)
         self.setUpMenu(AcrylicCompleterMenuActionListWidget(self))
 
-        self.view.setObjectName('completerListWidget')
+        self.view.setObjectName("completerListWidget")
         self.view.setItemDelegate(IndicatorMenuItemDelegate())
         self.view.setVerticalScrollBarPolicy(Qt.ScrollBarAsNeeded)
         self.setItemHeight(33)
@@ -153,7 +152,7 @@ class AcrylicCompleterMenu(AcrylicMenuBase, CompleterMenu):
         return super().exec(pos, ani, aniType)
 
     def setItems(self, items):
-        """ set completion items """
+        """set completion items"""
         self.view.clear()
 
         self.items = items
@@ -169,7 +168,7 @@ class AcrylicCompleterMenu(AcrylicMenuBase, CompleterMenu):
 
 
 class AcrylicLineEditMenu(AcrylicMenuBase, LineEditMenu):
-    """ Acrylic line edit menu """
+    """Acrylic line edit menu"""
 
     def __init__(self, parent: QLineEdit):
         super().__init__(parent)
@@ -180,19 +179,19 @@ class AcrylicLineEditMenu(AcrylicMenuBase, LineEditMenu):
 
 
 class AcrylicCheckableMenu(AcrylicMenuBase, CheckableMenu):
-    """ Checkable menu """
+    """Checkable menu"""
 
     def __init__(self, title="", parent=None, indicatorType=MenuIndicatorType.CHECK):
         super().__init__(title, parent, indicatorType)
         self.setUpMenu(AcrylicMenuActionListWidget(self))
-        self.view.setObjectName('checkableListWidget')
+        self.view.setObjectName("checkableListWidget")
 
     def exec(self, pos, ani=True, aniType=MenuAnimationType.DROP_DOWN):
         return super().exec(pos, ani, aniType)
 
 
 class AcrylicSystemTrayMenu(AcrylicMenu):
-    """ System tray menu """
+    """System tray menu"""
 
     def showEvent(self, e):
         super().showEvent(e)
@@ -201,7 +200,7 @@ class AcrylicSystemTrayMenu(AcrylicMenu):
 
 
 class AcrylicCheckableSystemTrayMenu(AcrylicCheckableMenu):
-    """ Checkable system tray menu """
+    """Checkable system tray menu"""
 
     def showEvent(self, e):
         super().showEvent(e)

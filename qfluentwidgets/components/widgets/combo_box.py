@@ -18,10 +18,10 @@ from ...common.style_sheet import FluentStyleSheet
 
 
 class ComboItem:
-    """ Combo box item """
+    """Combo box item"""
 
     def __init__(self, text: str, icon: Union[str, QIcon, FluentIconBase] = None, userData=None, isEnabled=True):
-        """ add item
+        """add item
 
         Parameters
         ----------
@@ -58,7 +58,8 @@ class ComboItem:
 
 
 class ComboBoxBase:
-    """ Combo box base """
+    """Combo box base"""
+
     activated = Signal(int)
     textActivated = Signal(str)
 
@@ -68,7 +69,7 @@ class ComboBoxBase:
     def _setUpUi(self):
         self.isHover = False
         self.isPressed = False
-        self.items = []     # type: List[ComboItem]
+        self.items = []  # type: List[ComboItem]
         self._currentIndex = -1
         self._maxVisibleItems = -1
         self.dropMenu = None
@@ -78,7 +79,7 @@ class ComboBoxBase:
         self.installEventFilter(self)
 
     def addItem(self, text, icon: Union[str, QIcon, FluentIconBase] = None, userData=None):
-        """ add item
+        """add item
 
         Parameters
         ----------
@@ -93,7 +94,7 @@ class ComboBoxBase:
             self.setCurrentIndex(0)
 
     def addItems(self, texts: Iterable[str]):
-        """ add items
+        """add items
 
         Parameters
         ----------
@@ -104,7 +105,7 @@ class ComboBoxBase:
             self.addItem(text)
 
     def removeItem(self, index: int):
-        """ Removes the item at the given index from the combobox.
+        """Removes the item at the given index from the combobox.
         This will update the current index if the index is removed.
         """
         if not 0 <= index < len(self.items):
@@ -129,7 +130,7 @@ class ComboBoxBase:
         return self._currentIndex
 
     def setCurrentIndex(self, index: int):
-        """ set current index
+        """set current index
 
         Parameters
         ----------
@@ -155,7 +156,7 @@ class ComboBoxBase:
 
     def currentText(self):
         if not 0 <= self.currentIndex() < len(self.items):
-            return ''
+            return ""
 
         return self.items[self.currentIndex()].text
 
@@ -166,7 +167,7 @@ class ComboBoxBase:
         return self.items[self.currentIndex()].userData
 
     def setCurrentText(self, text):
-        """ set the current text displayed in combo box,
+        """set the current text displayed in combo box,
         text should be in the item list
 
         Parameters
@@ -182,7 +183,7 @@ class ComboBoxBase:
             self.setCurrentIndex(index)
 
     def setItemText(self, index: int, text: str):
-        """ set the text of item
+        """set the text of item
 
         Parameters
         ----------
@@ -200,43 +201,43 @@ class ComboBoxBase:
             self.setText(text)
 
     def itemData(self, index: int):
-        """ Returns the data in the given index """
+        """Returns the data in the given index"""
         if not 0 <= index < len(self.items):
             return None
 
         return self.items[index].userData
 
     def itemText(self, index: int):
-        """ Returns the text in the given index """
+        """Returns the text in the given index"""
         if not 0 <= index < len(self.items):
-            return ''
+            return ""
 
         return self.items[index].text
 
     def itemIcon(self, index: int):
-        """ Returns the icon in the given index """
+        """Returns the icon in the given index"""
         if not 0 <= index < len(self.items):
             return QIcon()
 
         return self.items[index].icon
 
     def setItemData(self, index: int, value):
-        """ Sets the data role for the item on the given index """
+        """Sets the data role for the item on the given index"""
         if 0 <= index < len(self.items):
             self.items[index].userData = value
 
     def setItemIcon(self, index: int, icon: Union[str, QIcon, FluentIconBase]):
-        """ Sets the data role for the item on the given index """
+        """Sets the data role for the item on the given index"""
         if 0 <= index < len(self.items):
             self.items[index].icon = icon
 
     def setItemEnabled(self, index: int, isEnabled: bool):
-        """ Sets the enabled status of the item on the given index """
+        """Sets the enabled status of the item on the given index"""
         if 0 <= index < len(self.items):
             self.items[index].isEnabled = isEnabled
 
     def findData(self, data):
-        """ Returns the index of the item containing the given data, otherwise returns -1 """
+        """Returns the index of the item containing the given data, otherwise returns -1"""
         for i, item in enumerate(self.items):
             if item.userData == data:
                 return i
@@ -244,7 +245,7 @@ class ComboBoxBase:
         return -1
 
     def findText(self, text: str):
-        """ Returns the index of the item containing the given text; otherwise returns -1. """
+        """Returns the index of the item containing the given text; otherwise returns -1."""
         for i, item in enumerate(self.items):
             if item.text == text:
                 return i
@@ -252,19 +253,19 @@ class ComboBoxBase:
         return -1
 
     def clear(self):
-        """ Clears the combobox, removing all items. """
+        """Clears the combobox, removing all items."""
         if self.currentIndex() >= 0:
-            self.setText('')
+            self.setText("")
 
         self.items.clear()
         self._currentIndex = -1
 
     def count(self):
-        """ Returns the number of items in the combobox """
+        """Returns the number of items in the combobox"""
         return len(self.items)
 
     def insertItem(self, index: int, text: str, icon: Union[str, QIcon, FluentIconBase] = None, userData=None):
-        """ Inserts item into the combobox at the given index. """
+        """Inserts item into the combobox at the given index."""
         item = ComboItem(text, icon, userData)
         self.items.insert(index, item)
 
@@ -272,7 +273,7 @@ class ComboBoxBase:
             self.setCurrentIndex(self.currentIndex() + 1)
 
     def insertItems(self, index: int, texts: Iterable[str]):
-        """ Inserts items into the combobox, starting at the index specified. """
+        """Inserts items into the combobox, starting at the index specified."""
         pos = index
         for text in texts:
             item = ComboItem(text)
@@ -338,7 +339,7 @@ class ComboBoxBase:
             menu.setDefaultAction(menu.actions()[self.currentIndex()])
 
         # determine the animation type by choosing the maximum height of view
-        x = -menu.width()//2 + menu.layout().contentsMargins().left() + self.width()//2
+        x = -menu.width() // 2 + menu.layout().contentsMargins().left() + self.width() // 2
         pd = self.mapToGlobal(QPoint(x, self.height()))
         hd = menu.view.heightForAnimation(pd, MenuAnimationType.DROP_DOWN)
 
@@ -370,7 +371,7 @@ class ComboBoxBase:
 
 
 class ComboBox(QPushButton, ComboBoxBase):
-    """ Combo box """
+    """Combo box"""
 
     currentIndexChanged = Signal(int)
     currentTextChanged = Signal(str)
@@ -431,7 +432,7 @@ class ComboBox(QPushButton, ComboBoxBase):
         elif self.isPressed:
             painter.setOpacity(0.7)
 
-        rect = QRectF(self.width()-22, self.height()/2-5+self.arrowAni.y, 10, 10)
+        rect = QRectF(self.width() - 22, self.height() / 2 - 5 + self.arrowAni.y, 10, 10)
         if isDarkTheme():
             FIF.ARROW_DOWN.render(painter, rect)
         else:
@@ -439,7 +440,7 @@ class ComboBox(QPushButton, ComboBoxBase):
 
 
 class EditableComboBox(LineEdit, ComboBoxBase):
-    """ Editable combo box """
+    """Editable combo box"""
 
     currentIndexChanged = Signal(int)
     currentTextChanged = Signal(str)
@@ -540,7 +541,7 @@ class EditableComboBox(LineEdit, ComboBoxBase):
 
 
 class ComboBoxMenu(RoundMenu):
-    """ Combo box menu """
+    """Combo box menu"""
 
     def __init__(self, parent=None):
         super().__init__(title="", parent=parent)
@@ -548,7 +549,7 @@ class ComboBoxMenu(RoundMenu):
         self.view.setViewportMargins(0, 2, 0, 6)
         self.view.setVerticalScrollBarPolicy(Qt.ScrollBarAsNeeded)
         self.view.setItemDelegate(IndicatorMenuItemDelegate())
-        self.view.setObjectName('comboListWidget')
+        self.view.setObjectName("comboListWidget")
 
         self.setItemHeight(33)
 

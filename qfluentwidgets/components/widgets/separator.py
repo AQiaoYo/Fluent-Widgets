@@ -7,7 +7,7 @@ from ...common.style_sheet import isDarkTheme
 
 
 class HorizontalSeparator(QWidget):
-    """ Horizontal separator """
+    """Horizontal separator"""
 
     def __init__(self, parent=None):
         super().__init__(parent=parent)
@@ -26,7 +26,7 @@ class HorizontalSeparator(QWidget):
 
 
 class VerticalSeparator(QWidget):
-    """ Vertical separator """
+    """Vertical separator"""
 
     def __init__(self, parent=None):
         super().__init__(parent=parent)

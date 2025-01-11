@@ -7,7 +7,7 @@ from ..components.widgets.stacked_widget import PopUpAniStackedWidget
 
 
 class StackedWidget(QFrame):
-    """ Stacked widget """
+    """Stacked widget"""
 
     currentChanged = Signal(int)
 
@@ -23,7 +23,7 @@ class StackedWidget(QFrame):
         self.setAttribute(Qt.WA_StyledBackground)
 
     def addWidget(self, widget):
-        """ add widget to view """
+        """add widget to view"""
         self.view.addWidget(widget)
 
     def widget(self, index: int):
@@ -36,8 +36,7 @@ class StackedWidget(QFrame):
         if not popOut:
             self.view.setCurrentWidget(widget, duration=300)
         else:
-            self.view.setCurrentWidget(
-                widget, True, False, 200, QEasingCurve.InQuad)
+            self.view.setCurrentWidget(widget, True, False, 200, QEasingCurve.InQuad)
 
     def setCurrentIndex(self, index, popOut=True):
         self.setCurrentWidget(self.view.widget(index), popOut)

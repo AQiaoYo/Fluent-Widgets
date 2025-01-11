@@ -27,7 +27,7 @@ from ...common.style_sheet import FluentStyleSheet, themeColor
 
 
 class LineEditButton(QToolButton):
-    """ Line edit button """
+    """Line edit button"""
 
     def __init__(self, icon: Union[str, QIcon, FluentIconBase], parent=None):
         super().__init__(parent=parent)
@@ -37,7 +37,7 @@ class LineEditButton(QToolButton):
         self.setFixedSize(31, 23)
         self.setIconSize(QSize(10, 10))
         self.setCursor(Qt.CursorShape.PointingHandCursor)
-        self.setObjectName('lineEditButton')
+        self.setObjectName("lineEditButton")
         FluentStyleSheet.LINE_EDIT.apply(self)
 
     def setAction(self, action: QAction):
@@ -76,12 +76,11 @@ class LineEditButton(QToolButton):
     def paintEvent(self, e):
         super().paintEvent(e)
         painter = QPainter(self)
-        painter.setRenderHints(QPainter.Antialiasing |
-                               QPainter.SmoothPixmapTransform)
+        painter.setRenderHints(QPainter.Antialiasing | QPainter.SmoothPixmapTransform)
 
         iw, ih = self.iconSize().width(), self.iconSize().height()
         w, h = self.width(), self.height()
-        rect = QRectF((w - iw)/2, (h - ih)/2, iw, ih)
+        rect = QRectF((w - iw) / 2, (h - ih) / 2, iw, ih)
 
         if self.isPressed:
             painter.setOpacity(0.7)
@@ -89,11 +88,11 @@ class LineEditButton(QToolButton):
         if isDarkTheme():
             drawIcon(self._icon, painter, rect)
         else:
-            drawIcon(self._icon, painter, rect, fill='#656565')
+            drawIcon(self._icon, painter, rect, fill="#656565")
 
 
 class LineEdit(QLineEdit):
-    """ Line edit """
+    """Line edit"""
 
     def __init__(self, parent=None):
         super().__init__(parent=parent)
@@ -102,7 +101,7 @@ class LineEdit(QLineEdit):
         self._completerMenu = None  # type: CompleterMenu
         self._isError = False
 
-        self.leftButtons = []   # type: List[LineEditButton]
+        self.leftButtons = []  # type: List[LineEditButton]
         self.rightButtons = []  # type: List[LineEditButton]
 
         self.setProperty("transparent", True)
@@ -194,7 +193,7 @@ class LineEdit(QLineEdit):
             self.clearButton.setVisible(bool(self.text()))
 
     def __onTextChanged(self, text):
-        """ text changed slot """
+        """text changed slot"""
         if self.isClearButtonEnabled():
             self.clearButton.setVisible(bool(text) and self.hasFocus())
 
@@ -208,7 +207,7 @@ class LineEdit(QLineEdit):
             self._completerMenu.close()
 
     def setCompleterMenu(self, menu):
-        """ set completer menu
+        """set completer menu
 
         Parameters
         ----------
@@ -250,18 +249,18 @@ class LineEdit(QLineEdit):
 
         m = self.contentsMargins()
         path = QPainterPath()
-        w, h = self.width()-m.left()-m.right(), self.height()
-        path.addRoundedRect(QRectF(m.left(), h-10, w, 10), 5, 5)
+        w, h = self.width() - m.left() - m.right(), self.height()
+        path.addRoundedRect(QRectF(m.left(), h - 10, w, 10), 5, 5)
 
         rectPath = QPainterPath()
-        rectPath.addRect(m.left(), h-10, w, 8)
+        rectPath.addRect(m.left(), h - 10, w, 8)
         path = path.subtracted(rectPath)
 
         painter.fillPath(path, self.focusedBorderColor())
 
 
 class CompleterMenu(RoundMenu):
-    """ Completer menu """
+    """Completer menu"""
 
     activated = Signal(str)
 
@@ -271,7 +270,7 @@ class CompleterMenu(RoundMenu):
         self.lineEdit = lineEdit
 
         self.view.setViewportMargins(0, 2, 0, 6)
-        self.view.setObjectName('completerListWidget')
+        self.view.setObjectName("completerListWidget")
         self.view.setItemDelegate(IndicatorMenuItemDelegate())
         self.view.setVerticalScrollBarPolicy(Qt.ScrollBarAsNeeded)
 
@@ -279,7 +278,7 @@ class CompleterMenu(RoundMenu):
         self.setItemHeight(33)
 
     def setCompletion(self, model: QAbstractItemModel):
-        """ set the completion model """
+        """set the completion model"""
         items = []
         for i in range(model.rowCount()):
             for j in range(model.columnCount()):
@@ -292,7 +291,7 @@ class CompleterMenu(RoundMenu):
         return True
 
     def setItems(self, items: List[str]):
-        """ set completion items """
+        """set completion items"""
         self.view.clear()
 
         self.items = items
@@ -330,7 +329,7 @@ class CompleterMenu(RoundMenu):
         return super().exec(pos, ani, aniType)
 
     def popup(self):
-        """ show menu """
+        """show menu"""
         if not self.items:
             return self.close()
 
@@ -341,7 +340,7 @@ class CompleterMenu(RoundMenu):
             self.adjustSize()
 
         # determine the animation type by choosing the maximum height of view
-        x = -self.width()//2 + self.layout().contentsMargins().left() + p.width()//2
+        x = -self.width() // 2 + self.layout().contentsMargins().left() + p.width() // 2
         y = p.height() - self.layout().contentsMargins().top() + 2
         pd = p.mapToGlobal(QPoint(x, y))
         hd = self.view.heightForAnimation(pd, MenuAnimationType.FADE_IN_DROP_DOWN)
@@ -359,7 +358,7 @@ class CompleterMenu(RoundMenu):
         self.view.adjustSize(pos, aniType)
 
         # update border style
-        self.view.setProperty('dropDown', aniType == MenuAnimationType.FADE_IN_DROP_DOWN)
+        self.view.setProperty("dropDown", aniType == MenuAnimationType.FADE_IN_DROP_DOWN)
         self.view.setStyle(QApplication.style())
 
         self.adjustSize()
@@ -372,7 +371,7 @@ class CompleterMenu(RoundMenu):
 
 
 class SearchLineEdit(LineEdit):
-    """ Search line edit """
+    """Search line edit"""
 
     searchSignal = Signal(str)
     clearSignal = Signal()
@@ -389,7 +388,7 @@ class SearchLineEdit(LineEdit):
         self.clearButton.clicked.connect(self.clearSignal)
 
     def search(self):
-        """ emit search signal """
+        """emit search signal"""
         text = self.text().strip()
         if text:
             self.searchSignal.emit(text)
@@ -398,11 +397,11 @@ class SearchLineEdit(LineEdit):
 
     def setClearButtonEnabled(self, enable: bool):
         self._isClearButtonEnabled = enable
-        self.setTextMargins(0, 0, 28*enable+30, 0)
+        self.setTextMargins(0, 0, 28 * enable + 30, 0)
 
 
 class EditLayer(QWidget):
-    """ Edit layer """
+    """Edit layer"""
 
     def __init__(self, parent):
         super().__init__(parent=parent)
@@ -425,18 +424,18 @@ class EditLayer(QWidget):
 
         m = self.contentsMargins()
         path = QPainterPath()
-        w, h = self.width()-m.left()-m.right(), self.height()
-        path.addRoundedRect(QRectF(m.left(), h-10, w, 10), 5, 5)
+        w, h = self.width() - m.left() - m.right(), self.height()
+        path.addRoundedRect(QRectF(m.left(), h - 10, w, 10), 5, 5)
 
         rectPath = QPainterPath()
-        rectPath.addRect(m.left(), h-10, w, 7.5)
+        rectPath.addRect(m.left(), h - 10, w, 7.5)
         path = path.subtracted(rectPath)
 
         painter.fillPath(path, themeColor())
 
 
 class TextEdit(QTextEdit):
-    """ Text edit """
+    """Text edit"""
 
     def __init__(self, parent=None):
         super().__init__(parent=parent)
@@ -451,7 +450,7 @@ class TextEdit(QTextEdit):
 
 
 class PlainTextEdit(QPlainTextEdit):
-    """ Plain text edit """
+    """Plain text edit"""
 
     def __init__(self, parent=None):
         super().__init__(parent=parent)
@@ -466,7 +465,7 @@ class PlainTextEdit(QPlainTextEdit):
 
 
 class TextBrowser(QTextBrowser):
-    """ Text browser """
+    """Text browser"""
 
     def __init__(self, parent=None):
         super().__init__(parent)
@@ -481,7 +480,7 @@ class TextBrowser(QTextBrowser):
 
 
 class PasswordLineEdit(LineEdit):
-    """ Password line edit """
+    """Password line edit"""
 
     def __init__(self, parent=None):
         super().__init__(parent)
@@ -497,7 +496,7 @@ class PasswordLineEdit(LineEdit):
         self.viewButton.setFixedSize(29, 25)
 
     def setPasswordVisible(self, isVisible: bool):
-        """ set the visibility of password """
+        """set the visibility of password"""
         if isVisible:
             self.setEchoMode(QLineEdit.Normal)
         else:
@@ -510,12 +509,12 @@ class PasswordLineEdit(LineEdit):
         self._isClearButtonEnabled = enable
 
         if self.viewButton.isHidden():
-            self.setTextMargins(0, 0, 28*enable, 0)
+            self.setTextMargins(0, 0, 28 * enable, 0)
         else:
-            self.setTextMargins(0, 0, 28*enable + 30, 0)
+            self.setTextMargins(0, 0, 28 * enable + 30, 0)
 
     def setViewPasswordButtonVisible(self, isVisible: bool):
-        """ set the visibility of view password button """
+        """set the visibility of view password button"""
         self.viewButton.setVisible(isVisible)
 
     def eventFilter(self, obj, e):

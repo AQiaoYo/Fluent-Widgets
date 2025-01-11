@@ -8,7 +8,7 @@ from ...common.config import isDarkTheme
 
 
 class MaskDialogBase(QDialog):
-    """ Dialog box base class with a mask """
+    """Dialog box base class with a mask"""
 
     def __init__(self, parent=None):
         super().__init__(parent=parent)
@@ -17,14 +17,14 @@ class MaskDialogBase(QDialog):
         self.windowMask = QWidget(self)
 
         # dialog box in the center of mask, all widgets take it as parent
-        self.widget = QFrame(self, objectName='centerWidget')
+        self.widget = QFrame(self, objectName="centerWidget")
         self.setWindowFlags(Qt.FramelessWindowHint)
         self.setAttribute(Qt.WA_TranslucentBackground)
         self.setGeometry(0, 0, parent.width(), parent.height())
 
         c = 0 if isDarkTheme() else 255
         self.windowMask.resize(self.size())
-        self.windowMask.setStyleSheet(f'background:rgba({c}, {c}, {c}, 0.6)')
+        self.windowMask.setStyleSheet(f"background:rgba({c}, {c}, {c}, 0.6)")
         self._hBoxLayout.addWidget(self.widget)
         self.setShadowEffect()
 
@@ -32,7 +32,7 @@ class MaskDialogBase(QDialog):
         self.windowMask.installEventFilter(self)
 
     def setShadowEffect(self, blurRadius=60, offset=(0, 10), color=QColor(0, 0, 0, 100)):
-        """ add shadow to dialog """
+        """add shadow to dialog"""
         shadowEffect = QGraphicsDropShadowEffect(self.widget)
         shadowEffect.setBlurRadius(blurRadius)
         shadowEffect.setOffset(*offset)
@@ -41,16 +41,18 @@ class MaskDialogBase(QDialog):
         self.widget.setGraphicsEffect(shadowEffect)
 
     def setMaskColor(self, color: QColor):
-        """ set the color of mask """
-        self.windowMask.setStyleSheet(f"""
+        """set the color of mask"""
+        self.windowMask.setStyleSheet(
+            f"""
             background: rgba({color.red()}, {color.green()}, {color.blue()}, {color.alpha()})
-        """)
+        """
+        )
 
     def showEvent(self, e):
-        """ fade in """
+        """fade in"""
         opacityEffect = QGraphicsOpacityEffect(self)
         self.setGraphicsEffect(opacityEffect)
-        opacityAni = QPropertyAnimation(opacityEffect, b'opacity', self)
+        opacityAni = QPropertyAnimation(opacityEffect, b"opacity", self)
         opacityAni.setStartValue(0)
         opacityAni.setEndValue(1)
         opacityAni.setDuration(200)
@@ -60,11 +62,11 @@ class MaskDialogBase(QDialog):
         super().showEvent(e)
 
     def done(self, code):
-        """ fade out """
+        """fade out"""
         self.widget.setGraphicsEffect(None)
         opacityEffect = QGraphicsOpacityEffect(self)
         self.setGraphicsEffect(opacityEffect)
-        opacityAni = QPropertyAnimation(opacityEffect, b'opacity', self)
+        opacityAni = QPropertyAnimation(opacityEffect, b"opacity", self)
         opacityAni.setStartValue(1)
         opacityAni.setEndValue(0)
         opacityAni.setDuration(100)
@@ -90,8 +92,7 @@ class MaskDialogBase(QDialog):
                 re = QResizeEvent(e)
                 self.resize(re.size())
         elif obj is self.windowMask:
-            if e.type() == QEvent.MouseButtonRelease and e.button() == Qt.LeftButton \
-                    and self.isClosableOnMaskClicked():
+            if e.type() == QEvent.MouseButtonRelease and e.button() == Qt.LeftButton and self.isClosableOnMaskClicked():
                 self.reject()
 
         return super().eventFilter(obj, e)

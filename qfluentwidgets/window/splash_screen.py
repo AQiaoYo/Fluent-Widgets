@@ -15,7 +15,7 @@ from ..components.widgets import IconWidget
 
 
 class SplashScreen(QWidget):
-    """ Splash screen """
+    """Splash screen"""
 
     def __init__(self, icon: Union[str, QIcon, FluentIconBase], parent=None, enableShadow=True):
         super().__init__(parent=parent)
@@ -58,7 +58,7 @@ class SplashScreen(QWidget):
         return self._iconSize
 
     def setTitleBar(self, titleBar: QWidget):
-        """ set title bar """
+        """set title bar"""
         self.titleBar.deleteLater()
         self.titleBar = titleBar
         titleBar.setParent(self)
@@ -76,11 +76,11 @@ class SplashScreen(QWidget):
 
     def resizeEvent(self, e):
         iw, ih = self.iconSize().width(), self.iconSize().height()
-        self.iconWidget.move(self.width()//2 - iw//2, self.height()//2 - ih//2)
+        self.iconWidget.move(self.width() // 2 - iw // 2, self.height() // 2 - ih // 2)
         self.titleBar.resize(self.width(), self.titleBar.height())
 
     def finish(self):
-        """ close splash screen """
+        """close splash screen"""
         self.close()
 
     def paintEvent(self, e):

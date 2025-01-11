@@ -7,7 +7,7 @@ from ..widgets.acrylic_label import AcrylicBrush
 
 
 class AcrylicWidget:
-    """ Acrylic widget """
+    """Acrylic widget"""
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)

@@ -14,7 +14,7 @@ from ...components.widgets.menu import RoundMenu, MenuAnimationType
 
 
 class BreadcrumbWidget(QWidget):
-    """ Bread crumb widget """
+    """Bread crumb widget"""
 
     clicked = Signal()
 
@@ -42,7 +42,7 @@ class BreadcrumbWidget(QWidget):
 
 
 class ElideButton(BreadcrumbWidget):
-    """ Elide button """
+    """Elide button"""
 
     def __init__(self, parent=None):
         super().__init__(parent)
@@ -68,7 +68,7 @@ class ElideButton(BreadcrumbWidget):
 
 
 class BreadcrumbItem(BreadcrumbWidget):
-    """ Breadcrumb item """
+    """Breadcrumb item"""
 
     def __init__(self, routeKey: str, text: str, index: int, parent=None):
         super().__init__(parent=parent)
@@ -141,18 +141,17 @@ class BreadcrumbItem(BreadcrumbWidget):
         painter.drawText(rect, Qt.AlignVCenter | Qt.AlignLeft, self.text)
 
 
-
 class BreadcrumbBar(QWidget):
-    """ Breadcrumb bar """
+    """Breadcrumb bar"""
 
     currentItemChanged = Signal(str)
     currentIndexChanged = Signal(int)
 
     def __init__(self, parent=None):
         super().__init__(parent=parent)
-        self.itemMap = {}       # type: Dict[BreadcrumbItem]
-        self.items = []         # type: List[BreadcrumbItem]
-        self.hiddenItems = []   # type: List[BreadcrumbItem]
+        self.itemMap = {}  # type: Dict[BreadcrumbItem]
+        self.items = []  # type: List[BreadcrumbItem]
+        self.hiddenItems = []  # type: List[BreadcrumbItem]
 
         self._spacing = 10
         self._currentIndex = -1
@@ -166,7 +165,7 @@ class BreadcrumbBar(QWidget):
         self.elideButton.clicked.connect(self._showHiddenItemsMenu)
 
     def addItem(self, routeKey: str, text: str):
-        """ add item
+        """add item
 
         Parameters
         ----------
@@ -195,7 +194,7 @@ class BreadcrumbBar(QWidget):
         if not 0 <= index < len(self.items) or index == self.currentIndex():
             return
 
-        if 0<= self.currentIndex() < len(self.items):
+        if 0 <= self.currentIndex() < len(self.items):
             self.currentItem().setSelected(False)
 
         self._currentIndex = index
@@ -245,7 +244,7 @@ class BreadcrumbBar(QWidget):
         self.updateGeometry()
 
     def clear(self):
-        """ clear all items """
+        """clear all items"""
         while self.items:
             item = self.items.pop()
             self.itemMap.pop(item.routeKey)
@@ -255,7 +254,7 @@ class BreadcrumbBar(QWidget):
         self._currentIndex = -1
 
     def popItem(self):
-        """ pop trailing item """
+        """pop trailing item"""
         if not self.items:
             return
 
@@ -265,7 +264,7 @@ class BreadcrumbBar(QWidget):
             self.clear()
 
     def count(self):
-        """ Returns the number of items """
+        """Returns the number of items"""
         return len(self.items)
 
     def updateGeometry(self):
@@ -319,8 +318,7 @@ class BreadcrumbBar(QWidget):
         menu.setItemHeight(32)
 
         for item in self.hiddenItems:
-            menu.addAction(
-                QAction(item.text, menu, triggered=lambda i=item: self.setCurrentItem(i.routeKey)))
+            menu.addAction(QAction(item.text, menu, triggered=lambda i=item: self.setCurrentItem(i.routeKey)))
 
         # determine the animation type by choosing the maximum height of view
         x = -menu.layout().contentsMargins().left()

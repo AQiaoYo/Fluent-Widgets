@@ -16,16 +16,15 @@ else:
     from PySide6.QtWidgets import QApplication
     from qframelesswindow.titlebar.title_bar_buttons import TitleBarButtonState
 
-
     class FramelessWindow(Window):
-        """ Frameless window """
+        """Frameless window"""
 
         def __init__(self, parent=None):
             super().__init__(parent)
             self.windowEffect.setMicaEffect(self.winId())
 
         def nativeEvent(self, eventType, message):
-            """ Handle the Windows message """
+            """Handle the Windows message"""
             msg = MSG.from_address(message.__int__())
             if not msg.hWnd:
                 return super().nativeEvent(eventType, message)

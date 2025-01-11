@@ -7,7 +7,7 @@ from .config import Theme, qconfig
 
 
 class SystemThemeListener(QThread):
-    """ System theme listener """
+    """System theme listener"""
 
     systemThemeChanged = Signal()
 

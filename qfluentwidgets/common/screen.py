@@ -5,7 +5,7 @@ from PySide6.QtWidgets import QApplication
 
 
 def getCurrentScreen():
-    """ get current screen """
+    """get current screen"""
     cursorPos = QCursor.pos()
 
     for s in QApplication.screens():
@@ -16,7 +16,7 @@ def getCurrentScreen():
 
 
 def getCurrentScreenGeometry(avaliable=True):
-    """ get current screen geometry """
+    """get current screen geometry"""
     screen = getCurrentScreen() or QApplication.primaryScreen()
 
     # this should not happen

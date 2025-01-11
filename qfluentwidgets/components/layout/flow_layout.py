@@ -17,7 +17,7 @@ from PySide6.QtWidgets import QLayout, QWidgetItem
 
 
 class FlowLayout(QLayout):
-    """ Flow layout """
+    """Flow layout"""
 
     def __init__(self, parent=None, needAni=False, isTight=False):
         """
@@ -33,8 +33,8 @@ class FlowLayout(QLayout):
             whether to use the tight layout when widgets are hidden
         """
         super().__init__(parent)
-        self._items = []    # type: List[QLayoutItem]
-        self._anis = []    # type: List[QPropertyAnimation]
+        self._items = []  # type: List[QLayoutItem]
+        self._anis = []  # type: List[QPropertyAnimation]
         self._aniGroup = QParallelAnimationGroup(self)
         self._verticalSpacing = 10
         self._horizontalSpacing = 10
@@ -74,11 +74,11 @@ class FlowLayout(QLayout):
         if not self.needAni:
             return
 
-        ani = QPropertyAnimation(w, b'geometry')
+        ani = QPropertyAnimation(w, b"geometry")
         ani.setEndValue(QRect(QPoint(0, 0), w.size()))
         ani.setDuration(self.duration)
         ani.setEasingCurve(self.ease)
-        w.setProperty('flowAni', ani)
+        w.setProperty("flowAni", ani)
         self._aniGroup.addAnimation(ani)
 
         if index == -1:
@@ -87,7 +87,7 @@ class FlowLayout(QLayout):
             self._anis.insert(index, ani)
 
     def setAnimation(self, duration, ease=QEasingCurve.Linear):
-        """ set the moving animation
+        """set the moving animation
 
         Parameters
         ----------
@@ -118,8 +118,8 @@ class FlowLayout(QLayout):
 
     def takeAt(self, index: int):
         if 0 <= index < len(self._items):
-            item = self._items[index]   # type: QLayoutItem
-            ani = item.widget().property('flowAni')
+            item = self._items[index]  # type: QLayoutItem
+            ani = item.widget().property("flowAni")
             if ani:
                 self._anis.remove(ani)
                 self._aniGroup.removeAnimation(ani)
@@ -135,12 +135,12 @@ class FlowLayout(QLayout):
                 return self.takeAt(i)
 
     def removeAllWidgets(self):
-        """ remove all widgets from layout """
+        """remove all widgets from layout"""
         while self._items:
             self.takeAt(0)
 
     def takeAllWidgets(self):
-        """ remove all widgets from layout and delete them """
+        """remove all widgets from layout and delete them"""
         while self._items:
             w = self.takeAt(0)
             if w:
@@ -153,7 +153,7 @@ class FlowLayout(QLayout):
         return True
 
     def heightForWidth(self, width: int):
-        """ get the minimal height according to width """
+        """get the minimal height according to width"""
         return self._doLayout(QRect(0, 0, width, 0), False)
 
     def setGeometry(self, rect: QRect):
@@ -174,24 +174,24 @@ class FlowLayout(QLayout):
             size = size.expandedTo(item.minimumSize())
 
         m = self.contentsMargins()
-        size += QSize(m.left()+m.right(), m.top()+m.bottom())
+        size += QSize(m.left() + m.right(), m.top() + m.bottom())
 
         return size
 
     def setVerticalSpacing(self, spacing: int):
-        """ set vertical spacing between widgets """
+        """set vertical spacing between widgets"""
         self._verticalSpacing = spacing
 
     def verticalSpacing(self):
-        """ get vertical spacing between widgets """
+        """get vertical spacing between widgets"""
         return self._verticalSpacing
 
     def setHorizontalSpacing(self, spacing: int):
-        """ set horizontal spacing between widgets """
+        """set horizontal spacing between widgets"""
         self._horizontalSpacing = spacing
 
     def horizontalSpacing(self):
-        """ get horizontal spacing between widgets """
+        """get horizontal spacing between widgets"""
         return self._horizontalSpacing
 
     def eventFilter(self, obj: QObject, event: QEvent) -> bool:
@@ -207,7 +207,7 @@ class FlowLayout(QLayout):
         return super().eventFilter(obj, event)
 
     def _doLayout(self, rect: QRect, move: bool):
-        """ adjust widgets position according to the window size """
+        """adjust widgets position according to the window size"""
         aniRestart = False
         margin = self.contentsMargins()
         x = rect.x() + margin.left()

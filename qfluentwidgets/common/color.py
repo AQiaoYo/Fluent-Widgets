@@ -7,10 +7,11 @@ from PySide6.QtGui import QColor
 
 
 class FluentThemeColor(Enum):
-    """ Fluent theme color
+    """Fluent theme color
 
     Refer to: https://www.figma.com/file/iM7EPX8Jn37zjeSezb43cF
     """
+
     YELLOW_GOLD = "#FFB900"
     GOLD = "#FF8C00"
     ORANGE_BRIGHT = "#F7630C"
@@ -62,5 +63,3 @@ class FluentThemeColor(Enum):
 
     def color(self):
         return QColor(self.value)
-
-

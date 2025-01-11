@@ -15,11 +15,11 @@ from ...common.style_sheet import FluentStyleSheet, isDarkTheme
 
 
 class ScrollButton(ToolButton):
-    """ Scroll button """
+    """Scroll button"""
 
     def _postInit(self):
         self._opacity = 0
-        self.opacityAni = QPropertyAnimation(self, b'opacity', self)
+        self.opacityAni = QPropertyAnimation(self, b"opacity", self)
         self.opacityAni.setDuration(150)
 
     def getOpacity(self):
@@ -75,14 +75,14 @@ class ScrollButton(ToolButton):
 
 
 class FlipImageDelegate(QStyledItemDelegate):
-    """ Flip view image delegate """
+    """Flip view image delegate"""
 
     def __init__(self, parent=None):
         super().__init__(parent)
         self.borderRadius = 0
 
     def itemSize(self, index: int):
-        p = self.parent() # type: FlipView
+        p = self.parent()  # type: FlipView
         return p.item(index).sizeHint()
 
     def setBorderRadius(self, radius: int):
@@ -134,7 +134,7 @@ class FlipImageDelegate(QStyledItemDelegate):
 
 
 class FlipView(QListWidget):
-    """ Flip view
+    """Flip view
 
     Constructors
     ------------
@@ -198,7 +198,7 @@ class FlipView(QListWidget):
         return self.orientation == Qt.Horizontal
 
     def setItemSize(self, size: QSize):
-        """ set the size of item """
+        """set the size of item"""
         if size == self.itemSize:
             return
 
@@ -210,26 +210,26 @@ class FlipView(QListWidget):
         self.viewport().update()
 
     def getItemSize(self):
-        """ get the size of item """
+        """get the size of item"""
         return self._itemSize
 
     def setBorderRadius(self, radius: int):
-        """ set the border radius of item """
+        """set the border radius of item"""
         self.delegate.setBorderRadius(radius)
 
     def getBorderRadius(self):
         return self.delegate.borderRadius
 
     def scrollPrevious(self):
-        """ scroll to previous item """
+        """scroll to previous item"""
         self.setCurrentIndex(self.currentIndex() - 1)
 
     def scrollNext(self):
-        """ scroll to next item """
+        """scroll to next item"""
         self.setCurrentIndex(self.currentIndex() + 1)
 
     def setCurrentIndex(self, index: int):
-        """ set current index """
+        """set current index"""
         if not 0 <= index < self.count() or index == self.currentIndex():
             return
 
@@ -273,16 +273,16 @@ class FlipView(QListWidget):
         return self.item(index).data(Qt.UserRole)
 
     def addImage(self, image: Union[QImage, QPixmap, str]):
-        """ add image """
+        """add image"""
         self.addImages([image])
 
     def addImages(self, images: List[Union[QImage, QPixmap, str]], targetSize: QSize = None):
-        """ add images """
+        """add images"""
         if not images:
             return
 
         N = self.count()
-        self.addItems([''] * len(images))
+        self.addItems([""] * len(images))
 
         for i in range(N, self.count()):
             self.setItemImage(i, images[i - N], targetSize=targetSize)
@@ -291,7 +291,7 @@ class FlipView(QListWidget):
             self._currentIndex = 0
 
     def setItemImage(self, index: int, image: Union[QImage, QPixmap, str], targetSize: QSize = None):
-        """ set the image of specified item """
+        """set the image of specified item"""
         if not 0 <= index < self.count():
             return
 
@@ -332,7 +332,7 @@ class FlipView(QListWidget):
         item.setSizeHint(QSize(w, h))
 
     def itemImage(self, index: int, load=True) -> QImage:
-        """ get the image of specified item
+        """get the image of specified item
 
         Parameters
         ----------
@@ -419,14 +419,14 @@ class FlipView(QListWidget):
 
 
 class HorizontalFlipView(FlipView):
-    """ Horizontal flip view """
+    """Horizontal flip view"""
 
     def __init__(self, parent=None):
         super().__init__(Qt.Horizontal, parent)
 
 
 class VerticalFlipView(FlipView):
-    """ Vertical flip view """
+    """Vertical flip view"""
 
     def __init__(self, parent=None):
         super().__init__(Qt.Vertical, parent)

@@ -21,7 +21,7 @@ from ...common.screen import getCurrentScreenGeometry
 
 
 class ToolTipPosition(Enum):
-    """ Info bar position """
+    """Info bar position"""
 
     TOP = 0
     BOTTOM = 1
@@ -34,16 +34,16 @@ class ToolTipPosition(Enum):
 
 
 class ItemViewToolTipType(Enum):
-    """ Info bar position """
+    """Info bar position"""
 
     LIST = 0
     TABLE = 1
 
 
 class ToolTip(QFrame):
-    """ Tool tip """
+    """Tool tip"""
 
-    def __init__(self, text='', parent=None):
+    def __init__(self, text="", parent=None):
         """
         Parameters
         ----------
@@ -71,7 +71,7 @@ class ToolTip(QFrame):
         self.containerLayout.setContentsMargins(8, 6, 8, 6)
 
         # add opacity effect
-        self.opacityAni = QPropertyAnimation(self, b'windowOpacity', self)
+        self.opacityAni = QPropertyAnimation(self, b"windowOpacity", self)
         self.opacityAni.setDuration(150)
 
         # add shadow
@@ -94,7 +94,7 @@ class ToolTip(QFrame):
         return self.__text
 
     def setText(self, text):
-        """ set text on tooltip """
+        """set text on tooltip"""
         self.__text = text
         self.label.setText(text)
         self.container.adjustSize()
@@ -104,7 +104,7 @@ class ToolTip(QFrame):
         return self.__duration
 
     def setDuration(self, duration: int):
-        """ set tooltip duration in milliseconds
+        """set tooltip duration in milliseconds
 
         Parameters
         ----------
@@ -114,7 +114,7 @@ class ToolTip(QFrame):
         self.__duration = duration
 
     def __setQss(self):
-        """ set style sheet """
+        """set style sheet"""
         self.container.setObjectName("container")
         self.label.setObjectName("contentLabel")
         FluentStyleSheet.TOOL_TIP.apply(self)
@@ -140,13 +140,13 @@ class ToolTip(QFrame):
         super().hideEvent(e)
 
     def adjustPos(self, widget, position: ToolTipPosition):
-        """ adjust the position of tooltip relative to widget """
+        """adjust the position of tooltip relative to widget"""
         manager = ToolTipPositionManager.make(position)
         self.move(manager.position(self, widget))
 
 
 class ToolTipPositionManager:
-    """ Tooltip position manager """
+    """Tooltip position manager"""
 
     def position(self, tooltip: ToolTip, parent: QWidget) -> QPoint:
         pos = self._pos(tooltip, parent)
@@ -163,7 +163,7 @@ class ToolTipPositionManager:
 
     @staticmethod
     def make(position: ToolTipPosition):
-        """ mask info bar manager according to the display position """
+        """mask info bar manager according to the display position"""
         managers = {
             ToolTipPosition.TOP: TopToolTipManager,
             ToolTipPosition.BOTTOM: BottomToolTipManager,
@@ -176,33 +176,33 @@ class ToolTipPositionManager:
         }
 
         if position not in managers:
-            raise ValueError(f'`{position}` is an invalid info bar position.')
+            raise ValueError(f"`{position}` is an invalid info bar position.")
 
         return managers[position]()
 
 
 class TopToolTipManager(ToolTipPositionManager):
-    """ Top tooltip position manager """
+    """Top tooltip position manager"""
 
     def _pos(self, tooltip: ToolTip, parent: QWidget):
         pos = parent.mapToGlobal(QPoint())
-        x = pos.x() + parent.width()//2 - tooltip.width()//2
+        x = pos.x() + parent.width() // 2 - tooltip.width() // 2
         y = pos.y() - tooltip.height()
         return QPoint(x, y)
 
 
 class BottomToolTipManager(ToolTipPositionManager):
-    """ Bottom tooltip position manager """
+    """Bottom tooltip position manager"""
 
     def _pos(self, tooltip: ToolTip, parent: QWidget) -> QPoint:
         pos = parent.mapToGlobal(QPoint())
-        x = pos.x() + parent.width()//2 - tooltip.width()//2
+        x = pos.x() + parent.width() // 2 - tooltip.width() // 2
         y = pos.y() + parent.height()
         return QPoint(x, y)
 
 
 class LeftToolTipManager(ToolTipPositionManager):
-    """ Left tooltip position manager """
+    """Left tooltip position manager"""
 
     def _pos(self, tooltip: ToolTip, parent: QWidget) -> QPoint:
         pos = parent.mapToGlobal(QPoint())
@@ -212,7 +212,7 @@ class LeftToolTipManager(ToolTipPositionManager):
 
 
 class RightToolTipManager(ToolTipPositionManager):
-    """ Right tooltip position manager """
+    """Right tooltip position manager"""
 
     def _pos(self, tooltip: ToolTip, parent: QWidget) -> QPoint:
         pos = parent.mapToGlobal(QPoint())
@@ -222,18 +222,17 @@ class RightToolTipManager(ToolTipPositionManager):
 
 
 class TopRightToolTipManager(ToolTipPositionManager):
-    """ Top right tooltip position manager """
+    """Top right tooltip position manager"""
 
     def _pos(self, tooltip: ToolTip, parent: QWidget) -> QPoint:
         pos = parent.mapToGlobal(QPoint())
-        x = pos.x() + parent.width() - tooltip.width() + \
-            tooltip.layout().contentsMargins().right()
+        x = pos.x() + parent.width() - tooltip.width() + tooltip.layout().contentsMargins().right()
         y = pos.y() - tooltip.height()
         return QPoint(x, y)
 
 
 class TopLeftToolTipManager(ToolTipPositionManager):
-    """ Top left tooltip position manager """
+    """Top left tooltip position manager"""
 
     def _pos(self, tooltip: ToolTip, parent: QWidget) -> QPoint:
         pos = parent.mapToGlobal(QPoint())
@@ -243,18 +242,17 @@ class TopLeftToolTipManager(ToolTipPositionManager):
 
 
 class BottomRightToolTipManager(ToolTipPositionManager):
-    """ Bottom right tooltip position manager """
+    """Bottom right tooltip position manager"""
 
     def _pos(self, tooltip: ToolTip, parent: QWidget) -> QPoint:
         pos = parent.mapToGlobal(QPoint())
-        x = pos.x() + parent.width() - tooltip.width() + \
-            tooltip.layout().contentsMargins().right()
+        x = pos.x() + parent.width() - tooltip.width() + tooltip.layout().contentsMargins().right()
         y = pos.y() + parent.height()
         return QPoint(x, y)
 
 
 class BottomLeftToolTipManager(ToolTipPositionManager):
-    """ Bottom left tooltip position manager """
+    """Bottom left tooltip position manager"""
 
     def _pos(self, tooltip: ToolTip, parent: QWidget) -> QPoint:
         pos = parent.mapToGlobal(QPoint())
@@ -264,7 +262,7 @@ class BottomLeftToolTipManager(ToolTipPositionManager):
 
 
 class ItemViewToolTipManager(ToolTipPositionManager):
-    """ Item view tooltip position manager """
+    """Item view tooltip position manager"""
 
     def __init__(self, itemRect=QRect()):
         super().__init__()
@@ -278,20 +276,20 @@ class ItemViewToolTipManager(ToolTipPositionManager):
 
     @staticmethod
     def make(tipType: ItemViewToolTipType, itemRect: QRect):
-        """ mask info bar manager according to the display tipType """
+        """mask info bar manager according to the display tipType"""
         managers = {
             ItemViewToolTipType.LIST: ItemViewToolTipManager,
             ItemViewToolTipType.TABLE: TableItemToolTipManager,
         }
 
         if tipType not in managers:
-            raise ValueError(f'`{tipType}` is an invalid info bar tipType.')
+            raise ValueError(f"`{tipType}` is an invalid info bar tipType.")
 
         return managers[tipType](itemRect)
 
 
 class TableItemToolTipManager(ItemViewToolTipManager):
-    """ Table item view tooltip position manager """
+    """Table item view tooltip position manager"""
 
     def _pos(self, tooltip: ToolTip, view: QTableView) -> QPoint:
         pos = view.mapToGlobal(self.itemRect.topLeft())
@@ -300,9 +298,8 @@ class TableItemToolTipManager(ItemViewToolTipManager):
         return QPoint(x, y)
 
 
-
 class ToolTipFilter(QObject):
-    """ Tool button with a tool tip """
+    """Tool button with a tool tip"""
 
     def __init__(self, parent: QWidget, showDelay=300, position=ToolTipPosition.TOP):
         """
@@ -352,14 +349,14 @@ class ToolTipFilter(QObject):
         return ToolTip(self.parent().toolTip(), self.parent().window())
 
     def hideToolTip(self):
-        """ hide tool tip """
+        """hide tool tip"""
         self.isEnter = False
         self.timer.stop()
         if self._tooltip:
             self._tooltip.hide()
 
     def showToolTip(self):
-        """ show tool tip """
+        """show tool tip"""
         if not self.isEnter:
             return
 
@@ -369,7 +366,7 @@ class ToolTipFilter(QObject):
         self._tooltip.show()
 
     def setToolTipDelay(self, delay: int):
-        """ set the delay of tool tip """
+        """set the delay of tool tip"""
         self._tooltipDelay = delay
 
     def _canShowToolTip(self) -> bool:
@@ -378,16 +375,15 @@ class ToolTipFilter(QObject):
 
 
 class ItemViewToolTip(ToolTip):
-    """ Item view tool tip """
+    """Item view tool tip"""
 
     def adjustPos(self, view: QAbstractItemView, itemRect: QRect, tooltipType: ItemViewToolTipType):
         manager = ItemViewToolTipManager.make(tooltipType, itemRect)
         self.move(manager.position(self, view))
 
 
-
 class ItemViewToolTipDelegate(ToolTipFilter):
-    """ Item view tool tip """
+    """Item view tool tip"""
 
     def __init__(self, parent: QAbstractItemView, showDelay=300, tooltipType=ItemViewToolTipType.TABLE):
         super().__init__(parent, showDelay, ToolTipPosition.TOP)
@@ -418,7 +414,7 @@ class ItemViewToolTipDelegate(ToolTipFilter):
         return ItemViewToolTip(self.text, self.parent().window())
 
     def showToolTip(self):
-        """ show tool tip """
+        """show tool tip"""
         if not self._tooltip:
             self._tooltip = self._createToolTip()
 
@@ -446,7 +442,9 @@ class ItemViewToolTipDelegate(ToolTipFilter):
         if self._tooltip:
             self._tooltip.setDuration(duration)
 
-    def helpEvent(self, event: QHelpEvent, view: QAbstractItemView, option: QStyleOptionViewItem, index: QModelIndex) -> bool:
+    def helpEvent(
+        self, event: QHelpEvent, view: QAbstractItemView, option: QStyleOptionViewItem, index: QModelIndex
+    ) -> bool:
         if not event or not view:
             return False
 

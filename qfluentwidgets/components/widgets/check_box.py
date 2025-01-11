@@ -13,18 +13,18 @@ from ...common.style_sheet import ThemeColor, FluentStyleSheet, themeColor, isDa
 
 
 class CheckBoxIcon(FluentIconBase, Enum):
-    """ CheckBoxIcon """
+    """CheckBoxIcon"""
 
     ACCEPT = "Accept"
     PARTIAL_ACCEPT = "PartialAccept"
 
     def path(self, theme=Theme.AUTO):
         c = getIconColor(theme, reverse=True)
-        return f':/qfluentwidgets/images/check_box/{self.value}_{c}.svg'
+        return f":/qfluentwidgets/images/check_box/{self.value}_{c}.svg"
 
 
 class CheckBoxState(Enum):
-    """ Check box state """
+    """Check box state"""
 
     NORMAL = 0
     HOVER = 1
@@ -37,7 +37,7 @@ class CheckBoxState(Enum):
 
 
 class CheckBox(QCheckBox):
-    """ Check box
+    """Check box
 
     Constructors
     ------------
@@ -81,22 +81,22 @@ class CheckBox(QCheckBox):
                 CheckBoxState.NORMAL: QColor(255, 255, 255, 141),
                 CheckBoxState.HOVER: QColor(255, 255, 255, 141),
                 CheckBoxState.PRESSED: QColor(255, 255, 255, 40),
-                CheckBoxState.CHECKED : themeColor(),
-                CheckBoxState.CHECKED_HOVER : ThemeColor.DARK_1.color(),
-                CheckBoxState.CHECKED_PRESSED : ThemeColor.DARK_2.color(),
-                CheckBoxState.DISABLED : QColor(255, 255, 255, 41),
-                CheckBoxState.CHECKED_DISABLED : QColor(0, 0, 0, 0)
+                CheckBoxState.CHECKED: themeColor(),
+                CheckBoxState.CHECKED_HOVER: ThemeColor.DARK_1.color(),
+                CheckBoxState.CHECKED_PRESSED: ThemeColor.DARK_2.color(),
+                CheckBoxState.DISABLED: QColor(255, 255, 255, 41),
+                CheckBoxState.CHECKED_DISABLED: QColor(0, 0, 0, 0),
             }
         else:
             map = {
                 CheckBoxState.NORMAL: QColor(0, 0, 0, 122),
                 CheckBoxState.HOVER: QColor(0, 0, 0, 143),
                 CheckBoxState.PRESSED: QColor(0, 0, 0, 69),
-                CheckBoxState.CHECKED : themeColor(),
-                CheckBoxState.CHECKED_HOVER : ThemeColor.LIGHT_1.color(),
-                CheckBoxState.CHECKED_PRESSED : ThemeColor.LIGHT_2.color(),
-                CheckBoxState.DISABLED : QColor(0, 0, 0, 56),
-                CheckBoxState.CHECKED_DISABLED : QColor(0, 0, 0, 0)
+                CheckBoxState.CHECKED: themeColor(),
+                CheckBoxState.CHECKED_HOVER: ThemeColor.LIGHT_1.color(),
+                CheckBoxState.CHECKED_PRESSED: ThemeColor.LIGHT_2.color(),
+                CheckBoxState.DISABLED: QColor(0, 0, 0, 56),
+                CheckBoxState.CHECKED_DISABLED: QColor(0, 0, 0, 0),
             }
 
         return map[self._state()]
@@ -111,7 +111,7 @@ class CheckBox(QCheckBox):
                 CheckBoxState.CHECKED_HOVER: ThemeColor.DARK_1.color(),
                 CheckBoxState.CHECKED_PRESSED: ThemeColor.DARK_2.color(),
                 CheckBoxState.DISABLED: QColor(0, 0, 0, 0),
-                CheckBoxState.CHECKED_DISABLED: QColor(255, 255, 255, 41)
+                CheckBoxState.CHECKED_DISABLED: QColor(255, 255, 255, 41),
             }
         else:
             map = {
@@ -122,7 +122,7 @@ class CheckBox(QCheckBox):
                 CheckBoxState.CHECKED_HOVER: ThemeColor.LIGHT_1.color(),
                 CheckBoxState.CHECKED_PRESSED: ThemeColor.LIGHT_2.color(),
                 CheckBoxState.DISABLED: QColor(0, 0, 0, 0),
-                CheckBoxState.CHECKED_DISABLED: QColor(0, 0, 0, 56)
+                CheckBoxState.CHECKED_DISABLED: QColor(0, 0, 0, 56),
             }
 
         return map[self._state()]

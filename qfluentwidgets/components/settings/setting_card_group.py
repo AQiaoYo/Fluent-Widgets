@@ -12,7 +12,7 @@ from ..layout.expand_layout import ExpandLayout
 
 
 class SettingCardGroup(QWidget):
-    """ Setting card group """
+    """Setting card group"""
 
     def __init__(self, title: str, parent=None):
         super().__init__(parent=parent)
@@ -35,13 +35,13 @@ class SettingCardGroup(QWidget):
         self.titleLabel.adjustSize()
 
     def addSettingCard(self, card: QWidget):
-        """ add setting card to group """
+        """add setting card to group"""
         card.setParent(self)
         self.cardLayout.addWidget(card)
         self.adjustSize()
 
     def addSettingCards(self, cards: List[QWidget]):
-        """ add setting cards to group """
+        """add setting cards to group"""
         for card in cards:
             self.addSettingCard(card)
 

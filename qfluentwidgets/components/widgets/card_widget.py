@@ -17,7 +17,7 @@ from ...common.style_sheet import FluentStyleSheet, isDarkTheme
 
 
 class CardWidget(BackgroundAnimationWidget, QFrame):
-    """ Card widget """
+    """Card widget"""
 
     clicked = Signal()
 
@@ -108,9 +108,8 @@ class CardWidget(BackgroundAnimationWidget, QFrame):
     borderRadius = Property(int, getBorderRadius, setBorderRadius)
 
 
-
 class SimpleCardWidget(CardWidget):
-    """ Simple card widget """
+    """Simple card widget"""
 
     def __init__(self, parent=None):
         super().__init__(parent)
@@ -138,9 +137,8 @@ class SimpleCardWidget(CardWidget):
         painter.drawRoundedRect(self.rect().adjusted(1, 1, -1, -1), r, r)
 
 
-
 class ElevatedCardWidget(SimpleCardWidget):
-    """ Card widget with shadow effect """
+    """Card widget with shadow effect"""
 
     def __init__(self, parent=None):
         super().__init__(parent)
@@ -148,7 +146,7 @@ class ElevatedCardWidget(SimpleCardWidget):
         self.shadowAni.setOffset(0, 5)
         self.shadowAni.setBlurRadius(38)
 
-        self.elevatedAni = QPropertyAnimation(self, b'pos', self)
+        self.elevatedAni = QPropertyAnimation(self, b"pos", self)
         self.elevatedAni.setDuration(100)
 
         self._originalPos = self.pos()
@@ -182,9 +180,8 @@ class ElevatedCardWidget(SimpleCardWidget):
         return QColor(255, 255, 255, 6 if isDarkTheme() else 118)
 
 
-
 class CardSeparator(QWidget):
-    """ Card separator """
+    """Card separator"""
 
     def __init__(self, parent=None):
         super().__init__(parent=parent)
@@ -203,7 +200,7 @@ class CardSeparator(QWidget):
 
 
 class HeaderCardWidget(SimpleCardWidget):
-    """ Header card widget """
+    """Header card widget"""
 
     @singledispatchmethod
     def __init__(self, parent=None):
@@ -230,9 +227,9 @@ class HeaderCardWidget(SimpleCardWidget):
         self.viewLayout.setContentsMargins(24, 24, 24, 24)
         setFont(self.headerLabel, 15, QFont.DemiBold)
 
-        self.view.setObjectName('view')
-        self.headerView.setObjectName('headerView')
-        self.headerLabel.setObjectName('headerLabel')
+        self.view.setObjectName("view")
+        self.headerView.setObjectName("headerView")
+        self.headerLabel.setObjectName("headerLabel")
         FluentStyleSheet.CARD_WIDGET.apply(self)
 
         self._postInit()
@@ -252,7 +249,6 @@ class HeaderCardWidget(SimpleCardWidget):
         pass
 
     title = Property(str, getTitle, setTitle)
-
 
 
 class CardGroupWidget(QWidget):
@@ -326,7 +322,7 @@ class CardGroupWidget(QWidget):
 
 
 class GroupHeaderCardWidget(HeaderCardWidget):
-    """ Group header card widget """
+    """Group header card widget"""
 
     def _postInit(self):
         super()._postInit()
@@ -338,8 +334,10 @@ class GroupHeaderCardWidget(HeaderCardWidget):
         self.groupLayout.setContentsMargins(0, 0, 0, 0)
         self.viewLayout.addLayout(self.groupLayout)
 
-    def addGroup(self, icon: Union[str, FluentIconBase, QIcon], title: str, content: str, widget: QWidget, stretch=0) -> CardGroupWidget:
-        """ add widget to a new group
+    def addGroup(
+        self, icon: Union[str, FluentIconBase, QIcon], title: str, content: str, widget: QWidget, stretch=0
+    ) -> CardGroupWidget:
+        """add widget to a new group
 
         Parameters
         ----------

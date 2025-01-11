@@ -26,14 +26,13 @@ from ...common.style_sheet import FluentStyleSheet, themeColor, isDarkTheme
 
 
 class SpinIcon(FluentIconBase, Enum):
-    """ Spin icon """
+    """Spin icon"""
 
     UP = "Up"
     DOWN = "Down"
 
     def path(self, theme=Theme.AUTO):
-        return f':/qfluentwidgets/images/spin_box/{self.value}_{getIconColor(theme)}.svg'
-
+        return f":/qfluentwidgets/images/spin_box/{self.value}_{getIconColor(theme)}.svg"
 
 
 class SpinButton(QToolButton):
@@ -57,8 +56,7 @@ class SpinButton(QToolButton):
     def paintEvent(self, e):
         super().paintEvent(e)
         painter = QPainter(self)
-        painter.setRenderHints(QPainter.Antialiasing |
-                               QPainter.SmoothPixmapTransform)
+        painter.setRenderHints(QPainter.Antialiasing | QPainter.SmoothPixmapTransform)
 
         if not self.isEnabled():
             painter.setOpacity(0.36)
@@ -69,7 +67,7 @@ class SpinButton(QToolButton):
 
 
 class CompactSpinButton(QToolButton):
-    """ Compact spin button """
+    """Compact spin button"""
 
     def __init__(self, parent=None):
         super().__init__(parent=parent)
@@ -84,11 +82,11 @@ class CompactSpinButton(QToolButton):
         s = 9
 
         SpinIcon.UP.render(painter, QRectF(x, self.height() / 2 - s + 1, s, s))
-        SpinIcon.DOWN.render(painter, QRectF(x, self.height() / 2 , s, s))
+        SpinIcon.DOWN.render(painter, QRectF(x, self.height() / 2, s, s))
 
 
 class SpinFlyoutView(FlyoutViewBase):
-    """ Spin flyout view """
+    """Spin flyout view"""
 
     def __init__(self, parent=None):
         super().__init__(parent)
@@ -110,23 +108,21 @@ class SpinFlyoutView(FlyoutViewBase):
         painter = QPainter(self)
         painter.setRenderHints(QPainter.Antialiasing)
 
-        painter.setBrush(
-            QColor(46, 46, 46) if isDarkTheme() else QColor(249, 249, 249))
-        painter.setPen(
-            QColor(0, 0, 0, 51) if isDarkTheme() else QColor(0, 0, 0, 15))
+        painter.setBrush(QColor(46, 46, 46) if isDarkTheme() else QColor(249, 249, 249))
+        painter.setPen(QColor(0, 0, 0, 51) if isDarkTheme() else QColor(0, 0, 0, 15))
 
         rect = self.rect().adjusted(1, 1, -1, -1)
         painter.drawRoundedRect(rect, 8, 8)
 
 
 class SpinBoxBase:
-    """ Spin box ui """
+    """Spin box ui"""
 
     def __init__(self, parent=None):
         super().__init__(parent=parent)
         self.hBoxLayout = QHBoxLayout(self)
 
-        self.setProperty('transparent', True)
+        self.setProperty("transparent", True)
         FluentStyleSheet.SPIN_BOX.apply(self)
         self.setButtonSymbols(QSpinBox.NoButtons)
         self.setFixedHeight(33)
@@ -141,7 +137,7 @@ class SpinBoxBase:
         self.setSymbolVisible(not isReadOnly)
 
     def setSymbolVisible(self, isVisible: bool):
-        """ set whether the spin symbol is visible """
+        """set whether the spin symbol is visible"""
         self.setProperty("symbolVisible", isVisible)
         self.setStyle(QApplication.style())
 
@@ -159,10 +155,10 @@ class SpinBoxBase:
 
         path = QPainterPath()
         w, h = self.width(), self.height()
-        path.addRoundedRect(QRectF(0, h-10, w, 10), 5, 5)
+        path.addRoundedRect(QRectF(0, h - 10, w, 10), 5, 5)
 
         rectPath = QPainterPath()
-        rectPath.addRect(0, h-10, w, 8)
+        rectPath.addRect(0, h - 10, w, 8)
         path = path.subtracted(rectPath)
 
         painter.fillPath(path, themeColor())
@@ -173,7 +169,7 @@ class SpinBoxBase:
 
 
 class InlineSpinBoxBase(SpinBoxBase):
-    """ Inline spin box base """
+    """Inline spin box base"""
 
     def __init__(self, parent=None):
         super().__init__(parent)
@@ -201,7 +197,7 @@ class InlineSpinBoxBase(SpinBoxBase):
 
 
 class CompactSpinBoxBase(SpinBoxBase):
-    """ Compact spin box base """
+    """Compact spin box base"""
 
     def __init__(self, parent=None):
         super().__init__(parent)
@@ -243,41 +239,40 @@ class CompactSpinBoxBase(SpinBoxBase):
 
 
 class SpinBox(InlineSpinBoxBase, QSpinBox):
-    """ Spin box """
+    """Spin box"""
 
 
 class CompactSpinBox(CompactSpinBoxBase, QSpinBox):
-    """ Compact spin box """
+    """Compact spin box"""
 
 
 class DoubleSpinBox(InlineSpinBoxBase, QDoubleSpinBox):
-    """ Double spin box """
+    """Double spin box"""
 
 
 class CompactDoubleSpinBox(CompactSpinBoxBase, QDoubleSpinBox):
-    """ Compact double spin box """
+    """Compact double spin box"""
 
 
 class TimeEdit(InlineSpinBoxBase, QTimeEdit):
-    """ Time edit """
+    """Time edit"""
 
 
 class CompactTimeEdit(CompactSpinBoxBase, QTimeEdit):
-    """ Compact time edit """
+    """Compact time edit"""
 
 
 class DateTimeEdit(InlineSpinBoxBase, QDateTimeEdit):
-    """ Date time edit """
+    """Date time edit"""
 
 
 class CompactDateTimeEdit(CompactSpinBoxBase, QDateTimeEdit):
-    """ Compact date time edit """
+    """Compact date time edit"""
 
 
 class DateEdit(InlineSpinBoxBase, QDateEdit):
-    """ Date edit """
+    """Date edit"""
 
 
 class CompactDateEdit(CompactSpinBoxBase, QDateEdit):
-    """ Compact date edit """
-
+    """Compact date edit"""
