@@ -1,12 +1,13 @@
 # coding:utf-8
-from PySide6.QtGui import QPainterPath, QPainter, QColor
+# 第三方库导入
+from PySide6.QtGui import QColor, QPainter, QPainterPath
 
-from ..widgets.acrylic_label import AcrylicBrush
 from ...common.style_sheet import isDarkTheme
+from ..widgets.acrylic_label import AcrylicBrush
 
 
 class AcrylicWidget:
-    """ Acrylic widget """
+    """Acrylic widget"""
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)

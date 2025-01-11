@@ -1,28 +1,30 @@
+# 标准库导入
 import sys
 
 if sys.platform != "win32" or sys.getwindowsversion().build < 22000:
+    # 第三方库导入
     from qframelesswindow import FramelessWindow
 else:
+    # 标准库导入
     from ctypes.wintypes import MSG
 
+    # 第三方库导入
     import win32con
-    from PySide6.QtCore import QPoint, QEvent, Qt
     from PySide6.QtGui import QCursor, QMouseEvent
-    from PySide6.QtWidgets import QApplication
-
+    from PySide6.QtCore import Qt, QEvent, QPoint
     from qframelesswindow import AcrylicWindow as Window
+    from PySide6.QtWidgets import QApplication
     from qframelesswindow.titlebar.title_bar_buttons import TitleBarButtonState
 
-
     class FramelessWindow(Window):
-        """ Frameless window """
+        """Frameless window"""
 
         def __init__(self, parent=None):
             super().__init__(parent)
             self.windowEffect.setMicaEffect(self.winId())
 
         def nativeEvent(self, eventType, message):
-            """ Handle the Windows message """
+            """Handle the Windows message"""
             msg = MSG.from_address(message.__int__())
             if not msg.hWnd:
                 return super().nativeEvent(eventType, message)

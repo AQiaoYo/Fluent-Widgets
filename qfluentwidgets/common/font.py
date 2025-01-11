@@ -1,10 +1,11 @@
 # coding: utf-8
+# 第三方库导入
 from PySide6.QtGui import QFont
 from PySide6.QtWidgets import QWidget
 
 
 def setFont(widget: QWidget, fontSize=14, weight=QFont.Normal):
-    """ set the font of widget
+    """set the font of widget
 
     Parameters
     ----------
@@ -21,7 +22,7 @@ def setFont(widget: QWidget, fontSize=14, weight=QFont.Normal):
 
 
 def getFont(fontSize=14, weight=QFont.Normal):
-    """ create font
+    """create font
 
     Parameters
     ----------
@@ -32,7 +33,7 @@ def getFont(fontSize=14, weight=QFont.Normal):
         font weight
     """
     font = QFont()
-    font.setFamilies(['Segoe UI', 'Microsoft YaHei', 'PingFang SC'])
+    font.setFamilies(["Segoe UI", "Microsoft YaHei", "PingFang SC"])
     font.setPixelSize(fontSize)
     font.setWeight(weight)
     return font

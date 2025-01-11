@@ -1,20 +1,21 @@
 # coding:utf-8
-from PySide6.QtCore import Qt, Signal, QSize, QPropertyAnimation, QPoint
-from PySide6.QtGui import QPixmap, QPainter, QColor
-from PySide6.QtWidgets import QWidget, QGraphicsOpacityEffect, QHBoxLayout, QVBoxLayout
+# 第三方库导入
+from PySide6.QtGui import QColor, QPainter
+from PySide6.QtCore import Qt, QSize, Signal, QPropertyAnimation
+from PySide6.QtWidgets import QWidget, QHBoxLayout, QVBoxLayout, QGraphicsOpacityEffect
 
 from ..common.icon import FluentIcon
-from ..common.style_sheet import isDarkTheme, FluentStyleSheet
-from ..components.widgets.button import TransparentToolButton
-from ..components.widgets.tool_tip import ToolTipFilter
-from ..components.widgets.slider import Slider
-from ..components.widgets.label import CaptionLabel
-from ..components.widgets.flyout import Flyout, FlyoutViewBase, PullUpFlyoutAnimationManager
 from .media_player import MediaPlayer, MediaPlayerBase
+from ..common.style_sheet import FluentStyleSheet, isDarkTheme
+from ..components.widgets.label import CaptionLabel
+from ..components.widgets.button import TransparentToolButton
+from ..components.widgets.flyout import Flyout, FlyoutViewBase, PullUpFlyoutAnimationManager
+from ..components.widgets.slider import Slider
+from ..components.widgets.tool_tip import ToolTipFilter
 
 
 class MediaPlayBarButton(TransparentToolButton):
-    """ Media play bar button """
+    """Media play bar button"""
 
     def _postInit(self):
         super()._postInit()
@@ -24,7 +25,7 @@ class MediaPlayBarButton(TransparentToolButton):
 
 
 class PlayButton(MediaPlayBarButton):
-    """ Play button """
+    """Play button"""
 
     def _postInit(self):
         super()._postInit()
@@ -34,36 +35,36 @@ class PlayButton(MediaPlayBarButton):
     def setPlay(self, isPlay: bool):
         if isPlay:
             self.setIcon(FluentIcon.PAUSE_BOLD)
-            self.setToolTip(self.tr('Pause'))
+            self.setToolTip(self.tr("Pause"))
         else:
             self.setIcon(FluentIcon.PLAY_SOLID)
-            self.setToolTip(self.tr('Play'))
+            self.setToolTip(self.tr("Play"))
 
 
 class VolumeView(FlyoutViewBase):
-    """ Volume view """
+    """Volume view"""
 
     def __init__(self, parent=None):
         super().__init__(parent)
         self.muteButton = MediaPlayBarButton(FluentIcon.VOLUME, self)
         self.volumeSlider = Slider(Qt.Horizontal, self)
-        self.volumeLabel = CaptionLabel('30', self)
+        self.volumeLabel = CaptionLabel("30", self)
 
         self.volumeSlider.setRange(0, 100)
         self.volumeSlider.setFixedWidth(208)
         self.setFixedSize(295, 64)
 
         h = self.height()
-        self.muteButton.move(10, h//2-self.muteButton.height()//2)
+        self.muteButton.move(10, h // 2 - self.muteButton.height() // 2)
         self.volumeSlider.move(45, 21)
 
     def setMuted(self, isMute: bool):
         if isMute:
             self.muteButton.setIcon(FluentIcon.MUTE)
-            self.muteButton.setToolTip(self.tr('Unmute'))
+            self.muteButton.setToolTip(self.tr("Unmute"))
         else:
             self.muteButton.setIcon(FluentIcon.VOLUME)
-            self.muteButton.setToolTip(self.tr('Mute'))
+            self.muteButton.setToolTip(self.tr("Mute"))
 
     def setVolume(self, volume: int):
         self.volumeSlider.setValue(volume)
@@ -72,7 +73,7 @@ class VolumeView(FlyoutViewBase):
         self.volumeLabel.adjustSize()
 
         tr = self.volumeLabel.fontMetrics().boundingRect(str(volume))
-        self.volumeLabel.move(self.width() - 20 - tr.width(), self.height()//2 - tr.height()//2)
+        self.volumeLabel.move(self.width() - 20 - tr.width(), self.height() // 2 - tr.height() // 2)
 
     def paintEvent(self, e):
         painter = QPainter(self)
@@ -89,7 +90,7 @@ class VolumeView(FlyoutViewBase):
 
 
 class VolumeButton(MediaPlayBarButton):
-    """ Volume button """
+    """Volume button"""
 
     volumeChanged = Signal(int)
     mutedChanged = Signal(bool)
@@ -125,9 +126,8 @@ class VolumeButton(MediaPlayBarButton):
         self.volumeFlyout.exec(pos)
 
 
-
 class MediaPlayBarBase(QWidget):
-    """ Play bar base class """
+    """Play bar base class"""
 
     def __init__(self, parent=None):
         super().__init__(parent=parent)
@@ -138,7 +138,7 @@ class MediaPlayBarBase(QWidget):
         self.progressSlider = Slider(Qt.Horizontal, self)
 
         self.opacityEffect = QGraphicsOpacityEffect(self)
-        self.opacityAni = QPropertyAnimation(self.opacityEffect, b'opacity')
+        self.opacityAni = QPropertyAnimation(self.opacityEffect, b"opacity")
         self.opacityEffect.setOpacity(1)
         self.opacityAni.setDuration(250)
 
@@ -146,7 +146,7 @@ class MediaPlayBarBase(QWidget):
         FluentStyleSheet.MEDIA_PLAYER.apply(self)
 
     def setMediaPlayer(self, player: MediaPlayerBase):
-        """ set media player """
+        """set media player"""
         self.player = player
 
         self.player.durationChanged.connect(self.progressSlider.setMaximum)
@@ -184,11 +184,11 @@ class MediaPlayBarBase(QWidget):
         self.player.stop()
 
     def setVolume(self, volume: int):
-        """ Sets the volume of player """
+        """Sets the volume of player"""
         self.player.setVolume(volume)
 
     def setPosition(self, position: int):
-        """ Sets the position of media in ms """
+        """Sets the position of media in ms"""
         self.player.setPosition(position)
 
     def _onPositionChanged(self, position: int):
@@ -198,7 +198,7 @@ class MediaPlayBarBase(QWidget):
         self.playButton.setPlay(self.player.isPlaying())
 
     def togglePlayState(self):
-        """ toggle the play state of media player """
+        """toggle the play state of media player"""
         if self.player.isPlaying():
             self.player.pause()
         else:
@@ -220,9 +220,8 @@ class MediaPlayBarBase(QWidget):
         painter.drawRoundedRect(self.rect().adjusted(1, 1, -1, -1), 8, 8)
 
 
-
 class SimpleMediaPlayBar(MediaPlayBarBase):
-    """ simple media play bar """
+    """simple media play bar"""
 
     def __init__(self, parent=None):
         super().__init__(parent)
@@ -238,12 +237,12 @@ class SimpleMediaPlayBar(MediaPlayBarBase):
         self.setMediaPlayer(MediaPlayer(self))
 
     def addButton(self, button: MediaPlayBarButton):
-        """ add button to the right side of play bar """
+        """add button to the right side of play bar"""
         self.hBoxLayout.addWidget(button, 0)
 
 
 class StandardMediaPlayBar(MediaPlayBarBase):
-    """ Standard media play bar """
+    """Standard media play bar"""
 
     def __init__(self, parent=None):
         super().__init__(parent)
@@ -260,8 +259,8 @@ class StandardMediaPlayBar(MediaPlayBarBase):
         self.skipBackButton = MediaPlayBarButton(FluentIcon.SKIP_BACK, self)
         self.skipForwardButton = MediaPlayBarButton(FluentIcon.SKIP_FORWARD, self)
 
-        self.currentTimeLabel = CaptionLabel('0:00:00', self)
-        self.remainTimeLabel = CaptionLabel('0:00:00', self)
+        self.currentTimeLabel = CaptionLabel("0:00:00", self)
+        self.remainTimeLabel = CaptionLabel("0:00:00", self)
 
         self.__initWidgets()
 
@@ -298,12 +297,12 @@ class StandardMediaPlayBar(MediaPlayBarBase):
         self.skipForwardButton.clicked.connect(lambda: self.skipForward(30000))
 
     def skipBack(self, ms: int):
-        """ Back up for specified milliseconds """
-        self.player.setPosition(self.player.position()-ms)
+        """Back up for specified milliseconds"""
+        self.player.setPosition(self.player.position() - ms)
 
     def skipForward(self, ms: int):
-        """ Fast forward specified milliseconds """
-        self.player.setPosition(self.player.position()+ms)
+        """Fast forward specified milliseconds"""
+        self.player.setPosition(self.player.position() + ms)
 
     def _onPositionChanged(self, position: int):
         super()._onPositionChanged(position)
@@ -315,4 +314,4 @@ class StandardMediaPlayBar(MediaPlayBarBase):
         s = time % 60
         m = int(time / 60)
         h = int(time / 3600)
-        return f'{h}:{m:02}:{s:02}'
+        return f"{h}:{m:02}:{s:02}"

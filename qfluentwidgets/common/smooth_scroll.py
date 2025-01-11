@@ -1,15 +1,17 @@
 # coding:utf-8
-from collections import deque
+# 标准库导入
 from enum import Enum
-from math import cos, pi, ceil
+from math import pi, cos
+from collections import deque
 
-from PySide6.QtCore import QDateTime, Qt, QTimer, QPoint
+# 第三方库导入
 from PySide6.QtGui import QWheelEvent
-from PySide6.QtWidgets import QApplication, QScrollArea, QAbstractScrollArea
+from PySide6.QtCore import Qt, QPoint, QTimer, QDateTime
+from PySide6.QtWidgets import QScrollArea, QApplication, QAbstractScrollArea
 
 
 class SmoothScroll:
-    """ Scroll smoothly """
+    """Scroll smoothly"""
 
     def __init__(self, widget: QScrollArea, orient=Qt.Vertical):
         """
@@ -36,7 +38,7 @@ class SmoothScroll:
         self.smoothMoveTimer.timeout.connect(self.__smoothMove)
 
     def setSmoothMode(self, smoothMode):
-        """ set smooth mode """
+        """set smooth mode"""
         self.smoothMode = smoothMode
 
     def wheelEvent(self, e):
@@ -61,7 +63,7 @@ class SmoothScroll:
         self.stepsTotal = self.fps * self.duration / 1000
 
         # get the moving distance corresponding to each event
-        delta = delta* self.stepRatio
+        delta = delta * self.stepRatio
         if self.acceleration > 0:
             delta += delta * self.acceleration * accerationRatio
 
@@ -72,7 +74,7 @@ class SmoothScroll:
         self.smoothMoveTimer.start(int(1000 / self.fps))
 
     def __smoothMove(self):
-        """ scroll smoothly when timer time out """
+        """scroll smoothly when timer time out"""
         totalDelta = 0
 
         # Calculate the scrolling distance of all unprocessed events,
@@ -112,7 +114,7 @@ class SmoothScroll:
             self.smoothMoveTimer.stop()
 
     def __subDelta(self, delta, stepsLeft):
-        """ get the interpolation for each step """
+        """get the interpolation for each step"""
         m = self.stepsTotal / 2
         x = abs(self.stepsTotal - stepsLeft - m)
 
@@ -132,10 +134,10 @@ class SmoothScroll:
 
 
 class SmoothMode(Enum):
-    """ Smooth mode """
+    """Smooth mode"""
+
     NO_SMOOTH = 0
     CONSTANT = 1
     LINEAR = 2
     QUADRATI = 3
     COSINE = 4
-

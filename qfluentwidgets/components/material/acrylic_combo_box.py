@@ -1,14 +1,13 @@
 # coding:utf-8
-from PySide6.QtCore import Qt, QPoint
-from PySide6.QtGui import QAction
+# 第三方库导入
+from PySide6.QtCore import Qt
 
-
-from .acrylic_menu import AcrylicMenuBase, AcrylicMenuActionListWidget
-from .acrylic_line_edit import AcrylicLineEditBase
-from ..widgets.combo_box import ComboBoxMenu, ComboBox, EditableComboBox
-from ..widgets.menu import MenuAnimationType, RoundMenu, IndicatorMenuItemDelegate
 from ..settings import SettingCard
+from .acrylic_menu import AcrylicMenuBase, AcrylicMenuActionListWidget
+from ..widgets.menu import RoundMenu, MenuAnimationType, IndicatorMenuItemDelegate
 from ...common.config import OptionsConfigItem, qconfig
+from .acrylic_line_edit import AcrylicLineEditBase
+from ..widgets.combo_box import ComboBox, EditableComboBox
 
 
 class AcrylicComboMenuActionListWidget(AcrylicMenuActionListWidget):
@@ -25,7 +24,7 @@ class AcrylicComboBoxMenu(AcrylicMenuBase, RoundMenu):
 
         self.view.setVerticalScrollBarPolicy(Qt.ScrollBarAsNeeded)
         self.view.setItemDelegate(IndicatorMenuItemDelegate())
-        self.view.setObjectName('comboListWidget')
+        self.view.setObjectName("comboListWidget")
         self.setItemHeight(33)
 
     def exec(self, pos, ani=True, aniType=MenuAnimationType.DROP_DOWN):
@@ -33,21 +32,21 @@ class AcrylicComboBoxMenu(AcrylicMenuBase, RoundMenu):
 
 
 class AcrylicComboBox(ComboBox):
-    """ Acrylic combo box """
+    """Acrylic combo box"""
 
     def _createComboMenu(self):
         return AcrylicComboBoxMenu(self)
 
 
 class AcrylicEditableComboBox(AcrylicLineEditBase, EditableComboBox):
-    """ Acrylic combo box """
+    """Acrylic combo box"""
 
     def _createComboMenu(self):
         return AcrylicComboBoxMenu(self)
 
 
 class AcrylicComboBoxSettingCard(SettingCard):
-    """ Setting card with a combo box """
+    """Setting card with a combo box"""
 
     def __init__(self, configItem: OptionsConfigItem, icon, title, content=None, texts=None, parent=None):
         """

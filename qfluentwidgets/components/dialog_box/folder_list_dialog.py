@@ -1,22 +1,22 @@
 # coding:utf-8
+# 标准库导入
 import os
 
+# 第三方库导入
+from PySide6.QtGui import QPen, QFont, QBrush, QColor, QPixmap, QPainter, QMouseEvent, QFontMetrics
 from PySide6.QtCore import Qt, Signal
-from PySide6.QtGui import (QBrush, QColor, QFont, QFontMetrics, QMouseEvent,
-                         QPainter, QPen, QPixmap)
-from PySide6.QtWidgets import (QApplication, QFileDialog, QHBoxLayout, QLabel,
-                             QVBoxLayout, QWidget, QPushButton)
+from PySide6.QtWidgets import QLabel, QWidget, QFileDialog, QHBoxLayout, QPushButton, QVBoxLayout, QApplication
 
-from ...common.config import isDarkTheme
-from ...common.icon import getIconColor
-from ...common.style_sheet import FluentStyleSheet
 from .dialog import Dialog
+from ...common.icon import getIconColor
+from ...common.config import isDarkTheme
 from .mask_dialog_base import MaskDialogBase
+from ...common.style_sheet import FluentStyleSheet
 from ..widgets.scroll_area import SingleDirectionScrollArea
 
 
 class FolderListDialog(MaskDialogBase):
-    """ Folder list dialog box """
+    """Folder list dialog box"""
 
     folderChanged = Signal(list)
 
@@ -32,17 +32,16 @@ class FolderListDialog(MaskDialogBase):
         self.contentLabel = QLabel(content, self.widget)
         self.scrollArea = SingleDirectionScrollArea(self.widget)
         self.scrollWidget = QWidget(self.scrollArea)
-        self.completeButton = QPushButton(self.tr('Done'), self.widget)
+        self.completeButton = QPushButton(self.tr("Done"), self.widget)
         self.addFolderCard = AddFolderCard(self.scrollWidget)
-        self.folderCards = [FolderCard(i, self.scrollWidget)
-                            for i in folderPaths]
+        self.folderCards = [FolderCard(i, self.scrollWidget) for i in folderPaths]
         self.__initWidget()
 
     def __initWidget(self):
-        """ initialize widgets """
+        """initialize widgets"""
         self.__setQss()
 
-        w = max(self.titleLabel.width()+48, self.contentLabel.width()+48, 352)
+        w = max(self.titleLabel.width() + 48, self.contentLabel.width() + 48, 352)
         self.widget.setFixedWidth(w)
         self.scrollArea.resize(294, 72)
         self.scrollWidget.resize(292, 72)
@@ -63,7 +62,7 @@ class FolderListDialog(MaskDialogBase):
             card.clicked.connect(self.__showDeleteFolderCardDialog)
 
     def __initLayout(self):
-        """ initialize layout """
+        """initialize layout"""
         self.vBoxLayout.setContentsMargins(24, 24, 24, 24)
         self.vBoxLayout.setSizeConstraint(QVBoxLayout.SetFixedSize)
         self.vBoxLayout.setAlignment(Qt.AlignTop)
@@ -104,9 +103,8 @@ class FolderListDialog(MaskDialogBase):
         self.__adjustWidgetSize()
 
     def __showFileDialog(self):
-        """ show file dialog to select folder """
-        path = QFileDialog.getExistingDirectory(
-            self, self.tr("Choose folder"), "./")
+        """show file dialog to select folder"""
+        path = QFileDialog.getExistingDirectory(self, self.tr("Choose folder"), "./")
 
         if not path or path in self.folderPaths:
             return
@@ -123,18 +121,23 @@ class FolderListDialog(MaskDialogBase):
         self.__adjustWidgetSize()
 
     def __showDeleteFolderCardDialog(self):
-        """ show delete folder card dialog """
+        """show delete folder card dialog"""
         sender = self.sender()
-        title = self.tr('Are you sure you want to delete the folder?')
-        content = self.tr("If you delete the ") + f'"{sender.folderName}"' + \
-            self.tr(" folder and remove it from the list, the folder will no "
-                    "longer appear in the list, but will not be deleted.")
+        title = self.tr("Are you sure you want to delete the folder?")
+        content = (
+            self.tr("If you delete the ")
+            + f'"{sender.folderName}"'
+            + self.tr(
+                " folder and remove it from the list, the folder will no "
+                "longer appear in the list, but will not be deleted."
+            )
+        )
         dialog = Dialog(title, content, self.window())
         dialog.yesSignal.connect(lambda: self.__deleteFolderCard(sender))
         dialog.exec_()
 
     def __deleteFolderCard(self, folderCard):
-        """ delete selected folder card """
+        """delete selected folder card"""
         self.scrollLayout.removeWidget(folderCard)
         index = self.folderCards.index(folderCard)
         self.folderCards.pop(index)
@@ -145,11 +148,11 @@ class FolderListDialog(MaskDialogBase):
         self.__adjustWidgetSize()
 
     def __setQss(self):
-        """ set style sheet """
-        self.titleLabel.setObjectName('titleLabel')
-        self.contentLabel.setObjectName('contentLabel')
-        self.completeButton.setObjectName('completeButton')
-        self.scrollWidget.setObjectName('scrollWidget')
+        """set style sheet"""
+        self.titleLabel.setObjectName("titleLabel")
+        self.contentLabel.setObjectName("contentLabel")
+        self.completeButton.setObjectName("completeButton")
+        self.scrollWidget.setObjectName("scrollWidget")
 
         FluentStyleSheet.FOLDER_LIST_DIALOG.apply(self)
         self.setStyle(QApplication.style())
@@ -159,7 +162,7 @@ class FolderListDialog(MaskDialogBase):
         self.completeButton.adjustSize()
 
     def __onButtonClicked(self):
-        """ done button clicked slot """
+        """done button clicked slot"""
         if sorted(self.__originalPaths) != sorted(self.folderPaths):
             self.setEnabled(False)
             QApplication.processEvents()
@@ -169,12 +172,12 @@ class FolderListDialog(MaskDialogBase):
 
     def __adjustWidgetSize(self):
         N = len(self.folderCards)
-        h = 72*(N+1) + 8*N
+        h = 72 * (N + 1) + 8 * N
         self.scrollArea.setFixedHeight(min(h, 400))
 
 
 class ClickableWindow(QWidget):
-    """ Clickable window """
+    """Clickable window"""
 
     clicked = Signal()
 
@@ -205,7 +208,7 @@ class ClickableWindow(QWidget):
         self.update()
 
     def paintEvent(self, e):
-        """ paint window """
+        """paint window"""
         painter = QPainter(self)
         painter.setRenderHints(QPainter.Antialiasing)
 
@@ -230,12 +233,11 @@ class ClickableWindow(QWidget):
                 bg = 102 if isDark else 230
                 brush.setColor(QColor(153, 153, 153))
                 painter.setBrush(brush)
-                painter.drawRoundedRect(
-                    5, 1, self.width() - 10, self.height() - 2, 2, 2)
+                painter.drawRoundedRect(5, 1, self.width() - 10, self.height() - 2, 2, 2)
 
 
 class FolderCard(ClickableWindow):
-    """ Folder card """
+    """Folder card"""
 
     def __init__(self, folderPath: str, parent=None):
         super().__init__(parent)
@@ -243,14 +245,14 @@ class FolderCard(ClickableWindow):
         self.folderName = os.path.basename(folderPath)
         c = getIconColor()
         self.__closeIcon = QPixmap(f":/qfluentwidgets/images/folder_list_dialog/Close_{c}.png").scaled(
-            12, 12, Qt.KeepAspectRatio, Qt.SmoothTransformation)
+            12, 12, Qt.KeepAspectRatio, Qt.SmoothTransformation
+        )
 
     def paintEvent(self, e):
-        """ paint card """
+        """paint card"""
         super().paintEvent(e)
         painter = QPainter(self)
-        painter.setRenderHints(
-            QPainter.TextAntialiasing | QPainter.SmoothPixmapTransform | QPainter.Antialiasing)
+        painter.setRenderHints(QPainter.TextAntialiasing | QPainter.SmoothPixmapTransform | QPainter.Antialiasing)
 
         # paint text and icon
         color = Qt.white if isDarkTheme() else Qt.black
@@ -263,36 +265,35 @@ class FolderCard(ClickableWindow):
             painter.drawPixmap(self.width() - 24, 20, self.__closeIcon)
 
     def __drawText(self, painter, x1, fontSize1, x2, fontSize2):
-        """ draw text """
+        """draw text"""
         # paint folder name
         font = QFont("Microsoft YaHei")
         font.setBold(True)
         font.setPixelSize(fontSize1)
         painter.setFont(font)
-        name = QFontMetrics(font).elidedText(
-            self.folderName, Qt.ElideRight, self.width()-48)
+        name = QFontMetrics(font).elidedText(self.folderName, Qt.ElideRight, self.width() - 48)
         painter.drawText(x1, 30, name)
 
         # paint folder path
         font = QFont("Microsoft YaHei")
         font.setPixelSize(fontSize2)
         painter.setFont(font)
-        path = QFontMetrics(font).elidedText(
-            self.folderPath, Qt.ElideRight, self.width()-24)
+        path = QFontMetrics(font).elidedText(self.folderPath, Qt.ElideRight, self.width() - 24)
         painter.drawText(x2, 37, self.width() - 16, 18, Qt.AlignLeft, path)
 
 
 class AddFolderCard(ClickableWindow):
-    """ Add folder card """
+    """Add folder card"""
 
     def __init__(self, parent=None):
         super().__init__(parent)
         c = getIconColor()
         self.__iconPix = QPixmap(f":/qfluentwidgets/images/folder_list_dialog/Add_{c}.png").scaled(
-            22, 22, Qt.KeepAspectRatio, Qt.SmoothTransformation)
+            22, 22, Qt.KeepAspectRatio, Qt.SmoothTransformation
+        )
 
     def paintEvent(self, e):
-        """ paint card """
+        """paint card"""
         super().paintEvent(e)
         painter = QPainter(self)
         w = self.width()
@@ -300,8 +301,6 @@ class AddFolderCard(ClickableWindow):
         pw = self.__iconPix.width()
         ph = self.__iconPix.height()
         if not self._isPressed:
-            painter.drawPixmap(
-                int(w/2 - pw/2), int(h/2 - ph/2), self.__iconPix)
+            painter.drawPixmap(int(w / 2 - pw / 2), int(h / 2 - ph / 2), self.__iconPix)
         else:
-            painter.drawPixmap(
-                int(w/2 - (pw - 4)/2), int(h/2 - (ph - 4)/2), pw - 4, ph - 4, self.__iconPix)
+            painter.drawPixmap(int(w / 2 - (pw - 4) / 2), int(h / 2 - (ph - 4) / 2), pw - 4, ph - 4, self.__iconPix)

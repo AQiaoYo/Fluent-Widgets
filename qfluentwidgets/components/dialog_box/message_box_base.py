@@ -1,22 +1,22 @@
 # coding:utf-8
-from PySide6.QtCore import Qt, Signal
+# 第三方库导入
 from PySide6.QtGui import QColor
-from PySide6.QtWidgets import QFrame, QVBoxLayout, QHBoxLayout, QPushButton
+from PySide6.QtCore import Qt
+from PySide6.QtWidgets import QFrame, QHBoxLayout, QPushButton, QVBoxLayout
 
-from ...common.style_sheet import FluentStyleSheet
 from ..widgets.button import PrimaryPushButton
-
 from .mask_dialog_base import MaskDialogBase
+from ...common.style_sheet import FluentStyleSheet
 
 
 class MessageBoxBase(MaskDialogBase):
-    """ Message box base """
+    """Message box base"""
 
     def __init__(self, parent=None):
         super().__init__(parent=parent)
         self.buttonGroup = QFrame(self.widget)
-        self.yesButton = PrimaryPushButton(self.tr('OK'), self.buttonGroup)
-        self.cancelButton = QPushButton(self.tr('Cancel'), self.buttonGroup)
+        self.yesButton = PrimaryPushButton(self.tr("OK"), self.buttonGroup)
+        self.cancelButton = QPushButton(self.tr("Cancel"), self.buttonGroup)
 
         self.vBoxLayout = QVBoxLayout(self.widget)
         self.viewLayout = QVBoxLayout()
@@ -34,7 +34,7 @@ class MessageBoxBase(MaskDialogBase):
         # fixes https://github.com/zhiyiYo/PyQt-Fluent-Widgets/issues/19
         self.yesButton.setAttribute(Qt.WA_LayoutUsesWidgetRect)
         self.cancelButton.setAttribute(Qt.WA_LayoutUsesWidgetRect)
-        
+
         self.yesButton.setAttribute(Qt.WA_MacShowFocusRect, False)
 
         self.yesButton.setFocus()
@@ -61,7 +61,7 @@ class MessageBoxBase(MaskDialogBase):
         self.buttonLayout.addWidget(self.cancelButton, 1, Qt.AlignVCenter)
 
     def validate(self) -> bool:
-        """ validate the data of form before closing dialog
+        """validate the data of form before closing dialog
 
         Returns
         -------
@@ -78,8 +78,8 @@ class MessageBoxBase(MaskDialogBase):
             self.accept()
 
     def __setQss(self):
-        self.buttonGroup.setObjectName('buttonGroup')
-        self.cancelButton.setObjectName('cancelButton')
+        self.buttonGroup.setObjectName("buttonGroup")
+        self.cancelButton.setObjectName("cancelButton")
         FluentStyleSheet.DIALOG.apply(self)
 
     def hideYesButton(self):
@@ -89,4 +89,3 @@ class MessageBoxBase(MaskDialogBase):
     def hideCancelButton(self):
         self.cancelButton.hide()
         self.buttonLayout.insertStretch(0, 1)
-

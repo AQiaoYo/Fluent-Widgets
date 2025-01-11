@@ -1,24 +1,36 @@
 # coding:utf-8
-from typing import Union, List
-
-from PySide6.QtCore import (Qt, Signal, QRect, QRectF, QPropertyAnimation, Property, QMargins,
-                          QEasingCurve, QPoint, QEvent)
-from PySide6.QtGui import QColor, QPainter, QPen, QIcon, QCursor, QFont, QBrush, QPixmap, QImage
-from PySide6.QtWidgets import QWidget, QVBoxLayout
+# 标准库导入
+from typing import Union
 from collections import deque
 
-from ...common.config import isDarkTheme
-from ...common.style_sheet import themeColor
-from ...common.icon import drawIcon, toQIcon
-from ...common.icon import FluentIcon as FIF
+# 第三方库导入
+from PySide6.QtGui import QPen, QFont, QIcon, QColor, QImage, QCursor, QPixmap, QPainter
+from PySide6.QtCore import (
+    Qt,
+    QRect,
+    QEvent,
+    QPoint,
+    QRectF,
+    Signal,
+    Property,
+    QMargins,
+    QEasingCurve,
+    QPropertyAnimation,
+)
+from PySide6.QtWidgets import QWidget, QVBoxLayout
+
 from ...common.font import setFont
-from ..widgets.scroll_area import ScrollArea
+from ...common.icon import FluentIcon as FIF
+from ...common.icon import toQIcon, drawIcon
 from ..widgets.label import AvatarWidget
+from ...common.config import isDarkTheme
 from ..widgets.info_badge import InfoBadgeManager, InfoBadgePosition
+from ...common.style_sheet import themeColor
+from ..widgets.scroll_area import ScrollArea
 
 
 class NavigationWidget(QWidget):
-    """ Navigation widget """
+    """Navigation widget"""
 
     clicked = Signal(bool)  # whether triggered by the user
     selectedChanged = Signal(bool)
@@ -64,7 +76,7 @@ class NavigationWidget(QWidget):
         self.clicked.emit(True)
 
     def setCompacted(self, isCompacted: bool):
-        """ set whether the widget is compacted """
+        """set whether the widget is compacted"""
         if isCompacted == self.isCompacted:
             return
 
@@ -77,7 +89,7 @@ class NavigationWidget(QWidget):
         self.update()
 
     def setSelected(self, isSelected: bool):
-        """ set whether the button is selected
+        """set whether the button is selected
 
         Parameters
         ----------
@@ -95,23 +107,23 @@ class NavigationWidget(QWidget):
         return self.darkTextColor if isDarkTheme() else self.lightTextColor
 
     def setLightTextColor(self, color):
-        """ set the text color in light theme mode """
+        """set the text color in light theme mode"""
         self.lightTextColor = QColor(color)
         self.update()
 
     def setDarkTextColor(self, color):
-        """ set the text color in dark theme mode """
+        """set the text color in dark theme mode"""
         self.darkTextColor = QColor(color)
         self.update()
 
     def setTextColor(self, light, dark):
-        """ set the text color in light/dark theme mode """
+        """set the text color in light/dark theme mode"""
         self.setLightTextColor(light)
         self.setDarkTextColor(dark)
 
 
 class NavigationPushButton(NavigationWidget):
-    """ Navigation push button """
+    """Navigation push button"""
 
     def __init__(self, icon: Union[str, QIcon, FIF], text: str, isSelectable: bool, parent=None):
         """
@@ -152,8 +164,7 @@ class NavigationPushButton(NavigationWidget):
 
     def paintEvent(self, e):
         painter = QPainter(self)
-        painter.setRenderHints(QPainter.Antialiasing |
-                               QPainter.TextAntialiasing | QPainter.SmoothPixmapTransform)
+        painter.setRenderHints(QPainter.Antialiasing | QPainter.TextAntialiasing | QPainter.SmoothPixmapTransform)
         painter.setPen(Qt.NoPen)
 
         if self.isPressed:
@@ -178,7 +189,7 @@ class NavigationPushButton(NavigationWidget):
             painter.setBrush(QColor(c, c, c, 10))
             painter.drawRoundedRect(self.rect(), 5, 5)
 
-        drawIcon(self._icon, painter, QRectF(11.5+pl, 10, 16, 16))
+        drawIcon(self._icon, painter, QRectF(11.5 + pl, 10, 16, 16))
 
         # draw text
         if self.isCompacted:
@@ -188,21 +199,21 @@ class NavigationPushButton(NavigationWidget):
         painter.setPen(self.textColor())
 
         left = 44 + pl if not self.icon().isNull() else pl + 16
-        painter.drawText(QRectF(left, 0, self.width()-13-left-pr, self.height()), Qt.AlignVCenter, self.text())
+        painter.drawText(QRectF(left, 0, self.width() - 13 - left - pr, self.height()), Qt.AlignVCenter, self.text())
 
 
 class NavigationToolButton(NavigationPushButton):
-    """ Navigation tool button """
+    """Navigation tool button"""
 
     def __init__(self, icon: Union[str, QIcon, FIF], parent=None):
-        super().__init__(icon, '', False, parent)
+        super().__init__(icon, "", False, parent)
 
     def setCompacted(self, isCompacted: bool):
         self.setFixedSize(40, 36)
 
 
 class NavigationSeparator(NavigationWidget):
-    """ Navigation Separator """
+    """Navigation Separator"""
 
     def __init__(self, parent=None):
         super().__init__(False, parent=parent)
@@ -226,14 +237,14 @@ class NavigationSeparator(NavigationWidget):
 
 
 class NavigationTreeItem(NavigationPushButton):
-    """ Navigation tree item widget """
+    """Navigation tree item widget"""
 
-    itemClicked = Signal(bool, bool)    # triggerByUser, clickArrow
+    itemClicked = Signal(bool, bool)  # triggerByUser, clickArrow
 
     def __init__(self, icon: Union[str, QIcon, FIF], text: str, isSelectable: bool, parent=None):
         super().__init__(icon, text, isSelectable, parent)
         self._arrowAngle = 0
-        self.rotateAni = QPropertyAnimation(self, b'arrowAngle', self)
+        self.rotateAni = QPropertyAnimation(self, b"arrowAngle", self)
 
     def setExpanded(self, isExpanded: bool):
         self.rotateAni.stop()
@@ -243,12 +254,12 @@ class NavigationTreeItem(NavigationPushButton):
 
     def mouseReleaseEvent(self, e):
         super().mouseReleaseEvent(e)
-        clickArrow = QRectF(self.width()-30, 8, 20, 20).contains(e.pos())
+        clickArrow = QRectF(self.width() - 30, 8, 20, 20).contains(e.pos())
         self.itemClicked.emit(True, clickArrow and not self.parent().isLeaf())
         self.update()
 
     def _canDrawIndicator(self):
-        p = self.parent()   # type: NavigationTreeWidget
+        p = self.parent()  # type: NavigationTreeWidget
         if p.isLeaf() or p.isSelected:
             return p.isSelected
 
@@ -259,8 +270,8 @@ class NavigationTreeItem(NavigationPushButton):
         return False
 
     def _margins(self):
-        p = self.parent()   # type: NavigationTreeWidget
-        return QMargins(p.nodeDepth*28, 0, 20*bool(p.treeChildren), 0)
+        p = self.parent()  # type: NavigationTreeWidget
+        return QMargins(p.nodeDepth * 28, 0, 20 * bool(p.treeChildren), 0)
 
     def paintEvent(self, e):
         super().paintEvent(e)
@@ -291,10 +302,10 @@ class NavigationTreeItem(NavigationPushButton):
 
 
 class NavigationTreeWidgetBase(NavigationWidget):
-    """ Navigation tree widget base class """
+    """Navigation tree widget base class"""
 
     def addChild(self, child):
-        """ add child
+        """add child
 
         Parameters
         ----------
@@ -304,7 +315,7 @@ class NavigationTreeWidgetBase(NavigationWidget):
         raise NotImplementedError
 
     def insertChild(self, index: int, child: NavigationWidget):
-        """ insert child
+        """insert child
 
         Parameters
         ----------
@@ -314,7 +325,7 @@ class NavigationTreeWidgetBase(NavigationWidget):
         raise NotImplementedError
 
     def removeChild(self, child: NavigationWidget):
-        """ remove child
+        """remove child
 
         Parameters
         ----------
@@ -324,15 +335,15 @@ class NavigationTreeWidgetBase(NavigationWidget):
         raise NotImplementedError
 
     def isRoot(self):
-        """ is root node """
+        """is root node"""
         return True
 
     def isLeaf(self):
-        """ is leaf node """
+        """is leaf node"""
         return True
 
     def setExpanded(self, isExpanded: bool):
-        """ set the expanded status
+        """set the expanded status
 
         Parameters
         ----------
@@ -342,12 +353,12 @@ class NavigationTreeWidgetBase(NavigationWidget):
         raise NotImplementedError
 
     def childItems(self) -> list:
-        """ return child items """
+        """return child items"""
         raise NotImplementedError
 
 
 class NavigationTreeWidget(NavigationTreeWidgetBase):
-    """ Navigation tree widget """
+    """Navigation tree widget"""
 
     expanded = Signal()
 
@@ -360,7 +371,7 @@ class NavigationTreeWidget(NavigationTreeWidgetBase):
 
         self.itemWidget = NavigationTreeItem(icon, text, isSelectable, self)
         self.vBoxLayout = QVBoxLayout(self)
-        self.expandAni = QPropertyAnimation(self, b'geometry', self)
+        self.expandAni = QPropertyAnimation(self, b"geometry", self)
 
         self.__initWidget()
 
@@ -394,15 +405,15 @@ class NavigationTreeWidget(NavigationTreeWidgetBase):
         return self.itemWidget.textColor()
 
     def setLightTextColor(self, color):
-        """ set the text color in light theme mode """
+        """set the text color in light theme mode"""
         self.itemWidget.setLightTextColor(color)
 
     def setDarkTextColor(self, color):
-        """ set the text color in dark theme mode """
+        """set the text color in dark theme mode"""
         self.itemWidget.setDarkTextColor(color)
 
     def setTextColor(self, light, dark):
-        """ set the text color in light/dark theme mode """
+        """set the text color in light/dark theme mode"""
         self.itemWidget.setTextColor(light, dark)
 
     def setFont(self, font: QFont):
@@ -460,7 +471,7 @@ class NavigationTreeWidget(NavigationTreeWidgetBase):
         return self.treeChildren
 
     def setExpanded(self, isExpanded: bool, ani=False):
-        """ set the expanded status """
+        """set the expanded status"""
         if isExpanded == self.isExpanded:
             return
 
@@ -510,7 +521,7 @@ class NavigationTreeWidget(NavigationTreeWidgetBase):
 
 
 class NavigationAvatarWidget(NavigationWidget):
-    """ Avatar widget """
+    """Avatar widget"""
 
     def __init__(self, name: str, avatar: Union[str, QPixmap, QImage] = None, parent=None):
         super().__init__(isSelectable=False, parent=parent)
@@ -537,8 +548,7 @@ class NavigationAvatarWidget(NavigationWidget):
 
     def paintEvent(self, e):
         painter = QPainter(self)
-        painter.setRenderHints(
-            QPainter.SmoothPixmapTransform | QPainter.Antialiasing)
+        painter.setRenderHints(QPainter.SmoothPixmapTransform | QPainter.Antialiasing)
 
         painter.setPen(Qt.NoPen)
 
@@ -559,7 +569,7 @@ class NavigationAvatarWidget(NavigationWidget):
 
 @InfoBadgeManager.register(InfoBadgePosition.NAVIGATION_ITEM)
 class NavigationItemInfoBadgeManager(InfoBadgeManager):
-    """ Navigation item info badge manager """
+    """Navigation item info badge manager"""
 
     def eventFilter(self, obj, e: QEvent):
         if obj is self.target:
@@ -587,7 +597,7 @@ class NavigationItemInfoBadgeManager(InfoBadgeManager):
 
 
 class NavigationFlyoutMenu(ScrollArea):
-    """ Navigation flyout menu """
+    """Navigation flyout menu"""
 
     expanded = Signal()
 

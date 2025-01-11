@@ -1,26 +1,32 @@
 # coding:utf-8
-from typing import Union
+# 标准库导入
 import sys
+from typing import Union
 
-from PySide6.QtCore import Qt, QSize, QRect
-from PySide6.QtGui import QIcon, QPainter, QColor
-from PySide6.QtWidgets import QWidget, QHBoxLayout, QVBoxLayout, QLabel, QApplication
-
-from ..common.config import qconfig
-from ..common.icon import FluentIconBase
-from ..common.router import qrouter
-from ..common.style_sheet import FluentStyleSheet, isDarkTheme, setTheme, Theme
-from ..common.animation import BackgroundAnimationWidget
-from ..components.widgets.frameless_window import FramelessWindow
-from ..components.navigation import (NavigationInterface, NavigationBar, NavigationItemPosition,
-                                     NavigationBarPushButton, NavigationTreeWidget)
-from .stacked_widget import StackedWidget
-
+# 第三方库导入
+from PySide6.QtGui import QIcon, QColor, QPainter
+from PySide6.QtCore import Qt, QRect, QSize
 from qframelesswindow import TitleBar, TitleBarBase
+from PySide6.QtWidgets import QLabel, QWidget, QHBoxLayout, QVBoxLayout, QApplication
+
+from ..common.icon import FluentIconBase
+from ..common.config import qconfig
+from ..common.router import qrouter
+from .stacked_widget import StackedWidget
+from ..common.animation import BackgroundAnimationWidget
+from ..common.style_sheet import FluentStyleSheet, isDarkTheme
+from ..components.navigation import (
+    NavigationBar,
+    NavigationInterface,
+    NavigationTreeWidget,
+    NavigationItemPosition,
+    NavigationBarPushButton,
+)
+from ..components.widgets.frameless_window import FramelessWindow
 
 
 class FluentWindowBase(BackgroundAnimationWidget, FramelessWindow):
-    """ Fluent window base class """
+    """Fluent window base class"""
 
     def __init__(self, parent=None):
         self._isMicaEnabled = False
@@ -47,9 +53,14 @@ class FluentWindowBase(BackgroundAnimationWidget, FramelessWindow):
 
         qconfig.themeChangedFinished.connect(self._onThemeChangedFinished)
 
-    def addSubInterface(self, interface: QWidget, icon: Union[FluentIconBase, QIcon, str], text: str,
-                        position=NavigationItemPosition.TOP):
-        """ add sub interface """
+    def addSubInterface(
+        self,
+        interface: QWidget,
+        icon: Union[FluentIconBase, QIcon, str],
+        text: str,
+        position=NavigationItemPosition.TOP,
+    ):
+        """add sub interface"""
         raise NotImplementedError
 
     def switchTo(self, interface: QWidget):
@@ -71,7 +82,7 @@ class FluentWindowBase(BackgroundAnimationWidget, FramelessWindow):
         self.stackedWidget.setStyle(QApplication.style())
 
     def setCustomBackgroundColor(self, light, dark):
-        """ set custom background color
+        """set custom background color
 
         Parameters
         ----------
@@ -100,8 +111,8 @@ class FluentWindowBase(BackgroundAnimationWidget, FramelessWindow):
         painter.drawRect(self.rect())
 
     def setMicaEffectEnabled(self, isEnabled: bool):
-        """ set whether the mica effect is enabled, only available on Win11 """
-        if sys.platform != 'win32' or sys.getwindowsversion().build < 22000:
+        """set whether the mica effect is enabled, only available on Win11"""
+        if sys.platform != "win32" or sys.getwindowsversion().build < 22000:
             return
 
         self._isMicaEnabled = isEnabled
@@ -117,7 +128,7 @@ class FluentWindowBase(BackgroundAnimationWidget, FramelessWindow):
         return self._isMicaEnabled
 
     def systemTitleBarRect(self, size: QSize) -> QRect:
-        """ Returns the system title bar rect, only works for macOS
+        """Returns the system title bar rect, only works for macOS
 
         Parameters
         ----------
@@ -137,7 +148,7 @@ class FluentWindowBase(BackgroundAnimationWidget, FramelessWindow):
 
 
 class FluentTitleBar(TitleBar):
-    """ Fluent title bar"""
+    """Fluent title bar"""
 
     def __init__(self, parent):
         super().__init__(parent)
@@ -155,7 +166,7 @@ class FluentTitleBar(TitleBar):
         # add title label
         self.titleLabel = QLabel(self)
         self.hBoxLayout.insertWidget(1, self.titleLabel, 0, Qt.AlignLeft | Qt.AlignVCenter)
-        self.titleLabel.setObjectName('titleLabel')
+        self.titleLabel.setObjectName("titleLabel")
         self.window().windowTitleChanged.connect(self.setTitle)
 
         self.vBoxLayout = QVBoxLayout()
@@ -181,7 +192,7 @@ class FluentTitleBar(TitleBar):
 
 
 class FluentWindow(FluentWindowBase):
-    """ Fluent window """
+    """Fluent window"""
 
     def __init__(self, parent=None):
         super().__init__(parent)
@@ -201,9 +212,16 @@ class FluentWindow(FluentWindowBase):
         self.navigationInterface.displayModeChanged.connect(self.titleBar.raise_)
         self.titleBar.raise_()
 
-    def addSubInterface(self, interface: QWidget, icon: Union[FluentIconBase, QIcon, str], text: str,
-                        position=NavigationItemPosition.TOP, parent=None, isTransparent=False) -> NavigationTreeWidget:
-        """ add sub interface, the object name of `interface` should be set already
+    def addSubInterface(
+        self,
+        interface: QWidget,
+        icon: Union[FluentIconBase, QIcon, str],
+        text: str,
+        position=NavigationItemPosition.TOP,
+        parent=None,
+        isTransparent=False,
+    ) -> NavigationTreeWidget:
+        """add sub interface, the object name of `interface` should be set already
         before calling this method
 
         Parameters
@@ -243,7 +261,7 @@ class FluentWindow(FluentWindowBase):
             onClick=lambda: self.switchTo(interface),
             position=position,
             tooltip=text,
-            parentRouteKey=parent.objectName() if parent else None
+            parentRouteKey=parent.objectName() if parent else None,
         )
 
         # initialize selected item
@@ -258,7 +276,7 @@ class FluentWindow(FluentWindowBase):
 
     def resizeEvent(self, e):
         self.titleBar.move(46, 0)
-        self.titleBar.resize(self.width()-46, self.titleBar.height())
+        self.titleBar.resize(self.width() - 46, self.titleBar.height())
 
 
 class MSFluentTitleBar(FluentTitleBar):
@@ -270,7 +288,7 @@ class MSFluentTitleBar(FluentTitleBar):
 
 
 class MSFluentWindow(FluentWindowBase):
-    """ Fluent window in Microsoft Store style """
+    """Fluent window in Microsoft Store style"""
 
     def __init__(self, parent=None):
         super().__init__(parent)
@@ -286,9 +304,16 @@ class MSFluentWindow(FluentWindowBase):
         self.titleBar.raise_()
         self.titleBar.setAttribute(Qt.WA_StyledBackground)
 
-    def addSubInterface(self, interface: QWidget, icon: Union[FluentIconBase, QIcon, str], text: str,
-                        selectedIcon=None, position=NavigationItemPosition.TOP, isTransparent=False) -> NavigationBarPushButton:
-        """ add sub interface, the object name of `interface` should be set already
+    def addSubInterface(
+        self,
+        interface: QWidget,
+        icon: Union[FluentIconBase, QIcon, str],
+        text: str,
+        selectedIcon=None,
+        position=NavigationItemPosition.TOP,
+        isTransparent=False,
+    ) -> NavigationBarPushButton:
+        """add sub interface, the object name of `interface` should be set already
         before calling this method
 
         Parameters
@@ -322,7 +347,7 @@ class MSFluentWindow(FluentWindowBase):
             text=text,
             onClick=lambda: self.switchTo(interface),
             selectedIcon=selectedIcon,
-            position=position
+            position=position,
         )
 
         if self.stackedWidget.count() == 1:
@@ -349,7 +374,7 @@ class SplitTitleBar(TitleBar):
         # add title label
         self.titleLabel = QLabel(self)
         self.hBoxLayout.insertWidget(2, self.titleLabel, 0, Qt.AlignLeft | Qt.AlignBottom)
-        self.titleLabel.setObjectName('titleLabel')
+        self.titleLabel.setObjectName("titleLabel")
         self.window().windowTitleChanged.connect(self.setTitle)
 
         FluentStyleSheet.FLUENT_WINDOW.apply(self)
@@ -363,7 +388,7 @@ class SplitTitleBar(TitleBar):
 
 
 class SplitFluentWindow(FluentWindow):
-    """ Fluent window with split style """
+    """Fluent window with split style"""
 
     def __init__(self, parent=None):
         super().__init__(parent)
@@ -379,6 +404,7 @@ class SplitFluentWindow(FluentWindow):
 
 
 class FluentBackgroundTheme:
-    """ Fluent background theme """
-    DEFAULT = (QColor(243, 243, 243), QColor(32, 32, 32))   # light, dark
+    """Fluent background theme"""
+
+    DEFAULT = (QColor(243, 243, 243), QColor(32, 32, 32))  # light, dark
     DEFAULT_BLUE = (QColor(240, 244, 249), QColor(25, 33, 42))

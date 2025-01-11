@@ -1,21 +1,26 @@
 # coding:utf-8
+# 标准库导入
 from typing import Union
-from PySide6.QtCore import Signal
-from PySide6.QtGui import QIcon
-from PySide6.QtWidgets import QButtonGroup, QLabel
 
-from ...common.config import OptionsConfigItem, qconfig
+# 第三方库导入
+from PySide6.QtGui import QIcon
+from PySide6.QtCore import Signal
+from PySide6.QtWidgets import QLabel, QButtonGroup
+
 from ...common.icon import FluentIconBase
+from ...common.config import OptionsConfigItem, qconfig
 from ..widgets.button import RadioButton
 from .expand_setting_card import ExpandSettingCard
 
 
 class OptionsSettingCard(ExpandSettingCard):
-    """ setting card with a group of options """
+    """setting card with a group of options"""
 
     optionChanged = Signal(OptionsConfigItem)
 
-    def __init__(self, configItem, icon: Union[str, QIcon, FluentIconBase], title, content=None, texts=None, parent=None):
+    def __init__(
+        self, configItem, icon: Union[str, QIcon, FluentIconBase], title, content=None, texts=None, parent=None
+    ):
         """
         Parameters
         ----------
@@ -62,7 +67,7 @@ class OptionsSettingCard(ExpandSettingCard):
         self.buttonGroup.buttonClicked.connect(self.__onButtonClicked)
 
     def __onButtonClicked(self, button: RadioButton):
-        """ button clicked slot """
+        """button clicked slot"""
         if button.text() == self.choiceLabel.text():
             return
 
@@ -74,7 +79,7 @@ class OptionsSettingCard(ExpandSettingCard):
         self.optionChanged.emit(self.configItem)
 
     def setValue(self, value):
-        """ select button according to the value """
+        """select button according to the value"""
         qconfig.set(self.configItem, value)
 
         for button in self.buttonGroup.buttons():

@@ -1,14 +1,15 @@
 # coding: utf-8
-from PySide6.QtCore import QRect, QRectF
+# 第三方库导入
 from PySide6.QtGui import QPainterPath
-from PySide6.QtWidgets import QApplication, QFrame
+from PySide6.QtCore import QRect, QRectF
+from PySide6.QtWidgets import QFrame
 
 from .acrylic_widget import AcrylicWidget
 from ..widgets.tool_tip import ToolTip, ToolTipFilter
 
 
 class AcrylicToolTipContainer(AcrylicWidget, QFrame):
-    """ Acrylic tool tip container """
+    """Acrylic tool tip container"""
 
     def __init__(self, parent=None):
         super().__init__(parent=parent)
@@ -21,7 +22,7 @@ class AcrylicToolTipContainer(AcrylicWidget, QFrame):
 
 
 class AcrylicToolTip(ToolTip):
-    """ Acrylic tool tip """
+    """Acrylic tool tip"""
 
     def _createContainer(self):
         return AcrylicToolTipContainer(self)
@@ -33,7 +34,7 @@ class AcrylicToolTip(ToolTip):
 
 
 class AcrylicToolTipFilter(ToolTipFilter):
-    """ Acrylic tool tip filter """
+    """Acrylic tool tip filter"""
 
     def _createToolTip(self):
         return AcrylicToolTip(self.parent().toolTip(), self.parent().window())

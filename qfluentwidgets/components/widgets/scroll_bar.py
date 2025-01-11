@@ -1,16 +1,36 @@
 # coding:utf-8
-from PySide6.QtCore import (QEvent, QEasingCurve, Qt, Signal, QPropertyAnimation, Property, QRectF,
-                          QTimer, QPoint, QObject)
-from PySide6.QtGui import QPainter, QColor, QMouseEvent
-from PySide6.QtWidgets import (QWidget, QToolButton, QAbstractScrollArea, QGraphicsOpacityEffect,
-                             QHBoxLayout, QVBoxLayout, QApplication, QAbstractItemView, QListView)
+# 第三方库导入
+from PySide6.QtGui import QColor, QPainter, QMouseEvent
+from PySide6.QtCore import (
+    Qt,
+    QEvent,
+    QPoint,
+    QRectF,
+    QTimer,
+    Signal,
+    QObject,
+    Property,
+    QEasingCurve,
+    QPropertyAnimation,
+)
+from PySide6.QtWidgets import (
+    QWidget,
+    QListView,
+    QHBoxLayout,
+    QToolButton,
+    QVBoxLayout,
+    QApplication,
+    QAbstractItemView,
+    QAbstractScrollArea,
+)
 
 from ...common.icon import FluentIcon
 from ...common.style_sheet import isDarkTheme
 from ...common.smooth_scroll import SmoothScroll
 
+
 class ArrowButton(QToolButton):
-    """ Arrow button """
+    """Arrow button"""
 
     def __init__(self, icon: FluentIcon, parent=None):
         super().__init__(parent=parent)
@@ -33,7 +53,7 @@ class ArrowButton(QToolButton):
 
 
 class ScrollBarGroove(QWidget):
-    """ Scroll bar groove """
+    """Scroll bar groove"""
 
     def __init__(self, orient: Qt.Orientation, parent):
         super().__init__(parent=parent)
@@ -58,7 +78,7 @@ class ScrollBarGroove(QWidget):
             self.layout().addWidget(self.downButton, 0, Qt.AlignVCenter)
             self.layout().setContentsMargins(3, 0, 3, 0)
 
-        self.opacityAni = QPropertyAnimation(self, b'opacity', self)
+        self.opacityAni = QPropertyAnimation(self, b"opacity", self)
         self.setOpacity(0)
 
     def fadeIn(self):
@@ -101,7 +121,7 @@ class ScrollBarGroove(QWidget):
 
 
 class ScrollBarHandle(QWidget):
-    """ Scroll bar handle """
+    """Scroll bar handle"""
 
     def __init__(self, orient: Qt.Orientation, parent=None):
         super().__init__(parent)
@@ -123,7 +143,7 @@ class ScrollBarHandle(QWidget):
 
 
 class ScrollBar(QWidget):
-    """ Fluent scroll bar """
+    """Fluent scroll bar"""
 
     rangeChanged = Signal(tuple)
     valueChanged = Signal(int)
@@ -268,7 +288,7 @@ class ScrollBar(QWidget):
             self.sliderReleased.emit()
 
     def expand(self):
-        """ expand scroll bar """
+        """expand scroll bar"""
         if self._isExpanded or not self.isEnter:
             return
 
@@ -276,7 +296,7 @@ class ScrollBar(QWidget):
         self.groove.fadeIn()
 
     def collapse(self):
-        """ collapse scroll bar """
+        """collapse scroll bar"""
         if not self._isExpanded or self.isEnter:
             return
 
@@ -404,7 +424,7 @@ class ScrollBar(QWidget):
         self._adjustHandlePos()
 
     def setForceHidden(self, isHidden: bool):
-        """ whether to force the scrollbar to be hidden """
+        """whether to force the scrollbar to be hidden"""
         self._isForceHidden = isHidden
         self.setVisible(self.maximum() > 0 and not isHidden)
 
@@ -413,7 +433,7 @@ class ScrollBar(QWidget):
 
 
 class SmoothScrollBar(ScrollBar):
-    """ Smooth scroll bar """
+    """Smooth scroll bar"""
 
     def __init__(self, orient: Qt.Orientation, parent):
         super().__init__(orient, parent)
@@ -449,14 +469,14 @@ class SmoothScrollBar(ScrollBar):
         self.ani.start()
 
     def scrollValue(self, value, useAni=True):
-        """ scroll the specified distance """
+        """scroll the specified distance"""
         self.__value += value
         self.__value = max(self.minimum(), self.__value)
         self.__value = min(self.maximum(), self.__value)
         self.setValue(self.__value, useAni)
 
     def scrollTo(self, value, useAni=True):
-        """ scroll to the specified position """
+        """scroll to the specified position"""
         self.__value = value
         self.__value = max(self.minimum(), self.__value)
         self.__value = min(self.maximum(), self.__value)
@@ -476,7 +496,7 @@ class SmoothScrollBar(ScrollBar):
         self.__value = self.value()
 
     def setScrollAnimation(self, duration, easing=QEasingCurve.OutCubic):
-        """ set scroll animation
+        """set scroll animation
 
         Parameters
         ----------
@@ -492,7 +512,7 @@ class SmoothScrollBar(ScrollBar):
 
 
 class SmoothScrollDelegate(QObject):
-    """ Smooth scroll delegate """
+    """Smooth scroll delegate"""
 
     def __init__(self, parent: QAbstractScrollArea, useAni=False):
         """
@@ -525,12 +545,14 @@ class SmoothScrollDelegate(QObject):
     def eventFilter(self, obj, e: QEvent):
         if e.type() == QEvent.Type.Wheel:
             # Check if the vertical scroll is at its limit
-            verticalAtEnd = (e.angleDelta().y() < 0 and self.vScrollBar.value() == self.vScrollBar.maximum()) or \
-                            (e.angleDelta().y() > 0 and self.vScrollBar.value() == self.vScrollBar.minimum())
+            verticalAtEnd = (e.angleDelta().y() < 0 and self.vScrollBar.value() == self.vScrollBar.maximum()) or (
+                e.angleDelta().y() > 0 and self.vScrollBar.value() == self.vScrollBar.minimum()
+            )
 
             # Check if the horizontal scroll is at its limit
-            horizontalAtEnd = (e.angleDelta().x() < 0 and self.hScrollBar.value() == self.hScrollBar.maximum()) or \
-                              (e.angleDelta().x() > 0 and self.hScrollBar.value() == self.hScrollBar.minimum())
+            horizontalAtEnd = (e.angleDelta().x() < 0 and self.hScrollBar.value() == self.hScrollBar.maximum()) or (
+                e.angleDelta().x() > 0 and self.hScrollBar.value() == self.hScrollBar.minimum()
+            )
 
             if verticalAtEnd or horizontalAtEnd:
                 return False
@@ -558,4 +580,3 @@ class SmoothScrollDelegate(QObject):
     def setHorizontalScrollBarPolicy(self, policy):
         QAbstractScrollArea.setHorizontalScrollBarPolicy(self.parent(), Qt.ScrollBarAlwaysOff)
         self.hScrollBar.setForceHidden(policy == Qt.ScrollBarAlwaysOff)
-

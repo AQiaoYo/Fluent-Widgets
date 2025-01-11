@@ -1,12 +1,13 @@
 # coding:utf-8
-from PySide6.QtCore import QThread, Signal
+# 第三方库导入
+import darkdetect
+from PySide6.QtCore import Signal, QThread
 
 from .config import Theme, qconfig
-import darkdetect
 
 
 class SystemThemeListener(QThread):
-    """ System theme listener """
+    """System theme listener"""
 
     systemThemeChanged = Signal()
 

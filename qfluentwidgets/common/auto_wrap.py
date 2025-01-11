@@ -1,7 +1,8 @@
-from enum import Enum, auto
-from functools import lru_cache
+# 标准库导入
 from re import sub
-from typing import List, Optional, Tuple
+from enum import Enum, auto
+from typing import List, Tuple, Optional
+from functools import lru_cache
 from unicodedata import east_asian_width
 
 

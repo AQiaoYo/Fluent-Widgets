@@ -1,17 +1,19 @@
 # coding: utf-8
+# 标准库导入
 from enum import Enum
 
-from PySide6.QtCore import Qt, QTimer, Property, Signal, QEvent, QPoint, QPropertyAnimation, QEasingCurve
-from PySide6.QtGui import QColor, QPainter, QHoverEvent
-from PySide6.QtWidgets import QApplication, QHBoxLayout, QLabel, QToolButton, QWidget
+# 第三方库导入
+from PySide6.QtGui import QColor, QPainter
+from PySide6.QtCore import Qt, QEvent, Signal, Property, QPropertyAnimation
+from PySide6.QtWidgets import QLabel, QWidget, QHBoxLayout
 
-from ...common.style_sheet import FluentStyleSheet, themeColor, ThemeColor, isDarkTheme
-from ...common.overload import singledispatchmethod
 from .button import ToolButton
+from ...common.overload import singledispatchmethod
+from ...common.style_sheet import ThemeColor, FluentStyleSheet, themeColor, isDarkTheme
 
 
 class Indicator(ToolButton):
-    """ Indicator of switch button """
+    """Indicator of switch button"""
 
     checkedChanged = Signal(bool)
 
@@ -21,13 +23,13 @@ class Indicator(ToolButton):
         self.setFixedSize(42, 22)
 
         self._sliderX = 5
-        self.slideAni = QPropertyAnimation(self, b'sliderX', self)
+        self.slideAni = QPropertyAnimation(self, b"sliderX", self)
         self.slideAni.setDuration(120)
 
         self.toggled.connect(self._toggleSlider)
 
     def mouseReleaseEvent(self, e):
-        """ toggle checked state when mouse release"""
+        """toggle checked state when mouse release"""
         super().mouseReleaseEvent(e)
         self.checkedChanged.emit(self.isChecked())
 
@@ -47,7 +49,7 @@ class Indicator(ToolButton):
         self.update()
 
     def paintEvent(self, e):
-        """ paint indicator """
+        """paint indicator"""
         painter = QPainter(self)
         painter.setRenderHints(QPainter.Antialiasing)
         self._drawBackground(painter)
@@ -122,13 +124,14 @@ class Indicator(ToolButton):
 
 
 class IndicatorPosition(Enum):
-    """ Indicator position """
+    """Indicator position"""
+
     LEFT = 0
     RIGHT = 1
 
 
 class SwitchButton(QWidget):
-    """ Switch button class
+    """Switch button class
 
     Constructors
     ------------
@@ -150,9 +153,9 @@ class SwitchButton(QWidget):
             the position of indicator
         """
         super().__init__(parent=parent)
-        self._text = self.tr('Off')
-        self._offText =  self.tr('Off')
-        self._onText =  self.tr('On')
+        self._text = self.tr("Off")
+        self._offText = self.tr("Off")
+        self._onText = self.tr("On")
         self.__spacing = 12
 
         self.indicatorPos = indicatorPos
@@ -163,7 +166,7 @@ class SwitchButton(QWidget):
         self.__initWidget()
 
     @__init__.register
-    def _(self, text: str = 'Off', parent: QWidget = None, indicatorPos=IndicatorPosition.LEFT):
+    def _(self, text: str = "Off", parent: QWidget = None, indicatorPos=IndicatorPosition.LEFT):
         """
         Parameters
         ----------
@@ -181,7 +184,7 @@ class SwitchButton(QWidget):
         self.setText(text)
 
     def __initWidget(self):
-        """ initialize widgets """
+        """initialize widgets"""
         self.setAttribute(Qt.WA_StyledBackground)
         self.installEventFilter(self)
         self.setFixedHeight(22)
@@ -224,12 +227,12 @@ class SwitchButton(QWidget):
         return self.indicator.isChecked()
 
     def setChecked(self, isChecked):
-        """ set checked state """
+        """set checked state"""
         self._updateText()
         self.indicator.setChecked(isChecked)
 
     def toggleChecked(self):
-        """ toggle checked state """
+        """toggle checked state"""
         self.indicator.setChecked(not self.indicator.isChecked())
 
     def _updateText(self):

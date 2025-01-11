@@ -1,13 +1,14 @@
 # coding:utf-8
-from typing import Dict, List
+# 标准库导入
 from itertools import groupby
 
-from PySide6.QtCore import Qt, QObject, Signal
+# 第三方库导入
+from PySide6.QtCore import Signal, QObject
 from PySide6.QtWidgets import QWidget, QStackedWidget
 
 
 class RouteItem:
-    """ Route item """
+    """Route item"""
 
     def __init__(self, stacked: QStackedWidget, routeKey: str):
         self.stacked = stacked
@@ -21,12 +22,12 @@ class RouteItem:
 
 
 class StackedHistory:
-    """ Stacked history """
+    """Stacked history"""
 
     def __init__(self, stacked: QStackedWidget):
         self.stacked = stacked
         self.defaultRouteKey = None  # type: str
-        self.history = [self.defaultRouteKey]   # type: List[str]
+        self.history = [self.defaultRouteKey]  # type: List[str]
 
     def __len__(self):
         return len(self.history)
@@ -70,24 +71,24 @@ class StackedHistory:
 
 
 class Router(QObject):
-    """ Router """
+    """Router"""
 
     emptyChanged = Signal(bool)
 
     def __init__(self, parent=None):
         super().__init__(parent=parent)
-        self.history = []   # type: List[RouteItem]
+        self.history = []  # type: List[RouteItem]
         self.stackHistories = {}  # type: Dict[QStackedWidget, StackedHistory]
 
     def setDefaultRouteKey(self, stacked: QStackedWidget, routeKey: str):
-        """ set the default route key of stacked widget """
+        """set the default route key of stacked widget"""
         if stacked not in self.stackHistories:
             self.stackHistories[stacked] = StackedHistory(stacked)
 
         self.stackHistories[stacked].setDefaultRouteKey(routeKey)
 
     def push(self, stacked: QStackedWidget, routeKey: str):
-        """ push history
+        """push history
 
         Parameters
         ----------
@@ -110,7 +111,7 @@ class Router(QObject):
         self.emptyChanged.emit(not bool(self.history))
 
     def pop(self):
-        """ pop history """
+        """pop history"""
         if not self.history:
             return
 
@@ -119,7 +120,7 @@ class Router(QObject):
         self.stackHistories[item.stacked].pop()
 
     def remove(self, routeKey: str):
-        """ remove history """
+        """remove history"""
         self.history = [i for i in self.history if i.routeKey != routeKey]
         self.history = [list(g)[0] for k, g in groupby(self.history, lambda i: i.routeKey)]
         self.emptyChanged.emit(not bool(self.history))
