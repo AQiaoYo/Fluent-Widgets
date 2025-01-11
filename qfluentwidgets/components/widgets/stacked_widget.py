@@ -1,5 +1,4 @@
 # coding:utf-8
-# 标准库导入
 
 # 第三方库导入
 from PySide6.QtCore import QPoint, Signal, QEasingCurve, QAbstractAnimation, QPropertyAnimation
