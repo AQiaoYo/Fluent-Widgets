@@ -1,21 +1,26 @@
 """
-PySide6-Fluent-Widgets
-======================
+Fluent-Widgets
+==============
 A fluent design widgets library based on PySide6.
 
-Documentation is available in the docstrings and
-online at https://https://qfluentwidgets.com.
+This project is derived from the original PySide6-Fluent-Widgets library
+created by zhiyiYo. Fluent-Widgets builds upon it with additional features
+and enhancements.
+
+Original project: PySide6-Fluent-Widgets by zhiyiYo  
+Documentation is available online at https://qfluentwidgets.com.
 
 Examples are available at https://github.com/zhiyiYo/PyQt-Fluent-Widgets/tree/PySide6/examples.
 
-:copyright: (c) 2021 by zhiyiYo.
+:copyright: (c) 2021 by zhiyiYo.  
+:modified: (c) 2025 by QIAO.  
 :license: GPLv3 for non-commercial project, see README for more details.
 """
 
-__version__ = "1.7.4"
-__author__ = "zhiyiYo"
+__version__ = "1.0.0"
+__author__ = "zhiyiYo, modified by QIAO"
 
-from .components import *
+from ._rc import resource
 from .common import *
 from .window import *
-from ._rc import resource
+from .components import *
