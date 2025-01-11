@@ -7,7 +7,6 @@ from PySide6.QtWidgets import QWidget
 
 from .navigation_panel import NavigationPanel, NavigationItemPosition, NavigationWidget, NavigationDisplayMode
 from .navigation_widget import NavigationTreeWidget
-from ...common.style_sheet import FluentStyleSheet
 from ...common.icon import FluentIconBase
 
 

@@ -1,5 +1,5 @@
 # coding:utf-8
-from PySide6.QtCore import Qt, Signal, QObject, QEvent
+from PySide6.QtCore import Qt, Signal, QEvent
 from PySide6.QtGui import QColor
 from PySide6.QtWidgets import QLabel, QFrame, QVBoxLayout, QHBoxLayout, QPushButton
 from qframelesswindow import FramelessDialog

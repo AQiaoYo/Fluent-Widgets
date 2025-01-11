@@ -1,10 +1,9 @@
 # coding:utf-8
 from typing import Union
 from PySide6.QtCore import QPoint, Qt, QRect, QRectF
-from PySide6.QtGui import QPixmap, QPainter, QColor, QPainterPath, QIcon, QImage
+from PySide6.QtGui import QPixmap, QPainter, QPainterPath, QIcon, QImage
 from PySide6.QtWidgets import QWidget
 
-from ...common.style_sheet import isDarkTheme
 from ...common.icon import FluentIconBase
 from ..widgets.flyout import FlyoutAnimationType, FlyoutViewBase, FlyoutView, Flyout, FlyoutAnimationManager
 from .acrylic_widget import AcrylicWidget

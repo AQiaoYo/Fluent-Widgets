@@ -2,11 +2,11 @@
 from typing import Union
 import sys
 
-from PySide6.QtCore import Qt, QSize, QRectF, QEvent
-from PySide6.QtGui import QPixmap, QPainter, QColor, QIcon
-from PySide6.QtWidgets import QWidget, QVBoxLayout, QGraphicsDropShadowEffect
+from PySide6.QtCore import Qt, QSize, QEvent
+from PySide6.QtGui import QPainter, QColor, QIcon
+from PySide6.QtWidgets import QWidget, QGraphicsDropShadowEffect
 
-from ..common.icon import FluentIconBase, drawIcon, toQIcon
+from ..common.icon import FluentIconBase, toQIcon
 from ..common.style_sheet import isDarkTheme, FluentStyleSheet
 from ..components.widgets import IconWidget
 from qframelesswindow import TitleBar

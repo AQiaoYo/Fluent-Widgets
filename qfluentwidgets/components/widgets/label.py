@@ -1,10 +1,10 @@
 # coding:utf-8
 
-from typing import List, Union
+from typing import Union
 
-from PySide6.QtCore import Qt, Property, QPoint, Signal, QSize, QRectF, QUrl
-from PySide6.QtGui import (QPainter, QPixmap, QPalette, QColor, QFont, QImage, QPainterPath,
-                         QImageReader, QBrush, QMovie, QDesktopServices)
+from PySide6.QtCore import Qt, Property, Signal, QSize, QRectF, QUrl
+from PySide6.QtGui import (QPainter, QPixmap, QColor, QFont, QImage, QPainterPath, QImageReader,
+                         QMovie, QDesktopServices)
 from PySide6.QtWidgets import QLabel, QWidget, QPushButton, QApplication
 
 from ...common.exception_handler import exceptionHandler

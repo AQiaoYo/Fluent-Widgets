@@ -1,8 +1,7 @@
 # coding:utf-8
-from typing import Dict, List
 from itertools import groupby
 
-from PySide6.QtCore import Qt, QObject, Signal
+from PySide6.QtCore import QObject, Signal
 from PySide6.QtWidgets import QWidget, QStackedWidget
 
 

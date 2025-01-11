@@ -2,7 +2,7 @@
 from typing import Iterable, List
 
 from PySide6.QtCore import Qt, Signal, QSize, QRectF, QPoint, QPropertyAnimation, QEasingCurve, QObject
-from PySide6.QtGui import QColor, QPainter, QCursor, QRegion
+from PySide6.QtGui import QColor, QPainter, QRegion
 from PySide6.QtWidgets import (QApplication, QWidget, QFrame, QVBoxLayout, QHBoxLayout,
                              QGraphicsDropShadowEffect, QSizePolicy, QPushButton, QListWidgetItem)
 
@@ -373,7 +373,6 @@ class PickerBase(QPushButton):
 
     def _onColumnValueChanged(self, panel, index: int, value: str):
         """ column value changed slot """
-        pass
 
 
 class PickerToolButton(TransparentToolButton):

@@ -1,6 +1,6 @@
 # coding:utf-8
-from PySide6.QtCore import Qt, Signal, QSize, QPropertyAnimation, QPoint
-from PySide6.QtGui import QPixmap, QPainter, QColor
+from PySide6.QtCore import Qt, Signal, QSize, QPropertyAnimation
+from PySide6.QtGui import QPainter, QColor
 from PySide6.QtWidgets import QWidget, QGraphicsOpacityEffect, QHBoxLayout, QVBoxLayout
 
 from ..common.icon import FluentIcon

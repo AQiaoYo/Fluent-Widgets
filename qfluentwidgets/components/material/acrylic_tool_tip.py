@@ -1,7 +1,7 @@
 # coding: utf-8
 from PySide6.QtCore import QRect, QRectF
 from PySide6.QtGui import QPainterPath
-from PySide6.QtWidgets import QApplication, QFrame
+from PySide6.QtWidgets import QFrame
 
 from .acrylic_widget import AcrylicWidget
 from ..widgets.tool_tip import ToolTip, ToolTipFilter

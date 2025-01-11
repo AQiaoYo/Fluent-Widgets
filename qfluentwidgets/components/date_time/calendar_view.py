@@ -1,14 +1,14 @@
 # coding: utf-8
 from math import ceil
 from collections import defaultdict, Counter
-from typing import Tuple, Type
+from typing import Type
 
 from PySide6.QtCore import (Qt, QRectF, Signal, QSize, QModelIndex, QDate, QCalendar, QEasingCurve, QPropertyAnimation,
-                          QParallelAnimationGroup, QPoint, QRect, QStringListModel)
-from PySide6.QtGui import QPainter, QColor, QCursor
-from PySide6.QtWidgets import (QApplication, QFrame, QPushButton, QHBoxLayout, QVBoxLayout, QListWidget,
-                             QListWidgetItem, QStyledItemDelegate, QStyle, QStyleOptionViewItem,
-                             QLabel, QWidget, QStackedWidget, QGraphicsDropShadowEffect, QListView)
+                          QParallelAnimationGroup, QPoint, QRect)
+from PySide6.QtGui import QPainter, QColor
+from PySide6.QtWidgets import (QFrame, QPushButton, QHBoxLayout, QVBoxLayout, QListWidget, QListWidgetItem,
+                             QStyledItemDelegate, QStyle, QStyleOptionViewItem, QLabel,
+                             QWidget, QStackedWidget, QGraphicsDropShadowEffect)
 
 from ...common.icon import FluentIcon as FIF
 from ...common.style_sheet import isDarkTheme, FluentStyleSheet, themeColor, ThemeColor

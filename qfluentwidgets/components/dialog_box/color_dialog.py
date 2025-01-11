@@ -1,11 +1,11 @@
 # coding:utf-8
-from PySide6.QtCore import Qt, Signal, QPoint, QRegularExpression, QSize
+from PySide6.QtCore import Qt, Signal, QPoint, QRegularExpression
 from PySide6.QtGui import (QBrush, QColor, QPixmap, QPainter,
-                           QPen, QIntValidator, QRegularExpressionValidator, QIcon)
+                           QPen, QIntValidator, QRegularExpressionValidator)
 from PySide6.QtWidgets import QApplication, QLabel, QWidget, QPushButton, QPushButton, QFrame, QVBoxLayout
 
 from ...common.style_sheet import FluentStyleSheet, isDarkTheme
-from ..widgets import ClickableSlider, SingleDirectionScrollArea, PushButton, PrimaryPushButton
+from ..widgets import ClickableSlider, SingleDirectionScrollArea, PrimaryPushButton
 from ..widgets.line_edit import LineEdit
 from .mask_dialog_base import MaskDialogBase
 

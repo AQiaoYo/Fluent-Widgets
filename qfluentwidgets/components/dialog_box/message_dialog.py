@@ -1,6 +1,6 @@
 # coding:utf-8
 from PySide6.QtCore import Signal
-from PySide6.QtWidgets import QLabel, QPushButton, QDialog
+from PySide6.QtWidgets import QLabel, QPushButton
 
 from ...common.auto_wrap import TextWrap
 from ...common.style_sheet import FluentStyleSheet

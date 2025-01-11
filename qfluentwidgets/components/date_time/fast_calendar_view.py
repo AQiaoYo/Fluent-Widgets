@@ -1,9 +1,8 @@
 # coding: utf-8
 from math import ceil
-from collections import defaultdict, Counter
 from typing import Type
 
-from PySide6.QtCore import Qt, Signal, QSize, QDate, QCalendar, QLocale
+from PySide6.QtCore import Qt, Signal, QSize, QDate, QCalendar
 from PySide6.QtGui import QPainter, QColor
 from PySide6.QtWidgets import QHBoxLayout, QListWidgetItem, QLabel, QWidget, QStackedWidget, QStyle
 
@@ -123,7 +122,6 @@ class FastScrollViewBase(ScrollViewBase):
 
     def _updateItems(self):
         """ update the items of current page """
-        pass
 
     def pageCount(self):
         return ceil((self.maxYear - self.minYear + 1) / (self.pageRows * self.cols))

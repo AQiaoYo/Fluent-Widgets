@@ -3,7 +3,7 @@ from enum import Enum
 from typing import Union
 
 from PySide6.QtCore import Qt, QEvent, QRectF, QPoint, QObject, QSize
-from PySide6.QtGui import QPixmap, QPainter, QColor, QIcon
+from PySide6.QtGui import QPainter, QColor, QIcon
 from PySide6.QtWidgets import QLabel, QWidget, QSizePolicy
 
 from ...common.font import setFont

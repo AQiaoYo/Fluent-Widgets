@@ -1,5 +1,4 @@
 # coding:utf-8
-from typing import List
 
 from PySide6.QtCore import (QAbstractAnimation, QEasingCurve, QPoint, QPropertyAnimation,
                           Signal)

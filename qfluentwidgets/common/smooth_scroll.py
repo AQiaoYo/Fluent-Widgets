@@ -1,7 +1,7 @@
 # coding:utf-8
 from collections import deque
 from enum import Enum
-from math import cos, pi, ceil
+from math import cos, pi
 
 from PySide6.QtCore import QDateTime, Qt, QTimer, QPoint
 from PySide6.QtGui import QWheelEvent

@@ -1,11 +1,10 @@
 # coding: utf-8
-from typing import List, Union
+from typing import List
 
-from PySide6.QtCore import Qt, QMargins, QModelIndex, QItemSelectionModel, Property, QRectF, QEvent
-from PySide6.QtGui import QHelpEvent, QPainter, QColor, QKeyEvent, QPalette, QBrush
+from PySide6.QtCore import Qt, QMargins, QModelIndex, Property, QRectF
+from PySide6.QtGui import QHelpEvent, QPainter, QColor, QKeyEvent, QPalette
 from PySide6.QtWidgets import (QAbstractItemView, QStyledItemDelegate, QApplication, QStyleOptionViewItem,
-                             QTableView, QTableWidget, QWidget, QTableWidgetItem, QStyle,
-                             QStyleOptionButton)
+                             QTableView, QTableWidget, QWidget, QTableWidgetItem)
 
 from .check_box import CheckBoxIcon
 from ...common.font import getFont

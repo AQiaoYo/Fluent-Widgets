@@ -1,7 +1,6 @@
 # coding:utf-8
 import math
 
-from typing import Dict, List
 from PySide6.QtCore import Qt, Signal, QRectF, Property, QPoint, QEvent
 from PySide6.QtGui import QPainter, QFont, QHoverEvent, QAction
 from PySide6.QtWidgets import QWidget, QApplication

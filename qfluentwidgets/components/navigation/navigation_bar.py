@@ -1,7 +1,7 @@
 # coding:utf-8
-from typing import Dict, Union
+from typing import Union
 
-from PySide6.QtCore import Qt, QRect, QPropertyAnimation, QEasingCurve, Property, QRectF
+from PySide6.QtCore import Qt, QRect, QPropertyAnimation, Property, QRectF
 from PySide6.QtGui import QFont, QPainter, QColor, QIcon
 from PySide6.QtWidgets import QWidget, QVBoxLayout
 

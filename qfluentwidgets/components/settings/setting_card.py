@@ -4,7 +4,6 @@ from typing import Union
 from PySide6.QtCore import Qt, Signal
 from PySide6.QtGui import QColor, QIcon, QPainter
 from PySide6.QtWidgets import QFrame, QHBoxLayout, QLabel, QToolButton, QVBoxLayout, QPushButton
-from PySide6.QtSvgWidgets import QSvgWidget
 
 from ..dialog_box.color_dialog import ColorDialog
 from ..widgets.combo_box import ComboBox
@@ -94,7 +93,6 @@ class SettingCard(QFrame):
 
     def setValue(self, value):
         """ set the value of config item """
-        pass
 
     def setIconSize(self, width: int, height: int):
         """ set the icon fixed size """

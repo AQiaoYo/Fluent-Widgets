@@ -1,7 +1,7 @@
 # coding:utf-8
-from typing import List, Union
-from PySide6.QtCore import Qt, Signal, QRectF, Property, QPropertyAnimation, QPoint, QSize
-from PySide6.QtGui import QPixmap, QPainter, QColor, QPainterPath, QFont, QIcon
+from typing import Union
+from PySide6.QtCore import Qt, Signal, Property, QPropertyAnimation, QPoint, QSize
+from PySide6.QtGui import QPainter, QColor, QPainterPath, QFont, QIcon
 from PySide6.QtWidgets import QWidget, QFrame, QVBoxLayout, QHBoxLayout, QLabel
 
 from ...common.overload import singledispatchmethod

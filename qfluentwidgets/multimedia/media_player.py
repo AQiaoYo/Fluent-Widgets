@@ -1,5 +1,5 @@
 # coding:utf-8
-from PySide6.QtCore import Qt, Signal, QObject, QUrl
+from PySide6.QtCore import Signal, QObject, QUrl
 from PySide6.QtMultimedia import QMediaPlayer, QAudioOutput
 
 

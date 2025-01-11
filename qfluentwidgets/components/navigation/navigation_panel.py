@@ -1,6 +1,6 @@
 # coding:utf-8
 from enum import Enum
-from typing import Dict, Union
+from typing import Union
 
 from PySide6.QtCore import Qt, QPropertyAnimation, QRect, QSize, QEvent, QEasingCurve, Signal, QPoint
 from PySide6.QtGui import QResizeEvent, QIcon, QColor, QPainterPath

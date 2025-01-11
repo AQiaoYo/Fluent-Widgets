@@ -5,8 +5,8 @@ from typing import List, Union
 from qframelesswindow import WindowEffect
 from PySide6.QtCore import (QEasingCurve, QEvent, QPropertyAnimation, QObject, QModelIndex,
                           Qt, QSize, QRectF, Signal, QPoint, QTimer, QObject, QParallelAnimationGroup)
-from PySide6.QtGui import (QAction, QIcon, QColor, QPainter, QPen, QPixmap, QRegion, QCursor, QTextCursor, QHoverEvent,
-                           QFontMetrics, QKeySequence)
+from PySide6.QtGui import (QAction, QIcon, QColor, QPainter, QPen, QPixmap, QRegion, QTextCursor, QHoverEvent, QFontMetrics,
+                           QKeySequence)
 from PySide6.QtWidgets import (QApplication, QMenu, QProxyStyle, QStyle, QStyleFactory,
                                QGraphicsDropShadowEffect, QListWidget, QWidget, QHBoxLayout,
                                QListWidgetItem, QLineEdit, QTextEdit, QStyledItemDelegate, QStyleOptionViewItem, QLabel)

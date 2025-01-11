@@ -1,5 +1,5 @@
 # coding:utf-8
-from typing import List, Union
+from typing import Union
 from PySide6.QtCore import QEvent, Qt, QPropertyAnimation, Property, QEasingCurve, QRectF
 from PySide6.QtGui import QColor, QPainter, QIcon, QPainterPath
 from PySide6.QtWidgets import QFrame, QWidget, QAbstractButton, QApplication, QScrollArea, QVBoxLayout
@@ -8,7 +8,6 @@ from ...common.config import isDarkTheme
 from ...common.icon import FluentIcon as FIF
 from ...common.style_sheet import FluentStyleSheet
 from .setting_card import SettingCard
-from ..layout.v_box_layout import VBoxLayout
 
 
 class ExpandButton(QAbstractButton):
@@ -299,7 +298,6 @@ class ExpandSettingCard(QScrollArea):
 
     def setValue(self, value):
         """ set the value of config item """
-        pass
 
 
 

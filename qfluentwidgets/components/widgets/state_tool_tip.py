@@ -1,8 +1,7 @@
 # coding:utf-8
-from PySide6.QtCore import QEasingCurve, QPropertyAnimation, Qt, QTimer, Signal, QSize, QPoint, QRectF
+from PySide6.QtCore import QPropertyAnimation, Qt, QTimer, Signal, QPoint, QRectF
 from PySide6.QtGui import QPainter
 from PySide6.QtWidgets import QLabel, QWidget, QToolButton, QGraphicsOpacityEffect
-from PySide6.QtSvgWidgets import QSvgWidget
 
 from ...common import FluentStyleSheet, isDarkTheme, Theme
 from ...common.icon import FluentIcon as FIF

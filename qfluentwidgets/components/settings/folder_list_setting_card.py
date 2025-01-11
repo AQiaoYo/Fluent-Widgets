@@ -1,15 +1,12 @@
 # coding:utf-8
-from typing import List
 from pathlib import Path
 
 from PySide6.QtCore import Qt, Signal, QSize
-from PySide6.QtGui import QPainter, QIcon
-from PySide6.QtWidgets import (QPushButton, QFileDialog, QWidget, QLabel,
-                               QHBoxLayout, QToolButton, QSizePolicy)
+from PySide6.QtWidgets import (QFileDialog, QWidget, QLabel, QHBoxLayout,
+                               QSizePolicy)
 
 from ...components.widgets.button import ToolButton, PushButton
 from ...common.config import ConfigItem, qconfig
-from ...common.icon import drawIcon
 from ...common.icon import FluentIcon as FIF
 from ..dialog_box.dialog import Dialog
 from .expand_setting_card import ExpandSettingCard

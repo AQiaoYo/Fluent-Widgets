@@ -1,10 +1,10 @@
 # coding:utf-8
 from copy import deepcopy
 from enum import Enum
-from typing import Dict, List, Union
+from typing import Union
 from PySide6.QtCore import Qt, Signal, Property, QRectF, QSize, QPoint, QPropertyAnimation, QEasingCurve, QRect
 from PySide6.QtGui import QPainter, QColor, QIcon, QPainterPath, QLinearGradient, QPen, QBrush, QMouseEvent
-from PySide6.QtWidgets import QWidget, QGraphicsDropShadowEffect, QHBoxLayout, QSizePolicy, QApplication
+from PySide6.QtWidgets import QWidget, QGraphicsDropShadowEffect, QHBoxLayout, QApplication
 
 from ...common.icon import FluentIcon, FluentIconBase, drawIcon
 from ...common.style_sheet import isDarkTheme, FluentStyleSheet

@@ -1,9 +1,8 @@
 # coding:utf-8
-from typing import Dict
 
-from PySide6.QtCore import Qt, Signal, QRectF
-from PySide6.QtGui import QPainter, QFont
-from PySide6.QtWidgets import QApplication, QPushButton, QWidget, QHBoxLayout, QSizePolicy
+from PySide6.QtCore import Qt, Signal
+from PySide6.QtGui import QPainter
+from PySide6.QtWidgets import QApplication, QWidget, QHBoxLayout, QSizePolicy
 
 from ...common.font import setFont
 from ...common.router import qrouter

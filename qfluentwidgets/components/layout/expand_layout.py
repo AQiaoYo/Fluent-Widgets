@@ -1,6 +1,5 @@
 # coding:utf-8
 from PySide6.QtCore import QSize, QPoint, Qt, QEvent, QRect
-from PySide6.QtGui import QResizeEvent
 from PySide6.QtWidgets import QLayout, QWidget
 
 

@@ -1,9 +1,9 @@
 # coding:utf-8
-from PySide6.QtCore import QSize, Qt, Signal, QPoint, QRectF, QPropertyAnimation, Property, QEasingCurve
+from PySide6.QtCore import QSize, Qt, Signal, QPoint, QRectF, QPropertyAnimation, Property
 from PySide6.QtGui import QColor, QMouseEvent, QPainter, QPainterPath
 from PySide6.QtWidgets import QProxyStyle, QSlider, QStyle, QStyleOptionSlider, QWidget
 
-from ...common.style_sheet import FluentStyleSheet, themeColor, isDarkTheme
+from ...common.style_sheet import themeColor, isDarkTheme
 from ...common.overload import singledispatchmethod
 
 

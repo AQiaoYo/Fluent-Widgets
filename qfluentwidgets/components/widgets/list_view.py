@@ -1,5 +1,5 @@
 # coding:utf-8
-from typing import List, Union
+from typing import List
 
 from PySide6.QtCore import Qt, QModelIndex, Property
 from PySide6.QtGui import QPainter
