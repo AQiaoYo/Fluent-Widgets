@@ -400,7 +400,6 @@ class QConfig(QObject):
         copy: bool
             是否深度复制新值, 隔离新值和旧值
         """
-        print(f"set {item} to {value}")
         if item.value == value:
             # 如果新值和旧值一样, 则直接返回
             return
