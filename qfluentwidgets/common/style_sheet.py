@@ -10,6 +10,7 @@ from PySide6.QtGui import QColor
 from PySide6.QtCore import QFile, QEvent, QObject, QDynamicPropertyChangeEvent
 from PySide6.QtWidgets import QWidget
 
+from .file import QFluentFile
 from .config import Theme, qconfig, isDarkTheme
 
 
@@ -321,11 +322,8 @@ class DirtyStyleSheetWatcher(QObject):
 
 def getStyleSheetFromFile(file: str | QFile) -> str:
     """从 QSS 文件获取样式表"""
-    f = QFile(file)
-    f.open(QFile.ReadOnly)
-    qss = str(f.readAll(), encoding="utf-8")
-    f.close()
-    return qss
+    with QFluentFile(file, QFile.ReadOnly) as file:
+        return str(file.readAll(), encoding="utf-8")
 
 
 def getStyleSheet(source: str | StyleSheetBase, theme: Theme = Theme.AUTO) -> str:
