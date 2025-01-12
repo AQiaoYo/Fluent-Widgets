@@ -1,7 +1,7 @@
 # coding:utf-8
 
 # 标准库导入
-from typing import Optional
+from typing import Self, Optional
 from pathlib import Path
 
 # 第三方库导入
@@ -15,7 +15,7 @@ class QFluentFile(QFile):
         super().__init__(file if isinstance(file, QFile) else str(file))
         self._mode: QFile.OpenModeFlag = mode
 
-    def __enter__(self) -> "QFluentFile":
+    def __enter__(self) -> Self:
         """打开文件"""
         if not self.open(self._mode):
             raise IOError(self.errorString())
