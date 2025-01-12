@@ -507,8 +507,9 @@ class QConfig(QObject):
         items: dict[str, ConfigItem] = {}
 
         for name in dir(self._cfg.__class__):
+
             # 遍历 `self._cfg.__class__` 的所有属性名称
-            if isinstance((item := getattr(self._cfg.__class__), name), ConfigItem):
+            if isinstance(item := getattr(self._cfg.__class__, name), ConfigItem):
                 # 如果属性是 ConfigItem 类型，则将其存入 `items` 字典中
                 items[item.key] = item
 
