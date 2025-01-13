@@ -17,7 +17,7 @@ class RouteItem:
     stacked : QStackedWidget
         当前的堆叠小部件
     routeKey : str
-        路由的关键字，表示子界面的唯一标识
+        路由的关键字, 表示子界面的唯一标识
     """
 
     def __init__(self, stacked: QStackedWidget, routeKey: str):
@@ -29,7 +29,7 @@ class RouteItem:
         stacked : QStackedWidget
             当前的堆叠小部件
         routeKey : str
-            路由的关键字，表示子界面的唯一标识
+            路由的关键字, 表示子界面的唯一标识
         """
         self.stacked = stacked
         self.routeKey = routeKey
@@ -46,7 +46,7 @@ class RouteItem:
         Returns
         -------
         bool
-            如果两个RouteItem相等，返回True，否则返回False
+            如果两个RouteItem相等, 返回True, 否则返回False
         """
         if other is None:
             return False
@@ -99,7 +99,7 @@ class StackedHistory:
         Returns
         -------
         bool
-            如果历史记录为空，返回True，否则返回False
+            如果历史记录为空, 返回True, 否则返回False
         """
         return len(self) <= 1
 
@@ -115,7 +115,7 @@ class StackedHistory:
         Returns
         -------
         bool
-            如果推送成功，返回True，否则返回False
+            如果推送成功, 返回True, 否则返回False
         """
         if self.history[-1] == routeKey:
             return False
@@ -125,7 +125,7 @@ class StackedHistory:
 
     def pop(self):
         """
-        弹出历史记录中的最后一个路由，并跳转到顶部
+        弹出历史记录中的最后一个路由, 并跳转到顶部
         """
         if self.isEmpty():
             return
@@ -205,7 +205,7 @@ class Router(QObject):
         Parameters
         ----------
         parent : QObject, optional
-            父对象，默认为None
+            父对象, 默认为None
         """
         super().__init__(parent=parent)
         self.history = []  # type: List[RouteItem]
@@ -236,14 +236,14 @@ class Router(QObject):
         stacked : QStackedWidget
             堆叠小部件
         routeKey : str
-            子界面的路由关键字，通常是子界面的对象名称
+            子界面的路由关键字, 通常是子界面的对象名称
         """
         item = RouteItem(stacked, routeKey)
 
         if stacked not in self.stackHistories:
             self.stackHistories[stacked] = StackedHistory(stacked)
 
-        # 如果历史记录中没有相同的路由项，才加入
+        # 如果历史记录中没有相同的路由项, 才加入
         success = self.stackHistories[stacked].push(routeKey)
         if success:
             self.history.append(item)
