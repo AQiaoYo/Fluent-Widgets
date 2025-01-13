@@ -524,8 +524,8 @@ class FluentAnimation(QPropertyAnimation):
         """
 
         def wrapper(manager):
-            if name not in cls.objects:
-                cls.objects[name] = manager
+            if name not in cls.animations:
+                cls.animations[name] = manager
 
             return manager
 
