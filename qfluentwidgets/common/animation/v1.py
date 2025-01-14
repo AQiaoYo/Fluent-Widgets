@@ -8,7 +8,7 @@ from PySide6.QtGui import QColor, QEnterEvent, QFocusEvent, QMouseEvent
 from PySide6.QtCore import QEvent, QPoint, Signal, QObject, QPointF, Property, QEasingCurve, QPropertyAnimation
 from PySide6.QtWidgets import QWidget, QLineEdit, QGraphicsDropShadowEffect
 
-from .config import qconfig
+from ..config import qconfig
 
 
 class AnimationBase(QObject):

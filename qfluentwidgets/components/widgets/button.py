@@ -13,8 +13,8 @@ from ...common.icon import Icon, Theme
 from ...common.icon import FluentIcon as FIF
 from ...common.icon import FluentIconBase, toQIcon, drawIcon, isDarkTheme
 from ...common.overload import singledispatchmethod
-from ...common.animation import TranslateYAnimation
 from ...common.style_sheet import ThemeColor, FluentStyleSheet, themeColor
+from ...common.animation.v1 import TranslateYAnimation
 
 
 class PushButton(QPushButton):
