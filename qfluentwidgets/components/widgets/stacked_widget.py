@@ -1,7 +1,8 @@
 # coding:utf-8
 
 # 标准库导入
-from typing import List
+from copy import deepcopy
+from typing import List, Tuple
 
 # 第三方库导入
 from PySide6.QtCore import QPoint, Signal, QEasingCurve, QAbstractAnimation, QPropertyAnimation, QParallelAnimationGroup
@@ -55,32 +56,6 @@ class OpacityAniStackedWidget(QStackedWidget):
         super().setCurrentIndex(self.__nextIndex)
 
 
-class PopUpAniInfo:
-    """
-    弹出动画信息类
-
-    Parameters
-    ----------
-    widget : QWidget
-        需要执行动画的部件
-
-    deltaX : int
-        动画过程中 x 轴方向的位移量
-
-    deltaY : int
-        动画过程中 y 轴方向的位移量
-
-    ani : QPropertyAnimation
-        控制部件位置的动画对象
-    """
-
-    def __init__(self, widget: QWidget, deltaX: int, deltaY: int, ani: QPropertyAnimation) -> None:
-        self.widget = widget
-        self.deltaX = deltaX
-        self.deltaY = deltaY
-        self.ani = ani
-
-
 class PopUpAniStackedWidget(QStackedWidget):
     """
     带有弹出动画效果的堆叠窗口部件
@@ -92,12 +67,6 @@ class PopUpAniStackedWidget(QStackedWidget):
 
     aniStart : Signal
         动画开始时发出的信号
-
-    aniInfos : List[PopUpAniInfo]
-        存储每个子窗口动画信息的列表
-
-    _nextIndex : int
-        即将显示的窗口索引
 
     _ani : QPropertyAnimation
         当前正在执行的动画对象
@@ -116,11 +85,13 @@ class PopUpAniStackedWidget(QStackedWidget):
             父窗口, 默认为 None
         """
         super().__init__(parent)
-        self.aniInfos: List[PopUpAniInfo] = []
-        self._nextIndex: int | None = None
-        self._ani: QPropertyAnimation | None = None
+        self._aniInfos: List[Tuple[QPropertyAnimation,]] = []
+        self._nextIndex: int = 0
+        self._ani: QParallelAnimationGroup | QPropertyAnimation | None = None
+        self._deltaX: int = 0
+        self._deltaY: int = 64
 
-    def addWidget(self, widget: QWidget, deltaX: int = 0, deltaY: int = 64) -> None:
+    def addWidget(self, widget: QWidget) -> None:
         """
         添加一个新的子窗口, 并设置其动画属性
 
@@ -136,13 +107,15 @@ class PopUpAniStackedWidget(QStackedWidget):
             动画过程中 y 轴方向的位移量, 默认为 64
         """
         super().addWidget(widget)
-        self.aniInfos.append(
-            PopUpAniInfo(
-                widget=widget,
-                deltaX=deltaX,
-                deltaY=deltaY,
-                ani=QPropertyAnimation(widget, b"pos"),
-            )
+
+        # 添加透明度效果
+        effect = QGraphicsOpacityEffect(self)
+        effect.setOpacity(1)
+        widget.setGraphicsEffect(effect)
+
+        # 添加动画
+        self._aniInfos.append(
+            (QPropertyAnimation(widget, b"pos", widget), QPropertyAnimation(effect, b"opacity", widget))
         )
 
     def removeWidget(self, widget: QWidget) -> None:
@@ -162,12 +135,7 @@ class PopUpAniStackedWidget(QStackedWidget):
         super().removeWidget(widget)
 
     def setCurrentIndex(
-        self,
-        index: int,
-        needPopOut: bool = False,
-        showNextWidgetDirectly: bool = True,
-        duration: int = 250,
-        easingCurve: QEasingCurve = QEasingCurve.Type.OutQuad,
+        self, index: int, duration: int = 500, easingCurve: QEasingCurve = QEasingCurve.Type.OutQuad
     ) -> None:
         """
         设置当前显示的窗口索引, 并执行相应的动画
@@ -176,12 +144,6 @@ class PopUpAniStackedWidget(QStackedWidget):
         ----------
         index : int
             要显示的窗口索引
-
-        needPopOut : bool, optional
-            是否需要执行弹出动画, 默认为 False
-
-        showNextWidgetDirectly : bool, optional
-            动画过程中是否直接显示下一个窗口, 默认为 True
 
         duration : int, optional
             动画持续时间（毫秒）, 默认为 250
@@ -200,45 +162,21 @@ class PopUpAniStackedWidget(QStackedWidget):
         if index == self.currentIndex():
             return
 
-        if self._ani and self._ani.state() == QAbstractAnimation.Running:
+        if self._ani and self._ani.state() == QAbstractAnimation.State.Running:
             self._ani.stop()
-            self.__onAniFinished()
+            self._ani.finished.disconnect()
 
-        # 保存下一个窗口索引
+        # 保存下一个索引
         self._nextIndex = index
 
-        # 获取当前和下一个窗口的动画信息
-        nextAniInfo = self.aniInfos[index]
-        currentAniInfo = self.aniInfos[self.currentIndex()]
-
-        # 获取当前和下一个窗口
-        currentWidget = self.currentWidget()
-        nextWidget = nextAniInfo.widget
-        ani = currentAniInfo.ani if needPopOut else nextAniInfo.ani
-        self._ani = ani
-
-        if needPopOut:
-            deltaX, deltaY = currentAniInfo.deltaX, currentAniInfo.deltaY
-            pos = currentWidget.pos() + QPoint(deltaX, deltaY)
-            self.__setAnimation(ani, currentWidget.pos(), pos, duration, easingCurve)
-            nextWidget.setVisible(showNextWidgetDirectly)
-        else:
-            deltaX, deltaY = nextAniInfo.deltaX, nextAniInfo.deltaY
-            pos = nextWidget.pos() + QPoint(deltaX, deltaY)
-            self.__setAnimation(ani, pos, QPoint(nextWidget.x(), 0), duration, easingCurve)
-            super().setCurrentIndex(index)
-
-        ani.finished.connect(self.__onAniFinished)
-        ani.start()
-        self.aniStart.emit()
+        # 执行当前页面的退出动画
+        exit_ani = self.__exitAni()
+        self._ani = exit_ani
+        exit_ani.finished.connect(self.__onExitAniFinished)
+        exit_ani.start()
 
     def setCurrentWidget(
-        self,
-        widget: QWidget,
-        needPopOut: bool = False,
-        showNextWidgetDirectly: bool = True,
-        duration: int = 250,
-        easingCurve: QEasingCurve = QEasingCurve.OutQuad,
+        self, widget: QWidget, duration: int = 500, easingCurve: QEasingCurve = QEasingCurve.OutQuad
     ) -> None:
         """
         设置当前显示的窗口部件, 并执行动画
@@ -248,57 +186,57 @@ class PopUpAniStackedWidget(QStackedWidget):
         widget : QWidget
             要显示的窗口部件
 
-        needPopOut : bool, optional
-            是否需要执行弹出动画, 默认为 False
-
-        showNextWidgetDirectly : bool, optional
-            动画过程中是否直接显示下一个窗口, 默认为 True
-
         duration : int, optional
             动画持续时间（毫秒）, 默认为 250
 
         easingCurve : QEasingCurve, optional
             动画的插值模式, 默认为 QEasingCurve.OutQuad
         """
-        self.setCurrentIndex(self.indexOf(widget), needPopOut, showNextWidgetDirectly, duration, easingCurve)
+        self.setCurrentIndex(self.indexOf(widget), duration, easingCurve)
 
-    def __setAnimation(
-        self,
-        ani: QPropertyAnimation,
-        startValue: QPoint,
-        endValue: QPoint,
-        duration: int,
-        easingCurve: QEasingCurve = QEasingCurve.Linear,
-    ) -> None:
-        """
-        配置动画属性
-
-        Parameters
-        ----------
-        ani : QPropertyAnimation
-            动画对象
-
-        startValue : QPoint
-            动画起始位置
-
-        endValue : QPoint
-            动画结束位置
-
-        duration : int
-            动画持续时间（毫秒）
-
-        easingCurve : QEasingCurve, optional
-            动画的插值模式, 默认为 QEasingCurve.Linear
-        """
-        ani.setEasingCurve(easingCurve)
-        ani.setStartValue(startValue)
-        ani.setEndValue(endValue)
-        ani.setDuration(duration)
-
-    def __onAniFinished(self) -> None:
-        """
-        动画完成后的槽函数, 用于更新状态
-        """
+    def __onExitAniFinished(self) -> None:
+        """页面退出动画结束时的槽函数"""
+        # 断开信号连接
         self._ani.finished.disconnect()
+
+        # 设置下一个页面的位置
         super().setCurrentIndex(self._nextIndex)
-        self.aniFinished.emit()
+        enter_ani = self.__enterAni(self._deltaX, self._deltaY)
+        self._ani = enter_ani
+        enter_ani.finished.connect(lambda: (self._ani.finished.disconnect(), self.aniFinished.emit()))
+        enter_ani.start()
+
+    def __exitAni(self) -> QPropertyAnimation:
+        """页面退出动画"""
+        ani: QPropertyAnimation = self._aniInfos[self.currentIndex()][1]
+        ani.setStartValue(1)
+        ani.setEndValue(0)
+        ani.setDuration((int(300 / 2)))
+        ani.setEasingCurve(QEasingCurve.Type.Linear)
+
+        return ani
+
+    def __enterAni(self, deltaX: int, deltaY: int) -> QParallelAnimationGroup:
+        """页面进入动画"""
+        # 创建动画组和位置动画以及透明度动画
+        aniGroup = QParallelAnimationGroup(self)
+        pos_ani: QPropertyAnimation = self._aniInfos[self._nextIndex][0]
+        opacity_ani: QPropertyAnimation = self._aniInfos[self._nextIndex][1]
+
+        # 设置位置动画
+        pos_ani.setStartValue(self.widget(self._nextIndex).pos() + QPoint(deltaX, deltaY))
+        pos_ani.setEndValue(self.widget(self._nextIndex).pos())
+        pos_ani.setDuration(300)
+        pos_ani.setEasingCurve(QEasingCurve.Type.OutQuad)
+
+        # 设置透明度动画
+        opacity_ani.setStartValue(0)
+        opacity_ani.setEndValue(1)
+        opacity_ani.setDuration(int(300 / 2))
+        opacity_ani.setEasingCurve(QEasingCurve.Type.Linear)
+
+        # 添加动画到动画组
+        aniGroup.addAnimation(pos_ani)
+        aniGroup.addAnimation(opacity_ani)
+
+        return aniGroup
