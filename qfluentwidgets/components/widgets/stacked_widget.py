@@ -1,7 +1,6 @@
 # coding:utf-8
 
 # 标准库导入
-from copy import deepcopy
 from typing import List, Tuple
 
 # 第三方库导入
