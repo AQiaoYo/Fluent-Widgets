@@ -13,8 +13,8 @@ from .line_edit import LineEdit, LineEditButton
 from ...common.font import setFont
 from ...common.icon import FluentIcon as FIF
 from ...common.icon import FluentIconBase, isDarkTheme
+from ...common.animation import TranslateYAnimation
 from ...common.style_sheet import FluentStyleSheet
-from ...common.animation.v1 import TranslateYAnimation
 
 
 class ComboItem:
