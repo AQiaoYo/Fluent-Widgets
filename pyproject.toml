@@ -1,5 +1,5 @@
 [project]
-name = "Fluent-Widgets"
+name = "Fluent-Widgets-QIAO"
 version = "0.1.0"
 description = "基于 PyQt-Fluent-Widgets 的组件库"
 authors = [
