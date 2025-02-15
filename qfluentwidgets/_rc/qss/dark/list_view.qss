@@ -4,6 +4,7 @@ ListWidget {
     outline: none;
     border: none;
     /* font: 13px 'Segoe UI', 'Microsoft YaHei'; */
+    font-family: --FontFamily;
     selection-background-color: transparent;
     alternate-background-color: transparent;
     padding-left: 4px;

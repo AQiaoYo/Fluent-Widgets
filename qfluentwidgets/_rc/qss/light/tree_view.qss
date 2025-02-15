@@ -5,6 +5,7 @@ QTreeView {
     outline: 0;
     padding-right: 5px;
     /* font: 13px 'Segoe UI', 'Microsoft YaHei'; */
+    font-family: --FontFamily;
     selection-background-color: transparent;
 }
 
@@ -54,7 +55,8 @@ QHeaderView::section {
     padding-left: 5px;
     padding-right: 5px;
     border: 1px solid rgba(0, 0, 0, 15);
-    font: 13px 'Segoe UI', 'Microsoft YaHei', 'PingFang SC';
+    font-family: --FontFamily;
+    font-size: 13px;
 }
 
 QHeaderView::section:horizontal {

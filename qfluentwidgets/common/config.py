@@ -372,6 +372,11 @@ class QConfig(QObject):
         name="ThemeColor",
         default="#009faa",
     )
+    fontFamily = ConfigItem(
+        group="Personalized",
+        name="FontFamily",
+        default="'Alimama FangYuanTi VF', 'Segoe UI', 'Microsoft YaHei'",
+    )
 
     def __init__(self) -> None:
         super().__init__()

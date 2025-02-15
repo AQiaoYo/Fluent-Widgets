@@ -1,6 +1,7 @@
 RoundMenu {
     background-color: transparent;
     border: none;
+    font-family: --FontFamily;
 }
 
 MenuActionListWidget {
@@ -8,7 +9,8 @@ MenuActionListWidget {
     border-radius: 9px;
     background-color: rgb(249, 249, 249);
     outline: none;
-    font: 14px 'Segoe UI', 'Microsoft YaHei', 'PingFang SC';
+    font-family: --FontFamily;
+    font-size: 14px;
 }
 
 MenuActionListWidget[transparent=true] {
@@ -23,6 +25,7 @@ MenuActionListWidget::item {
     margin-right: 6px;
     border: none;
     color: black;
+    font-family: --FontFamily;
 }
 
 MenuActionListWidget::item:disabled {
@@ -49,6 +52,7 @@ MenuActionListWidget::item:selected:active {
 
 #commandListWidget{
     border-color: rgb(233, 233, 233);
+    font-family: --FontFamily;
 }
 
 #completerListWidget[dropDown=true],
@@ -76,8 +80,10 @@ MenuActionListWidget::item:selected:active {
 #completerListWidget::item,
 #comboListWidget::item {
     margin-top: 4px;
+    font-family: --FontFamily;
 }
 
 #checkableListWidget::item {
     padding-left: 36px;
+    font-family: --FontFamily;
 }

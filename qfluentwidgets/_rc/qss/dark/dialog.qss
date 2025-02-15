@@ -23,26 +23,29 @@ MessageBox #buttonGroup {
 }
 
 QLabel {
+    font-family: --FontFamily;
     background-color: transparent;
     color: white;
     border: none;
 }
 
 QLabel#titleLabel {
-    font: 20px 'Segoe UI', 'Microsoft YaHei', 'PingFang SC';
+    font-size: 20px;
     padding: 0;
 }
 
 #contentLabel {
     padding: 0;
-    font: 14px 'Segoe UI', 'Microsoft YaHei', 'PingFang SC';
+    font-family: --FontFamily;
+    font-size: 14px;
     border: none;
     selection-background-color: --ThemeColorPrimary;
     selection-color: black;
 }
 
 QLabel#windowTitleLabel {
-    font: 12px 'Segoe UI', 'Microsoft YaHei', 'PingFang SC';
+    font-family: --FontFamily;
+    font-size: 12px;
     padding: 6px 6px;
     background-color: rgb(32, 32, 32);
 }
@@ -53,7 +56,8 @@ QLabel#windowTitleLabel {
     border-top: 1px solid rgb(53, 53, 53);
     border-radius: 5px;
     color: white;
-    font: 14px 'Segoe UI', 'Microsoft YaHei', 'PingFang SC';
+    font-family: --FontFamily;
+    font-size: 14px;
     padding: 5px 9px 6px 9px;
     outline: none;
 }

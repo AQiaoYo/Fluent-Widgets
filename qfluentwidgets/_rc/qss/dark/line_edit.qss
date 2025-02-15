@@ -4,6 +4,7 @@ LineEdit, TextEdit, PlainTextEdit, TextBrowser {
     border-bottom: 1px solid rgba(255, 255, 255, 0.5442);
     border-radius: 5px;
     /* font: 14px "Segoe UI", "Microsoft YaHei"; */
+    font-family: --FontFamily;
     padding: 0px 10px;
     color: white;
     selection-background-color: --ThemeColorPrimary;

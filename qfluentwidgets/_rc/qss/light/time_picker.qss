@@ -10,7 +10,8 @@ CycleListWidget {
     border-top-left-radius: 7px;
     border-top-right-radius: 7px;
     outline: none;
-    font: 14px 'Segoe UI', 'Microsoft YaHei', 'PingFang SC';
+    font-family: --FontFamily;
+    font-size: 14px;
 }
 
 CycleListWidget::item {
@@ -46,11 +47,13 @@ SeparatorWidget {
 }
 
 ItemMaskWidget {
-    font: 14px 'Segoe UI', 'Microsoft YaHei', 'PingFang SC';
+    font-family: --FontFamily;
+    font-size: 14px;
 }
 
 PickerBase {
-    font: 14px 'Segoe UI', 'Microsoft YaHei', 'PingFang SC';
+    font-family: --FontFamily;
+    font-size: 14px;
     background: rgba(255, 255, 255, 0.7);
     border: 1px solid rgba(0, 0, 0, 0.073);
     border-bottom: 1px solid rgba(0, 0, 0, 0.183);
@@ -75,7 +78,8 @@ PickerBase:disabled {
 }
 
 #pickerButton {
-    font: 14px 'Segoe UI', 'Microsoft YaHei', 'PingFang SC';
+    font-family: --FontFamily;
+    font-size: 14px;
     color: rgba(0, 0, 0, 0.6);
     background-color: transparent;
     border: none;

@@ -5,6 +5,7 @@ PushButton, ToolButton, ToggleButton, ToggleToolButton {
     border-radius: 5px;
     color: white;
     /* font: 14px 'Segoe UI', 'Microsoft YaHei', 'PingFang SC'; */
+    font-family: --FontFamily;
     padding: 5px 12px 6px 12px;
     outline: none;
 }
@@ -27,6 +28,7 @@ PushButton[hasIcon=true] {
 
 DropDownToolButton,
 PrimaryDropDownToolButton {
+    font-family: --FontFamily;
     padding: 5px 31px 6px 8px;
 }
 
@@ -106,6 +108,7 @@ PrimarySplitDropButton {
     border-left: none;
     border-top-left-radius: 0;
     border-bottom-left-radius: 0;
+    font-family: --FontFamily;
 }
 
 #splitPushButton,
@@ -134,6 +137,7 @@ HyperlinkButton {
     border: none;
     border-radius: 6px;
     background-color: transparent;
+    font-family: --FontFamily;
 }
 
 HyperlinkButton[hasIcon=false] {
@@ -166,7 +170,8 @@ RadioButton {
     min-height: 24px;
     max-height: 24px;
     background-color: transparent;
-    font: 14px 'Segoe UI', 'Microsoft YaHei', 'PingFang SC';
+    font-size: 14px;
+    font-family: --FontFamily;
     color: white;
 }
 
@@ -244,6 +249,7 @@ TransparentDropDownToolButton,
 TransparentPushButton,
 TransparentDropDownPushButton,
 TransparentTogglePushButton {
+    font-family: --FontFamily;
     background-color: transparent;
     border: none;
     border-radius: 4px;

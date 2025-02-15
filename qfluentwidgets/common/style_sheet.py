@@ -132,8 +132,8 @@ class QssTemplate(Template):
     delimiter = "--"
 
 
-def applyThemeColor(qss: str) -> str:
-    """将主题颜色应用于样式表
+def applyThemeTemplate(qss: str) -> str:
+    """将主题颜色与字体应用于样式表
 
     Parameters
     ----------
@@ -145,6 +145,8 @@ def applyThemeColor(qss: str) -> str:
     template = QssTemplate(qss)
     # 获取主题颜色的映射
     mappings = {c.value: c.name() for c in ThemeColor._member_map_.values()}
+    # 获取字体的映射
+    mappings.update({f"FontFamily": qconfig.get(qconfig.fontFamily)})
 
     # 返回应用主题颜色后的样式表
     return template.safe_substitute(mappings)
@@ -344,7 +346,7 @@ def getStyleSheet(source: str | StyleSheetBase, theme: Theme = Theme.AUTO) -> st
         source = StyleSheetFile(source)
 
     # 获取样式表内容
-    return applyThemeColor(source.content(theme))
+    return applyThemeTemplate(source.content(theme))
 
 
 def setStyleSheet(

@@ -1,5 +1,6 @@
 FluentLabelBase {
     color: white;
+    font-family: --FontFamily;
 }
 
 HyperlinkLabel {

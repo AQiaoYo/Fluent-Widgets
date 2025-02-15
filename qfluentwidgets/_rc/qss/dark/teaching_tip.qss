@@ -1,12 +1,14 @@
 #titleLabel {
-    font: 14px 'Segoe UI', 'Microsoft YaHei', 'PingFang SC';
+    font-family: --FontFamily;
+    font-size: 14px;
     font-weight: bold;
     color: white;
     background-color: transparent;
 }
 
 #contentLabel {
-    font: 14px 'Segoe UI', 'Microsoft YaHei', 'PingFang SC';
+    font-family: --FontFamily;
+    font-size: 14px;
     color: white;
     background-color: transparent;
 }

@@ -1,31 +1,43 @@
 # coding:utf-8
+# 标准库导入
 from typing import List
 
+# 第三方库导入
 from PySide6.QtCore import Qt, Signal
-from PySide6.QtWidgets import QApplication, QFrame, QVBoxLayout, QLabel, QWidget, QHBoxLayout
-from qfluentwidgets import (FluentIcon, IconWidget, FlowLayout, isDarkTheme,
-                            Theme, applyThemeColor, SmoothScrollArea, SearchLineEdit, StrongBodyLabel,
-                            BodyLabel)
+from PySide6.QtWidgets import QFrame, QLabel, QWidget, QHBoxLayout, QVBoxLayout, QApplication
 
+# 项目内模块导入
+from qfluentwidgets import (
+    Theme,
+    BodyLabel,
+    FlowLayout,
+    FluentIcon,
+    IconWidget,
+    SearchLineEdit,
+    StrongBodyLabel,
+    SmoothScrollArea,
+    isDarkTheme,
+)
+
+from ..common.trie import Trie
+from ..common.config import cfg
 from .gallery_interface import GalleryInterface
 from ..common.translator import Translator
-from ..common.config import cfg
 from ..common.style_sheet import StyleSheet
-from ..common.trie import Trie
 
 
 class LineEdit(SearchLineEdit):
-    """ Search line edit """
+    """Search line edit"""
 
     def __init__(self, parent=None):
         super().__init__(parent)
-        self.setPlaceholderText(self.tr('Search icons'))
+        self.setPlaceholderText(self.tr("Search icons"))
         self.setFixedWidth(304)
         self.textChanged.connect(self.search)
 
 
 class IconCard(QFrame):
-    """ Icon card """
+    """Icon card"""
 
     clicked = Signal(FluentIcon)
 
@@ -68,20 +80,20 @@ class IconCard(QFrame):
             icon = self.icon.icon(Theme.LIGHT if isDarkTheme() else Theme.DARK)
             self.iconWidget.setIcon(icon)
 
-        self.setProperty('isSelected', isSelected)
+        self.setProperty("isSelected", isSelected)
         self.setStyle(QApplication.style())
 
 
 class IconInfoPanel(QFrame):
-    """ Icon info panel """
+    """Icon info panel"""
 
     def __init__(self, icon: FluentIcon, parent=None):
         super().__init__(parent=parent)
         self.nameLabel = QLabel(icon.value, self)
         self.iconWidget = IconWidget(icon, self)
-        self.iconNameTitleLabel = QLabel(self.tr('Icon name'), self)
+        self.iconNameTitleLabel = QLabel(self.tr("Icon name"), self)
         self.iconNameLabel = QLabel(icon.value, self)
-        self.enumNameTitleLabel = QLabel(self.tr('Enum member'), self)
+        self.enumNameTitleLabel = QLabel(self.tr("Enum member"), self)
         self.enumNameLabel = QLabel("FluentIcon." + icon.name, self)
 
         self.vBoxLayout = QVBoxLayout(self)
@@ -104,24 +116,24 @@ class IconInfoPanel(QFrame):
         self.iconWidget.setFixedSize(48, 48)
         self.setFixedWidth(216)
 
-        self.nameLabel.setObjectName('nameLabel')
-        self.iconNameTitleLabel.setObjectName('subTitleLabel')
-        self.enumNameTitleLabel.setObjectName('subTitleLabel')
+        self.nameLabel.setObjectName("nameLabel")
+        self.iconNameTitleLabel.setObjectName("subTitleLabel")
+        self.enumNameTitleLabel.setObjectName("subTitleLabel")
 
     def setIcon(self, icon: FluentIcon):
         self.iconWidget.setIcon(icon)
         self.nameLabel.setText(icon.value)
         self.iconNameLabel.setText(icon.value)
-        self.enumNameLabel.setText("FluentIcon."+icon.name)
+        self.enumNameLabel.setText("FluentIcon." + icon.name)
 
 
 class IconCardView(QWidget):
-    """ Icon card view """
+    """Icon card view"""
 
     def __init__(self, parent=None):
         super().__init__(parent=parent)
         self.trie = Trie()
-        self.iconLibraryLabel = StrongBodyLabel(self.tr('Fluent Icons Library'), self)
+        self.iconLibraryLabel = StrongBodyLabel(self.tr("Fluent Icons Library"), self)
         self.searchLineEdit = LineEdit(self)
 
         self.view = QFrame(self)
@@ -133,7 +145,7 @@ class IconCardView(QWidget):
         self.hBoxLayout = QHBoxLayout(self.view)
         self.flowLayout = FlowLayout(self.scrollWidget, isTight=True)
 
-        self.cards = []     # type:List[IconCard]
+        self.cards = []  # type:List[IconCard]
         self.icons = []
         self.currentIndex = -1
 
@@ -171,7 +183,7 @@ class IconCardView(QWidget):
         self.setSelectedIcon(self.icons[0])
 
     def addIcon(self, icon: FluentIcon):
-        """ add icon to view """
+        """add icon to view"""
         card = IconCard(icon, self)
         card.clicked.connect(self.setSelectedIcon)
 
@@ -181,7 +193,7 @@ class IconCardView(QWidget):
         self.flowLayout.addWidget(card)
 
     def setSelectedIcon(self, icon: FluentIcon):
-        """ set selected icon """
+        """set selected icon"""
         index = self.icons.index(icon)
 
         if self.currentIndex >= 0:
@@ -192,8 +204,8 @@ class IconCardView(QWidget):
         self.infoPanel.setIcon(icon)
 
     def __setQss(self):
-        self.view.setObjectName('iconView')
-        self.scrollWidget.setObjectName('scrollWidget')
+        self.view.setObjectName("iconView")
+        self.scrollWidget.setObjectName("scrollWidget")
 
         StyleSheet.ICON_INTERFACE.apply(self)
         StyleSheet.ICON_INTERFACE.apply(self.scrollWidget)
@@ -202,7 +214,7 @@ class IconCardView(QWidget):
             self.cards[self.currentIndex].setSelected(True, True)
 
     def search(self, keyWord: str):
-        """ search icons """
+        """search icons"""
         items = self.trie.items(keyWord.lower())
         indexes = {i[1] for i in items}
         self.flowLayout.removeAllWidgets()
@@ -221,16 +233,12 @@ class IconCardView(QWidget):
 
 
 class IconInterface(GalleryInterface):
-    """ Icon interface """
+    """Icon interface"""
 
     def __init__(self, parent=None):
         t = Translator()
-        super().__init__(
-            title=t.icons,
-            subtitle="qfluentwidgets.common.icon",
-            parent=parent
-        )
-        self.setObjectName('iconInterface')
+        super().__init__(title=t.icons, subtitle="qfluentwidgets.common.icon", parent=parent)
+        self.setObjectName("iconInterface")
 
         self.iconView = IconCardView(self)
         self.vBoxLayout.addWidget(self.iconView)

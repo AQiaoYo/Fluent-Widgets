@@ -18,7 +18,7 @@ from .style_sheet import (
     getStyleSheet,
     setStyleSheet,
     setThemeColor,
-    applyThemeColor,
+    applyThemeTemplate,
     setCustomStyleSheet,
 )
 from .smooth_scroll import SmoothMode, SmoothScroll
