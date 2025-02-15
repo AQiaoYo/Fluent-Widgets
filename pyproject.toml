@@ -1,5 +1,5 @@
 [project]
-name = "Fluent-Widgets"
+name = "Fluent-Widgets-QIAO"
 version = "0.1.0"
 description = "基于 PyQt-Fluent-Widgets 的组件库"
 authors = [
@@ -18,8 +18,8 @@ readme = "README.md"
 license = {text = "GPLv3"}
 
 [build-system]
-requires = ["setuptools>=61", "wheel"]
-build-backend = "setuptools.build_meta"
+requires = ["pdm-pep517"]
+build-backend = "pdm.pep517.api"
 
 
 [tool.pdm]

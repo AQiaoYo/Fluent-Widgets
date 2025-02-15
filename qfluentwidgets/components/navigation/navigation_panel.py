@@ -1,7 +1,7 @@
 # coding:utf-8
 # 标准库导入
 from enum import Enum
-from typing import Union
+from typing import Dict, Union
 
 # 第三方库导入
 from PySide6.QtGui import QIcon, QColor, QPainterPath, QResizeEvent
@@ -28,73 +28,97 @@ from ..material.acrylic_flyout import AcrylicFlyout, AcrylicFlyoutViewBase
 
 
 class NavigationDisplayMode(Enum):
-    """Navigation display mode"""
+    """导航显示模式"""
 
-    MINIMAL = 0
-    COMPACT = 1
-    EXPAND = 2
-    MENU = 3
+    MINIMAL = 0  # 最小模式
+    COMPACT = 1  # 紧凑模式
+    EXPAND = 2  # 展开模式
+    MENU = 3  # 菜单模式
 
 
 class NavigationItemPosition(Enum):
-    """Navigation item position"""
+    """导航项位置"""
 
-    TOP = 0
-    SCROLL = 1
-    BOTTOM = 2
+    TOP = 0  # 顶部
+    SCROLL = 1  # 滚动区
+    BOTTOM = 2  # 底部
 
 
 class NavigationToolTipFilter(ToolTipFilter):
-    """Navigation tool tip filter"""
+    """导航工具提示过滤器"""
 
     def _canShowToolTip(self) -> bool:
         isVisible = super()._canShowToolTip()
-        parent = self.parent()  # type: NavigationWidget
+        parent: NavigationWidget = self.parent()
         return isVisible and parent.isCompacted
 
 
 class RouteKeyError(Exception):
-    """Route key error"""
+    """路由键错误"""
 
 
 class NavigationItem:
-    """Navigation item"""
+    """导航项"""
 
     def __init__(self, routeKey: str, parentRouteKey: str, widget: NavigationWidget):
+        """
+        初始化导航项
+
+        Parameters
+        ----------
+        routeKey : str
+            导航项的唯一标识符
+
+        parentRouteKey : str
+            父级导航项的标识符
+
+        widget : NavigationWidget
+            该导航项对应的控件
+        """
         self.routeKey = routeKey
         self.parentRouteKey = parentRouteKey
         self.widget = widget
 
 
 class NavigationPanel(QFrame):
-    """Navigation panel"""
+    """导航面板"""
 
+    # 显示模式改变信号
     displayModeChanged = Signal(NavigationDisplayMode)
 
-    def __init__(self, parent=None, isMinimalEnabled=False):
+    def __init__(self, parent: QWidget = None, isMinimalEnabled: bool = False) -> None:
         super().__init__(parent=parent)
-        self._parent = parent  # type: QWidget
+        # 父级窗口组件,方便调用
+        self._parent = parent
+
+        # 定义内置属性
         self._isMenuButtonVisible = True
         self._isReturnButtonVisible = False
         self._isCollapsible = True
         self._isAcrylicEnabled = False
 
+        # 亚克力材料
         self.acrylicBrush = AcrylicBrush(self, 30)
 
+        # 滚动区域
         self.scrollArea = ScrollArea(self)
         self.scrollWidget = QWidget()
 
+        # 创建按钮
         self.menuButton = NavigationToolButton(FIF.MENU, self)
         self.returnButton = NavigationToolButton(FIF.RETURN, self)
 
+        # 创建布局
         self.vBoxLayout = NavigationItemLayout(self)
         self.topLayout = NavigationItemLayout()
         self.bottomLayout = NavigationItemLayout()
         self.scrollLayout = NavigationItemLayout(self.scrollWidget)
 
-        self.items = {}  # type: Dict[str, NavigationItem]
+        # 导航项以及历史记录
+        self.items: Dict[str, NavigationItem] = {}
         self.history = qrouter
 
+        # 展开动画
         self.expandAni = QPropertyAnimation(self, b"geometry", self)
         self.expandWidth = 322
         self.minimumExpandWidth = 1008
@@ -105,9 +129,11 @@ class NavigationPanel(QFrame):
         else:
             self.displayMode = NavigationDisplayMode.COMPACT
 
+        # 初始化控件
         self.__initWidget()
 
-    def __initWidget(self):
+    def __initWidget(self) -> None:
+        """初始化控件"""
         self.resize(48, self.height())
         self.setAttribute(Qt.WA_StyledBackground)
         self.window().installEventFilter(self)
@@ -121,7 +147,7 @@ class NavigationPanel(QFrame):
         self.scrollArea.setWidget(self.scrollWidget)
         self.scrollArea.setWidgetResizable(True)
 
-        self.expandAni.setEasingCurve(QEasingCurve.OutQuad)
+        self.expandAni.setEasingCurve(QEasingCurve.Type.OutQuad)
         self.expandAni.setDuration(150)
 
         self.menuButton.clicked.connect(self.toggle)
