@@ -375,7 +375,8 @@ class QConfig(QObject):
     fontFamily = ConfigItem(
         group="Personalized",
         name="FontFamily",
-        default="'Alimama FangYuanTi VF', 'Segoe UI', 'Microsoft YaHei'",
+        default="'Segoe UI', 'Microsoft YaHei', 'pingfang SC'",
+        # TODO 验证器以及序列化待实现
     )
 
     def __init__(self) -> None:
