@@ -1,12 +1,12 @@
 [project]
 name = "Fluent-Widgets-QIAO"
-version = "0.1.0"
+version = "0.2.0"
 description = "基于 PyQt-Fluent-Widgets 的组件库"
 authors = [
     {name = "Qiao", email = "SugarQiao@outlook.com"},
 ]
 dependencies = [
-    "PySide6>=6.4.2",
+    "PySide6>=6.4.2,<=6.7.2",
     "PySideSix-Frameless-Window>=0.4.0",
     "darkdetect",
     "colorthief",
