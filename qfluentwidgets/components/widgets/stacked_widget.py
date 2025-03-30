@@ -98,17 +98,11 @@ class PopUpAniStackedWidget(QStackedWidget):
         ----------
         widget : QWidget
             要添加的窗口部件
-
-        deltaX : int, optional
-            动画过程中 x 轴方向的位移量, 默认为 0
-
-        deltaY : int, optional
-            动画过程中 y 轴方向的位移量, 默认为 64
         """
         super().addWidget(widget)
 
         # 添加透明度效果
-        effect = QGraphicsOpacityEffect(self)
+        effect = QGraphicsOpacityEffect(widget)
         effect.setOpacity(1)
         widget.setGraphicsEffect(effect)
 
@@ -239,3 +233,122 @@ class PopUpAniStackedWidget(QStackedWidget):
         aniGroup.addAnimation(opacity_ani)
 
         return aniGroup
+
+
+class FadeEffectAniStackedWidget(QStackedWidget):
+    """
+    带有淡入淡出动画效果的堆叠窗口部件
+    """
+
+    def __init__(self, parent=None) -> None:
+        """
+        初始化淡入淡出动画堆叠窗口
+        """
+        super().__init__(parent)
+        self._aniList: List[Tuple[QPropertyAnimation]] = []
+        self._aniDuration: int = 500
+        self._aniEasingCurve: QEasingCurve.Type = QEasingCurve.Type.OutQuad
+        self._nextIndex = 0
+
+    def getAniDuration(self) -> int:
+        return self._aniDuration
+
+    def setAniDuration(self, duration: int) -> None:
+        self._aniDuration = duration
+
+    def getAniEasingCurve(self) -> QEasingCurve.Type:
+        return self._aniEasingCurve
+
+    def setAniEasingCurve(self, curve: QEasingCurve.Type) -> None:
+        self._aniEasingCurve = curve
+
+    def addWidget(self, widget: QWidget) -> None:
+        """
+        添加一个新的子窗口, 并设置其动画属性
+
+        Parameters
+        ----------
+        widget : QWidget
+            要添加的窗口部件
+        """
+        super().addWidget(widget)
+
+        # 添加透明度效果
+        effect = QGraphicsOpacityEffect(widget)
+        effect.setOpacity(1)
+        widget.setGraphicsEffect(effect)
+
+        # 添加动画
+        exit_ani = QPropertyAnimation(effect, b"opacity", widget)
+        exit_ani.setStartValue(1)
+        exit_ani.setEndValue(0)
+        exit_ani.setDuration(self._aniDuration)
+        exit_ani.setEasingCurve(self._aniEasingCurve)
+        exit_ani.finished.connect(self._setCurrentIndex)
+        exit_ani.finished.connect(self._actionNextAni)
+
+        enter_ani = QPropertyAnimation(effect, b"opacity", widget)
+        enter_ani.setStartValue(0)
+        enter_ani.setEndValue(1)
+        enter_ani.setDuration(self._aniDuration)
+        enter_ani.setEasingCurve(self._aniEasingCurve)
+
+        self._aniList.append((exit_ani, enter_ani))
+
+    def removeWidget(self, widget: QWidget) -> None:
+        """
+        移除指定的子窗口及其对应的动画信息
+
+        Parameters
+        ----------
+        widget : QWidget
+            要移除的窗口部件
+        """
+        index = self.indexOf(widget)
+        if index == -1:
+            return
+
+        self._aniList.pop(index)
+        super().removeWidget(widget)
+
+    def _setCurrentIndex(self) -> None:
+        super().setCurrentIndex(self._nextIndex)
+
+    def _actionNextAni(self) -> None:
+        self._aniList[self._nextIndex][1].start()
+
+    def setCurrentIndex(self, index: int) -> None:
+        """
+        设置当前显示的窗口索引, 并执行相应的动画
+
+        Parameters
+        ----------
+        index : int
+            要显示的窗口索引
+        """
+        # 检查索引是否合法
+        if index < 0 or index >= self.count():
+            raise Exception(f"The index `{index}` is illegal")
+
+        # 检查是否需要切换页面
+        if index == self.currentIndex():
+            return
+
+        # 检查是否有动画正在执行, 如果有则停止
+        ani_tuple = self._aniList[self.currentIndex()]
+        any(ani.stop() for ani in ani_tuple[:2] if ani.state() == QAbstractAnimation.State.Running)
+
+        # 执行退出动画
+        self._nextIndex = index
+        self._aniList[self.currentIndex()][0].start()
+
+    def setCurrentWidget(self, widget: QWidget) -> None:
+        """
+        设置当前显示的窗口部件, 并执行动画
+
+        Parameters
+        ----------
+        widget : QWidget
+            要显示的窗口部件
+        """
+        self.setCurrentIndex(self.indexOf(widget))
