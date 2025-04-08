@@ -1,6 +1,6 @@
 [project]
 name = "Fluent-Widgets-QIAO"
-version = "0.2.0"
+version = "0.3.0"
 description = "基于 PyQt-Fluent-Widgets 的组件库"
 authors = [
     {name = "Qiao", email = "SugarQiao@outlook.com"},
