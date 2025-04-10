@@ -4,12 +4,10 @@
 import sys
 
 # 第三方库导入
-from PySide6.QtCore import Qt
 from PySide6.QtWidgets import QWidget, QHBoxLayout, QVBoxLayout, QApplication
 
 # 项目内模块导入
-from qfluentwidgets import BodyLabel, ImageLabel, StrongBodyLabel
-from qfluentwidgets.components.widgets.skeleton_screen import SkeletonScreen, SkeletonPlaceholder
+from qfluentwidgets import BodyLabel, ImageLabel, SkeletonScreen, StrongBodyLabel, SkeletonPlaceholder
 
 
 class PlaceholderPage(QWidget):
