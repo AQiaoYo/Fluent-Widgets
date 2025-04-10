@@ -22,10 +22,6 @@ requires = ["pdm-pep517"]
 build-backend = "pdm.pep517.api"
 
 
-[tool.pdm]
-distribution = true
-
-
 [tool.black]
 line-length = 120  # 设置代码行的最大长度为 80 字符
 target-version = ['py312']  # 目标 Python 版本为 3.12
@@ -42,3 +38,15 @@ import_heading_stdlib = "标准库导入"
 import_heading_thirdparty = "第三方库导入"
 import_heading_firstparty = "项目内模块导入"
 
+[tool.pdm]
+distribution = true
+[tool.pdm.scripts]
+format = "python scripts/format_code.py"
+
+
+[dependency-groups]
+dev = [
+    "autoflake>=2.3.1",
+    "isort>=6.0.1",
+    "black>=25.1.0",
+]
