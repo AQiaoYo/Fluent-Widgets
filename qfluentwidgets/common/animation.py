@@ -102,7 +102,7 @@ class BackgroundAnimationWidget:
 
         # 背景颜色动画
         self.backgroundColorAni = QPropertyAnimation(self.bgColorObject, b"backgroundColor", self)
-        self.backgroundColorAni.setDuration(12000)
+        self.backgroundColorAni.setDuration(120)
 
         # 为自身添加事件过滤器
         self.installEventFilter(self)
